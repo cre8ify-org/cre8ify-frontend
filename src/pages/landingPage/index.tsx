@@ -6,7 +6,6 @@ function LandingPage() {
     <div>
       <Header />
       <Hero />
-      <h3> Hello</h3>
     </div>
   );
 }
