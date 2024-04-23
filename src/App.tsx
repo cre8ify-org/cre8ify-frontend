@@ -1,7 +1,8 @@
 import { configureWeb3Modal } from "./connection";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
+import Header from "./pages/landingPage/components/Header";
+import LandingPage from "./pages/landingPage";
 import Home from "./pages/dashboard/home";
 import DashboardLayout from "./layout/dashboardLayout";
 import Feed from "./pages/dashboard/feed";
@@ -12,9 +13,9 @@ configureWeb3Modal();
 function App() {
   return (
     <>
-      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="feed" element={<Feed />} />
