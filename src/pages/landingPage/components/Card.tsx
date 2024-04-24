@@ -1,28 +1,38 @@
-import { Flex, Box, Text, Image, Heading } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
+
+// Replace these with the paths to your images
+import heroImage from "../../../assets/heroImage.jpg";
+import heroImage from "../../../assets/heroImage.jpg";
+import heroImage from "../../../assets/heroImage.jpg";
 import heroImage from "../../../assets/heroImage.jpg";
 
-export default function Card() {
-  return (
-    <Flex
-      gap={"4"}
-      p={"2rem"}
-      align={"center"}
-      justify={"space-between"}
-      w={"100%"}
-    >
-      <Box flex="1">
-        <Heading as="h1" size="4xl" noOfLines={2} mb={6}>
-          Discover Top Creators And Influencers
-        </Heading>
-        <Text fontSize="2xl">
-          Jamii aim is to simplify the influencer marketing process for brands
-          and provide them with access to a diverse range of talented creators
-          who can help them achieve their marketing goals.
+const Card = ({ image, title }) => (
+  <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Image src={image} alt={title} />
+
+    <Box p="6">
+      <Box d="flex" alignItems="baseline">
+        <Text
+          mt="1"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          isTruncated
+        >
+          {title}
         </Text>
       </Box>
-      <Box flex="1">
-        <Image src={heroImage} alt="Description of the image" boxSize="90%" />
-      </Box>
-    </Flex>
-  );
-}
+    </Box>
+  </Box>
+);
+
+const CardRow = () => (
+  <Flex direction="row" justify="space-between">
+    <Card image={image1} title="Card 1" />
+    <Card image={image2} title="Card 2" />
+    <Card image={image3} title="Card 3" />
+    <Card image={image4} title="Card 4" />
+  </Flex>
+);
+
+export default CardRow;
