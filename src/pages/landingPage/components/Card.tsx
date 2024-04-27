@@ -27,9 +27,9 @@ const CardRow: React.FC = () => {
   return (
     <Box>
       <Center>
-        <Heading my="50px">Most Viewed Content</Heading>
+        <Heading my="20px">Most Viewed Content</Heading>
       </Center>
-      <Flex direction="row" mx="220px" justifyContent="space-around">
+      <Flex direction="row" justifyContent="space-around" mx="220px" my="50px">
         <Card image={image1} />
         <Card image={image2} />
         <Card image={image3} />
