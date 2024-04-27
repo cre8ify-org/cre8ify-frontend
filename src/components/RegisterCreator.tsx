@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Flex,
   Icon,
@@ -17,10 +16,12 @@ import { ChangeEvent, useState } from "react";
 import { FaImage } from "react-icons/fa6";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import useRegister from "../hooks/useRegister";
+import { useToast } from "@chakra-ui/react";
 
 export const RegisterCreator = () => {
   const [username, setUsername] = useState<string>("");
   const [cid, setCid] = useState<string>("");
+  const toast = useToast();
 
   const { address } = useWeb3ModalAccount();
 
@@ -77,7 +78,7 @@ export const RegisterCreator = () => {
         _hover={{ border: "1px solid #15AB99" }}
       />
       <ModalBody pb={6}>
-        <Box>
+        <FormControl>
           <Input
             type="file"
             border={"none"}
@@ -86,7 +87,7 @@ export const RegisterCreator = () => {
             hidden
           />
           <Flex align={"end"} justify={"space-between"} mb={"1rem"}>
-            <label htmlFor="selectFile">
+            <FormLabel htmlFor="selectFile">
               <Flex
                 borderRadius={".5rem"}
                 align={"center"}
@@ -98,15 +99,16 @@ export const RegisterCreator = () => {
               >
                 <Flex flexDirection={"column"} align={"center"}>
                   <Icon as={FaImage} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Profile</Text>
+                  <Text fontSize={"1rem"}>Upload Profile Image</Text>
                 </Flex>
               </Flex>
-            </label>
+            </FormLabel>
           </Flex>
-        </Box>
-        <FormControl>
+        </FormControl>
+        <FormControl isRequired={true}>
           <FormLabel>Username</FormLabel>
           <Input
+            required
             placeholder="Username"
             value={username}
             _placeholder={{ color: "#767677" }}
@@ -148,7 +150,20 @@ export const RegisterCreator = () => {
             border: "none",
           }}
           _focus={{ outline: "none" }}
-          onClick={handleRegister}
+          onClick={() => {
+            handleRegister;
+            toast.promise(handleRegister(), {
+              success: {
+                title: "User Registered",
+                description: "Welcome",
+              },
+              error: {
+                title: "Registration failed",
+                description: "Something wrong",
+              },
+              loading: { title: "Loading...", description: "Please wait" },
+            });
+          }}
         >
           <Text>Register</Text>
         </Button>
