@@ -43,3 +43,30 @@ export const menuDAO = [
     icon: CgProfile,
   },
 ];
+
+export const content = [
+  {
+    img: "./images/cool-profile_picture.jpeg",
+    username: "@Muhadrehh",
+    name: "Muhadreh Kumbirai",
+    tag: "free",
+  },
+  {
+    img: "./images/profile_2.jpeg",
+    username: "@Muhadrehh",
+    name: "Muhadreh Kumbirai",
+    tag: "free",
+  },
+  {
+    img: "./images/profile_3.avif",
+    username: "@Muhadrehh",
+    name: "Muhadreh Kumbirai",
+    tag: "free",
+  },
+  {
+    img: "./images/profile_4.jpeg",
+    username: "@Muhadrehh",
+    name: "Muhadreh Kumbirai",
+    tag: "free",
+  },
+];
