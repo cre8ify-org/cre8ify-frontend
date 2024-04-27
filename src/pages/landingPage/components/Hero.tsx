@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Image, Heading } from "@chakra-ui/react";
-import heroImage from "../../../assets/heroImage.jpg";
+
+const heroImage = "./assets/heroImage.jpg";
 
 export default function Hero() {
   return (

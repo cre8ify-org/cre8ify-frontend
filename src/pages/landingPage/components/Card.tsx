@@ -1,38 +1,42 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import * as React from "react";
+import { Box, Image, Flex, Center } from "@chakra-ui/react";
 
-// Replace these with the paths to your images
-import heroImage from "../../../assets/heroImage.jpg";
-import heroImage from "../../../assets/heroImage.jpg";
-import heroImage from "../../../assets/heroImage.jpg";
-import heroImage from "../../../assets/heroImage.jpg";
+interface CardProps {
+  image: string;
+}
 
-const Card = ({ image, title }) => (
-  <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-    <Image src={image} alt={title} />
-
-    <Box p="6">
-      <Box d="flex" alignItems="baseline">
-        <Text
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          isTruncated
-        >
-          {title}
-        </Text>
-      </Box>
-    </Box>
+const Card: React.FC<CardProps> = ({ image }) => (
+  <Box
+    borderWidth="1px"
+    borderRadius="lg"
+    overflow="hidden"
+    w="300px"
+    minH="300px"
+  >
+    <Image src={image} alt="" objectFit="cover" w="100%" h="100%" />
   </Box>
 );
 
-const CardRow = () => (
-  <Flex direction="row" justify="space-between">
-    <Card image={image1} title="Card 1" />
-    <Card image={image2} title="Card 2" />
-    <Card image={image3} title="Card 3" />
-    <Card image={image4} title="Card 4" />
-  </Flex>
-);
+const CardRow: React.FC = () => {
+  // Replace these with the paths to your images
+  const image1 = "./assets/image1.jpg";
+  const image2 = "./assets/image2.jpg";
+  const image3 = "./assets/image3.jpg";
+  const image4 = "./assets/image4.jpg";
+
+  return (
+    <Box>
+      <Center>
+        <h4>Most Viewed Content</h4>
+      </Center>
+      <Flex direction="row" mx="220px" justifyContent="space-around">
+        <Card image={image1} />
+        <Card image={image2} />
+        <Card image={image3} />
+        <Card image={image4} />
+      </Flex>
+    </Box>
+  );
+};
 
 export default CardRow;
