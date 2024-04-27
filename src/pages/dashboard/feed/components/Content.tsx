@@ -1,184 +1,146 @@
-import { Box, Button, Flex, Grid, GridItem, Img, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Img,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  useDisclosure,
+  Icon,
+} from "@chakra-ui/react";
+import { content } from "../../../../constants/data";
+import { useState } from "react";
+import { GoHeartFill } from "react-icons/go";
+import { FiEye } from "react-icons/fi";
 
 const Content = () => {
+  const [fullContent, setFullContent] = useState(content);
+  const [id, setId] = useState(fullContent[0]);
+  const [liked, setLiked] = useState(false);
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
+    />
+  );
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
+
+  const handleFullContent = (e: any) => {
+    setId(e);
+
+    setFullContent((prev) => prev);
+  };
+
+  const handleLiked = () => {
+    if (!liked) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  };
+
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-      <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
-        <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
-          <Img
-            src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-            w={"50px"}
-            h={"50px"}
-            borderRadius={"100%"}
-            alt="image"
-          />
-          <Flex align={"end"} gap={".4rem"}>
-            <Box>
-              <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                @Muhadrehh
-              </Text>
-              <Text>Muhadreh Kumbirai</Text>
-            </Box>
-            <Text color={"#15AB99"}>. 1 hr ago</Text>
-          </Flex>
-        </Flex>
-        <Img
-          mb={"1rem"}
-          src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-          alt="image"
+    <Grid templateColumns="repeat(1, 1fr)" gap={6}>
+      {content.map((item, index) => (
+        <GridItem
+          key={index}
+          w={"100%"}
+          bg={"#292929"}
+          p={".7rem"}
           borderRadius={".5rem"}
-        />
-        <Flex justify={"space-between"}>
-          <Box></Box>
-          <Box
-            borderRadius={"50rem"}
-            px={"1rem"}
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            free
-          </Box>
-        </Flex>
-      </GridItem>
-      <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
-        <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
-          <Img
-            src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-            w={"50px"}
-            h={"50px"}
-            borderRadius={"100%"}
-            alt="image"
-          />
-          <Flex align={"end"} gap={".4rem"}>
-            <Box>
-              <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                @Muhadrehh
-              </Text>
-              <Text>Muhadreh Kumbirai</Text>
-            </Box>
-            <Text color={"#15AB99"}>. 1 hr ago</Text>
+        >
+          <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
+            <Img
+              src={item.img}
+              w={"50px"}
+              h={"50px"}
+              objectFit={"cover"}
+              borderRadius={"100%"}
+              alt="image"
+            />
+            <Flex align={"end"} gap={".4rem"}>
+              <Box>
+                <Text color={"#B1B1B1"} fontSize={".9rem"}>
+                  {item.username}
+                </Text>
+                <Text>{item.name}</Text>
+              </Box>
+              <Text color={"#15AB99"}>. 1 hr ago</Text>
+            </Flex>
           </Flex>
-        </Flex>
-        <Img
-          mb={"1rem"}
-          src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-          alt="image"
-          borderRadius={".5rem"}
-        />
-        <Flex justify={"space-between"}>
-          <Box></Box>
           <Box
-            borderRadius={"50rem"}
-            px={"1rem"}
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
+            onClick={() => {
+              setOverlay(<OverlayOne />);
+              onOpen();
+              handleFullContent(item);
             }}
-            _focus={{ outline: "none" }}
           >
-            free
+            <Img
+              mb={"1rem"}
+              src={item.img}
+              alt="image"
+              h={"200px"}
+              w={"100%"}
+              objectFit={"cover"}
+              cursor={"pointer"}
+              borderRadius={".5rem"}
+            />
           </Box>
-        </Flex>
-      </GridItem>
-      <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
-        <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
-          <Img
-            src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-            w={"50px"}
-            h={"50px"}
-            borderRadius={"100%"}
-            alt="image"
-          />
-          <Flex align={"end"} gap={".4rem"}>
+          <Flex justify={"space-between"}>
             <Box>
-              <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                @Muhadrehh
-              </Text>
-              <Text>Muhadreh Kumbirai</Text>
+              <Flex gap={"2rem"}>
+                <Flex gap={".2rem"} onClick={handleLiked} cursor={"pointer"}>
+                  <Icon
+                    as={GoHeartFill}
+                    fontSize={"1.5rem"}
+                    color={liked ? "#ff0000" : ""}
+                  />
+                  <Text>18.3k</Text>
+                </Flex>
+                <Flex gap={".2rem"}>
+                  <Icon as={FiEye} fontSize={"1.5rem"} />
+                  <Text>100.3k</Text>
+                </Flex>
+              </Flex>
             </Box>
-            <Text color={"#15AB99"}>. 1 hr ago</Text>
-          </Flex>
-        </Flex>
-        <Img
-          mb={"1rem"}
-          src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-          alt="image"
-          borderRadius={".5rem"}
-        />
-        <Flex justify={"space-between"}>
-          <Box></Box>
-          <Box
-            borderRadius={"50rem"}
-            px={"1rem"}
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            free
-          </Box>
-        </Flex>
-      </GridItem>
-      <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
-        <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
-          <Img
-            src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-            w={"50px"}
-            h={"50px"}
-            borderRadius={"100%"}
-            alt="image"
-          />
-          <Flex align={"end"} gap={".4rem"}>
-            <Box>
-              <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                @Muhadrehh
-              </Text>
-              <Text>Muhadreh Kumbirai</Text>
+            <Box
+              borderRadius={"50rem"}
+              px={"1rem"}
+              bgGradient="linear(to-r, #04A67D, #24B1B6)"
+              border={"none"}
+              color={"#fff"}
+              transition={"all .5s ease-in-out"}
+              _hover={{
+                bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                border: "none",
+              }}
+              _focus={{ outline: "none" }}
+            >
+              {item.tag}
             </Box>
-            <Text color={"#15AB99"}>. 1 hr ago</Text>
           </Flex>
-        </Flex>
-        <Img
-          mb={"1rem"}
-          src="https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg"
-          alt="image"
-          borderRadius={".5rem"}
-        />
-        <Flex justify={"space-between"}>
-          <Box></Box>
-          <Box
-            borderRadius={"50rem"}
-            px={"1rem"}
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            free
-          </Box>
-        </Flex>
-      </GridItem>
+          <Modal isCentered isOpen={isOpen} onClose={onClose}>
+            {overlay}
+            <ModalContent bg={"#262628"} className="font">
+              <ModalBody pb={6} pt={9}>
+                <Img
+                  mb={"1rem"}
+                  src={id.img}
+                  alt="image"
+                  objectFit={"cover"}
+                  borderRadius={".5rem"}
+                />
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </GridItem>
+      ))}
     </Grid>
   );
 };
