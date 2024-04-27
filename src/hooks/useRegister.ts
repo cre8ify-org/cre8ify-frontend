@@ -4,7 +4,6 @@ import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
-import { toast } from "react-toastify";
 import { getAuthContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 
@@ -26,18 +25,8 @@ const useRegister = (name: string, image: string) => {
       const receipt = await transaction.wait();
 
       console.log("receipt: ", receipt);
-
-      if (receipt.status) {
-        return toast.success("registration successful!");
-      }
-
-      toast.error("registration failed!");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error(String(error));
-      }
+      console.log(error);
     }
   }, [chainId, walletProvider, name, image]);
 };
