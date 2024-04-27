@@ -18,12 +18,23 @@ import {
 } from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FaImage } from "react-icons/fa6";
 import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
+import useRegister from "../../hooks/useRegister.tsx";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
-const DashboardLayout = (props: any) => {
+interface DashboardLayoutProps {
+  children: React.ReactNode;
+}
+
+const DashboardLayout = (props: DashboardLayoutProps) => {
+  const [username, setUsername] = useState<string>("");
+  const [cid, setCid] = useState<string>("");
+
+  const { address } = useWeb3ModalAccount();
+
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -33,6 +44,52 @@ const DashboardLayout = (props: any) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
+
+  const handleRegister = useRegister(
+    username,
+    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${cid}`
+  );
+
+  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const selectedFile = e.target.files[0];
+      await handleSubmission(selectedFile);
+    }
+  };
+
+  const handleSubmission = async (fileToUpload: string | Blob) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", fileToUpload);
+      const metadata = JSON.stringify({
+        name: "File name",
+      });
+      formData.append("pinataMetadata", metadata);
+
+      const options = JSON.stringify({
+        cidVersion: 0,
+      });
+      formData.append("pinataOptions", options);
+
+      const res = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_PINATA_JWT}`,
+          },
+          body: formData,
+        }
+      );
+
+      const resData = await res.json();
+      setCid(resData.IpfsHash);
+      console.log(resData.IpfsHash);
+    } catch (e) {
+      console.log(e);
+      alert("Trouble uploading file");
+    }
+  };
 
   return (
     <Flex h="100vh">
@@ -111,7 +168,13 @@ const DashboardLayout = (props: any) => {
           />
           <ModalBody pb={6}>
             <Box>
-              <Input type="file" border={"none"} id="selectFile" hidden />
+              <Input
+                type="file"
+                border={"none"}
+                id="selectFile"
+                onChange={changeHandler}
+                hidden
+              />
               <Flex align={"end"} justify={"space-between"} mb={"1rem"}>
                 <label htmlFor="selectFile">
                   <Flex
@@ -135,6 +198,7 @@ const DashboardLayout = (props: any) => {
               <FormLabel>Username</FormLabel>
               <Input
                 placeholder="Username"
+                value={username}
                 _placeholder={{ color: "#767677" }}
                 size="md"
                 border={"1px solid #535354"}
@@ -142,6 +206,7 @@ const DashboardLayout = (props: any) => {
                 _hover={{ outline: "none" }}
                 _focus={{ boxShadow: "none" }}
                 px={".5rem"}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </FormControl>
 
@@ -154,7 +219,7 @@ const DashboardLayout = (props: any) => {
                 _hover={{ outline: "none" }}
                 _focus={{ boxShadow: "none" }}
                 px={".5rem"}
-                value={"0x00000"}
+                value={address}
                 disabled
               />
             </FormControl>
@@ -173,6 +238,7 @@ const DashboardLayout = (props: any) => {
                 border: "none",
               }}
               _focus={{ outline: "none" }}
+              onClick={handleRegister}
             >
               <Text>Register</Text>
             </Button>
