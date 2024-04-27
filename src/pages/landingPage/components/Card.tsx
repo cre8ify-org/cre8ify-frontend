@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Image, Flex, Center } from "@chakra-ui/react";
+import { Box, Image, Flex, Center, Heading } from "@chakra-ui/react";
 
 interface CardProps {
   image: string;
@@ -27,7 +27,7 @@ const CardRow: React.FC = () => {
   return (
     <Box>
       <Center>
-        <h4>Most Viewed Content</h4>
+        <Heading my="50px">Most Viewed Content</Heading>
       </Center>
       <Flex direction="row" mx="220px" justifyContent="space-around">
         <Card image={image1} />
