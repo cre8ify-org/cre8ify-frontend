@@ -37,7 +37,7 @@ const DAOdashboardLayout = (props: any) => {
   return (
     <Flex h="100vh">
       <Box
-        w="400px"
+        w="500px"
         h="100vh"
         py={"2rem"}
         px={"1.8rem"}
