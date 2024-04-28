@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ image }) => {
       borderWidth="2px"
       borderRadius="xl"
       overflow="hidden"
-      w="260px"
+      w="220px"
       minH="300px"
       position="relative"
       onMouseMove={handleMouseMove}
@@ -52,7 +52,7 @@ const CardRow: React.FC = () => {
   const image4 = "./assets/image4.jpg";
 
   return (
-    <Box m={"8rem"}>
+    <Box mx={"13rem"} my={"6rem"}>
       <Center>
         <Heading my="20px">Most Viewed Content</Heading>
       </Center>
