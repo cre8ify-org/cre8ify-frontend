@@ -1,6 +1,10 @@
 import { configureWeb3Modal } from "./connection";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Header from "./pages/landingPage/components/Header";
+import LandingPage from "./pages/landingPage";
+import Home from "./pages/dashboard/home";
+import DashboardLayout from "./layout/dashboardLayout";
 import Feed from "./pages/dashboard/feed";
 import Monetization from "./pages/dashboard/monetization";
 import Analytics from "./pages/dashboard/analytics";
@@ -14,9 +18,14 @@ configureWeb3Modal();
 function App() {
   return (
     <>
-      {/* <Header /> */}
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="home" element={<Home />} />
+            <Route path="feed" element={<Feed />} />
+            <Route path="about" element={<About />} />
+          </Route>
           <Route path="feed" element={<Feed />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="monetization" element={<Monetization />} />
