@@ -1,28 +1,32 @@
 import * as React from "react";
-import { Box, Image, Flex, Center, Heading } from "@chakra-ui/react";
+import { Box, Flex, Center, Heading } from "@chakra-ui/react";
 
 interface CardProps {
-  image: string;
+  videoUrl: string;
 }
 
-const Card: React.FC<CardProps> = ({ image }) => (
+const Card: React.FC<CardProps> = ({ videoUrl }) => (
   <Box
     borderWidth="1px"
     borderRadius="lg"
     overflow="hidden"
     w="300px"
     minH="300px"
+    position="relative"
   >
-    <Image src={image} alt="" objectFit="cover" w="100%" h="100%" />
+    <video width="100%" height="100%" controls>
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   </Box>
 );
 
 const CardRow: React.FC = () => {
-  // Replace these with the paths to your images
-  const image1 = "./assets/image1.jpg";
-  const image2 = "./assets/image2.jpg";
-  const image3 = "./assets/image3.jpg";
-  const image4 = "./assets/image4.jpg";
+  // Replace these with the URLs to your videos
+  const video1 = "https://www.example.com/video1.mp4";
+  const video2 = "https://www.example.com/video2.mp4";
+  const video3 = "https://www.example.com/video3.mp4";
+  const video4 = "https://www.example.com/video4.mp4";
 
   return (
     <Box>
@@ -30,10 +34,10 @@ const CardRow: React.FC = () => {
         <Heading my="20px">Most Viewed Content</Heading>
       </Center>
       <Flex direction="row" justifyContent="space-around" mx="220px" my="50px">
-        <Card image={image1} />
-        <Card image={image2} />
-        <Card image={image3} />
-        <Card image={image4} />
+        <Card videoUrl={video1} />
+        <Card videoUrl={video2} />
+        <Card videoUrl={video3} />
+        <Card videoUrl={video4} />
       </Flex>
     </Box>
   );

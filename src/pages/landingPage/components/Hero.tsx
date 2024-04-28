@@ -11,7 +11,7 @@ export default function Hero() {
       justify={"space-between"}
       w={"100%"}
     >
-      <Box flex="1" mx="100px">
+      <Box flex="1" mx="100px" px="100px">
         <Heading as="h1" size="2xl" noOfLines={2} mb="50px">
           Discover Top Creators And Influencers
         </Heading>

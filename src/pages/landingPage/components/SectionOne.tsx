@@ -1,6 +1,6 @@
 import { Flex, Box, Text, Image, Heading } from "@chakra-ui/react";
 
-const heroImage = "./assets/heroImage.jpg";
+const image5 = "./assets/image5.jpg";
 
 export default function SectionOne() {
   return (
@@ -12,16 +12,23 @@ export default function SectionOne() {
       w={"100%"}
     >
       <Box flex="1">
-        <Image src={heroImage} alt="Description of the image" boxSize="90%" />
+        <Image
+          src={image5}
+          alt="Description of the image"
+          boxSize="70%"
+          borderRadius="lg"
+          mx="150px"
+        />
       </Box>
-      <Box flex="1">
-        <Heading as="h1" size="4xl" noOfLines={2} mb={6}>
-          Discover Top Creators And Influencers
+      <Box flex="1" mx="200px">
+        <Heading as="h1" size="2xl" noOfLines={2} mb={6}>
+          Why Choose Us
         </Heading>
-        <Text fontSize="2xl">
-          Jamii aim is to simplify the influencer marketing process for brands
-          and provide them with access to a diverse range of talented creators
-          who can help them achieve their marketing goals.
+        <Text fontSize="xl">
+          We are a Decentralised Content Creator platform where creatives get
+          paid for their work without the presence of a middle man.Feel free to
+          speak your mind without restrictions and regulations. Your voice is
+          heard!
         </Text>
       </Box>
     </Flex>
