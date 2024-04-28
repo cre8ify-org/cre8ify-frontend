@@ -52,7 +52,7 @@ const CardRow: React.FC = () => {
   const image4 = "./assets/image4.jpg";
 
   return (
-    <Box>
+    <Box m={"6rem"}>
       <Center>
         <Heading my="20px">Most Viewed Content</Heading>
       </Center>
