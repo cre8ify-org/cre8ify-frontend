@@ -1,12 +1,38 @@
-import { Box, Flex, Icon, Link, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Text,
+  Modal,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import "../../App.css";
+import ConnectButton from "../../components/ConnectButton.tsx";
+import { RegisterCreator } from "../../components/RegisterCreator.tsx";
+interface DashboardLayoutProps {
+  children: React.ReactNode;
+}
 
-const DashboardLayout = () => {
+const DashboardLayout = (props: DashboardLayoutProps) => {
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
+    />
+  );
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
+
   return (
     <Flex h="100vh">
       <Box
-        w="300px"
+        w="500px"
         h="100vh"
         py={"2rem"}
         px={"1.8rem"}
@@ -14,33 +40,66 @@ const DashboardLayout = () => {
         overflowY={"auto"}
         overflowX={"hidden"}
       >
-        <Box mb={"3rem"}>
+        <Box
+          mb={"5rem"}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
           <Text>LOGO</Text>
+          <ConnectButton />
         </Box>
 
-        <Flex flexDirection={"column"} justify={"space-between"} h={"86%"}>
-          <Flex flexDirection={"column"} gap={".5rem"}>
+        <Flex flexDirection={"column"} justify={"space-between"} h={"77%"}>
+          <Flex flexDirection={"column"} gap={"1rem"}>
             {menu.map((item, index) => (
               <NavLink to={item.link} key={index} className="activeClassName">
-                <Text fontSize={".9rem"} p={"1rem"}>
-                  {item.title}
-                </Text>
+                <Flex align={"center"} px={"1rem"}>
+                  <Icon as={item.icon} />
+                  <Text fontSize={".9rem"} p={".8rem"}>
+                    {item.title}
+                  </Text>
+                </Flex>
               </NavLink>
             ))}
           </Flex>
-          <Flex flexDirection={"column"} align={"start"}>
-            <Box mb={"1rem"}>
-              <w3m-button />
-            </Box>
-            <Link href="#" _hover={{ color: "#fff" }} fontSize={".8rem"}>
-              FAQ & Help Center
-            </Link>
-          </Flex>
+          <Box>
+            <Button
+              bgGradient="linear(to-r, #04A67D, #24B1B6)"
+              borderRadius={"100rem"}
+              border={"none"}
+              color={"#fff"}
+              transition={"all .5s ease-in-out"}
+              w={"150px"}
+              _hover={{
+                bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                border: "none",
+              }}
+              _focus={{ outline: "none" }}
+              onClick={() => {
+                setOverlay(<OverlayOne />);
+                onOpen();
+              }}
+            >
+              <Text>Register</Text>
+            </Button>
+          </Box>
         </Flex>
       </Box>
-      <Box>
-        <Outlet />
+      <Box
+        w={"100%"}
+        h={"100vh"}
+        overflowY={"auto"}
+        overflowX={"hidden"}
+        py={"2.5rem"}
+        px={"1.5rem"}
+      >
+        {props.children}
       </Box>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        {overlay}
+        <RegisterCreator />
+      </Modal>
     </Flex>
   );
 };

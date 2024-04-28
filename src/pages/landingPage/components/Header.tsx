@@ -1,4 +1,5 @@
 import { Flex } from "@chakra-ui/react";
+import ConnectButton from "./ConnectButton";
 
 export default function Header() {
   return (
@@ -9,8 +10,8 @@ export default function Header() {
       justify={"space-between"}
       w={"100%"}
     >
-      <div>Meta NFT</div>
-      <w3m-button />
+      <div>LOGO</div>
+      <ConnectButton />
     </Flex>
   );
 }

@@ -6,7 +6,12 @@ import LandingPage from "./pages/landingPage";
 import Home from "./pages/dashboard/home";
 import DashboardLayout from "./layout/dashboardLayout";
 import Feed from "./pages/dashboard/feed";
-import About from "./pages/dashboard/about";
+import Monetization from "./pages/dashboard/monetization";
+import Analytics from "./pages/dashboard/analytics";
+import Overview from "./pages/DAOdashboard/Overview";
+import Proposals from "./pages/DAOdashboard/Proposals";
+import Voting from "./pages/DAOdashboard/Voting";
+import Treasury from "./pages/DAOdashboard/Treasury";
 
 configureWeb3Modal();
 
@@ -21,6 +26,15 @@ function App() {
             <Route path="feed" element={<Feed />} />
             <Route path="about" element={<About />} />
           </Route>
+          <Route path="feed" element={<Feed />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="monetization" element={<Monetization />} />
+        </Routes>
+        <Routes>
+          <Route path="overview" element={<Overview />} />
+          <Route path="proposals" element={<Proposals />} />
+          <Route path="voting" element={<Voting />} />
+          <Route path="treasury" element={<Treasury />} />
         </Routes>
       </BrowserRouter>
     </>
