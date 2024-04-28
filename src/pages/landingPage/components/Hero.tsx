@@ -21,12 +21,20 @@ export default function Hero() {
           who can help them achieve their marketing goals.
         </Text>
       </Box>
-      <Box flex="1">
+      <Box
+        flex="1"
+        position="relative"
+        overflow="hidden"
+        borderRadius="lg"
+        transition="transform 0.3s"
+        _hover={{ transform: "scale(1.1)" }}
+      >
         <Image
           src={heroImage}
           alt="Description of the image"
-          boxSize="70%"
-          borderRadius="lg"
+          w="70%"
+          h="100%"
+          objectFit="cover"
         />
       </Box>
     </Flex>

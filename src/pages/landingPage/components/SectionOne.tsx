@@ -11,13 +11,21 @@ export default function SectionOne() {
       justify={"space-between"}
       w={"100%"}
     >
-      <Box flex="1">
+      <Box
+        flex="1"
+        position="relative"
+        overflow="hidden"
+        borderRadius="lg"
+        transition="transform 0.3s"
+        _hover={{ transform: "scale(1.1)" }}
+      >
         <Image
           src={image5}
           alt="Description of the image"
-          boxSize="70%"
-          borderRadius="lg"
-          mx="150px"
+          w="70%"
+          h="100%"
+          objectFit="cover"
+          mx="200px"
         />
       </Box>
       <Box flex="1" mx="200px">
@@ -26,7 +34,7 @@ export default function SectionOne() {
         </Heading>
         <Text fontSize="xl">
           We are a Decentralised Content Creator platform where creatives get
-          paid for their work without the presence of a middle man.Feel free to
+          paid for their work without the presence of a middle man. Feel free to
           speak your mind without restrictions and regulations. Your voice is
           heard!
         </Text>
