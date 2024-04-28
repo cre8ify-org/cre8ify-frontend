@@ -26,8 +26,8 @@ const Card: React.FC<CardProps> = ({ image }) => {
 
   return (
     <Box
-      borderWidth="1px"
-      borderRadius="lg"
+      borderWidth="2px"
+      borderRadius="xl"
       overflow="hidden"
       w="300px"
       minH="300px"
@@ -52,11 +52,11 @@ const CardRow: React.FC = () => {
   const image4 = "./assets/image4.jpg";
 
   return (
-    <Box m={"6rem"}>
+    <Box>
       <Center>
         <Heading my="20px">Most Viewed Content</Heading>
       </Center>
-      <Flex direction="row" justifyContent="space-around" mx="220px" my="50px">
+      <Flex direction="row" justifyContent="space-between" py="50px">
         <Card image={image1} />
         <Card image={image2} />
         <Card image={image3} />
