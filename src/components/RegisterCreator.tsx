@@ -11,6 +11,7 @@ import {
   FormLabel,
   Input,
   FormControl,
+  Img,
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { FaImage } from "react-icons/fa6";
@@ -20,6 +21,7 @@ import { useToast } from "@chakra-ui/react";
 
 export const RegisterCreator = () => {
   const [username, setUsername] = useState<string>("");
+  const [selectedFile, setSelectedFile] = useState<Blob | MediaSource>();
   const [cid, setCid] = useState<string>("");
   const toast = useToast();
 
@@ -32,12 +34,12 @@ export const RegisterCreator = () => {
 
   const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const selectedFile = e.target.files[0];
+      setSelectedFile(e.target.files[0]);
       await handleSubmission(selectedFile);
     }
   };
 
-  const handleSubmission = async (fileToUpload: string | Blob) => {
+  const handleSubmission = async (fileToUpload: any | Blob | MediaSource) => {
     try {
       const formData = new FormData();
       formData.append("file", fileToUpload);
@@ -88,20 +90,30 @@ export const RegisterCreator = () => {
           />
           <Flex align={"end"} justify={"space-between"} mb={"1rem"}>
             <FormLabel htmlFor="selectFile">
-              <Flex
-                borderRadius={".5rem"}
-                align={"center"}
-                justify={"center"}
-                color={"#B7B7B6"}
-                w={"200px"}
-                h={"150px"}
-                bg={"#323436"}
-              >
-                <Flex flexDirection={"column"} align={"center"}>
-                  <Icon as={FaImage} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Profile Image</Text>
+              {selectedFile ? (
+                <Img
+                  src={URL.createObjectURL(selectedFile)}
+                  w={"200px"}
+                  h={"150px"}
+                  objectFit={"cover"}
+                  borderRadius={".5rem"}
+                />
+              ) : (
+                <Flex
+                  borderRadius={".5rem"}
+                  align={"center"}
+                  justify={"center"}
+                  color={"#B7B7B6"}
+                  w={"200px"}
+                  h={"150px"}
+                  bg={"#323436"}
+                >
+                  <Flex flexDirection={"column"} align={"center"}>
+                    <Icon as={FaImage} fontSize={"3rem"} />
+                    <Text fontSize={"1rem"}>Upload Profile Image</Text>
+                  </Flex>
                 </Flex>
-              </Flex>
+              )}
             </FormLabel>
           </Flex>
         </FormControl>
@@ -151,15 +163,15 @@ export const RegisterCreator = () => {
           }}
           _focus={{ outline: "none" }}
           onClick={() => {
-            handleRegister;
+            handleRegister();
             toast.promise(handleRegister(), {
-              success: {
-                title: "User Registered",
-                description: "Welcome",
-              },
               error: {
                 title: "Registration failed",
                 description: "Something wrong",
+              },
+              success: {
+                title: "User Registered",
+                description: "Welcome",
               },
               loading: { title: "Loading...", description: "Please wait" },
             });

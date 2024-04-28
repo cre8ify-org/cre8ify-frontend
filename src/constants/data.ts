@@ -70,3 +70,22 @@ export const content = [
     tag: "free",
   },
 ];
+
+export const analytics = [
+  {
+    title: "Engagement",
+    amount: "250.9k",
+  },
+  {
+    title: "Profile View",
+    amount: "90.2k",
+  },
+  {
+    title: "Search Appearances",
+    amount: "10.0k",
+  },
+  {
+    title: "Content View",
+    amount: "1.6m",
+  },
+];
