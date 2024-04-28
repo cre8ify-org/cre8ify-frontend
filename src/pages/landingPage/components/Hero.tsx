@@ -42,7 +42,7 @@ export default function Hero() {
         </Box>
       </Flex>
       <Flex
-        gap={"10"}
+        gap={"8"}
         px={"8rem"}
         py={"5rem"}
         align={"center"}
