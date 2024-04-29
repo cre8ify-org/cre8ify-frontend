@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import {
   AreaChart,
   Area,
@@ -8,7 +8,6 @@ import {
   Tooltip,
 } from "recharts";
 import { curveCardinal } from "d3-shape";
-import { analytics } from "../../../../constants/data";
 
 const data = [
   {
