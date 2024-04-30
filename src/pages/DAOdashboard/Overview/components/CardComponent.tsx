@@ -8,11 +8,9 @@ const CardComponent = () => {
       templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
     >
       <Card
-        bgGradient="linear(to-r, #1d1d1e, #1d1d1f)"
+        bgGradient="linear(to-r, #1d1d1e, #252528)"
         color="#fff"
-        border={"1px"}
         boxShadow="lg"
-        borderColor="#04A67D"
         transition={"all .5s ease-in-out"}
       >
         <CardHeader>
@@ -27,11 +25,9 @@ const CardComponent = () => {
         </CardBody>
       </Card>
       <Card
-        bgGradient="linear(to-r, #1d1d1e, #1d1d1f)"
+        bgGradient="linear(to-r, #1d1d1e, #252528)"
         color="#fff"
-        border={"1px"}
         boxShadow="lg"
-        borderColor="#04A67D"
         transition={"all .5s ease-in-out"}
       >
         <CardHeader>
@@ -46,11 +42,9 @@ const CardComponent = () => {
         </CardBody>
       </Card>
       <Card
-        bgGradient="linear(to-r, #1d1d1e, #1d1d1f)"
+        bgGradient="linear(to-r, #1d1d1e, #252528)"
         color="#fff"
-        border={"1px"}
         boxShadow="lg"
-        borderColor="#04A67D"
         transition={"all .5s ease-in-out"}
       >
         <CardHeader>
@@ -65,11 +59,9 @@ const CardComponent = () => {
         </CardBody>
       </Card>{" "}
       <Card
-        bgGradient="linear(to-r, #1d1d1e, #1d1d1f)"
+        bgGradient="linear(to-r, #1d1d1e, #252528)"
         color="#fff"
-        border={"1px"}
         boxShadow="lg"
-        borderColor="#04A67D"
         transition={"all .5s ease-in-out"}
       >
         <CardHeader>
