@@ -6,7 +6,7 @@ import {
 } from "@web3modal/ethers/react";
 import { getAuthContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
-import { useToast } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 
 const useRegister = (name: string, image: string) => {
   const { chainId } = useWeb3ModalAccount();
@@ -14,27 +14,24 @@ const useRegister = (name: string, image: string) => {
   // const toast = useToast();
 
   return useCallback(async () => {
-    if (chainId === undefined) return console.error("Chain ID is undefined");
-    if (!isSupportedChain(chainId)) return console.error("Wrong network");
+    if (chainId === undefined)
+      return toast.error("Please connect your wallet first");
+    if (!isSupportedChain(chainId)) return toast.error("Wrong network");
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
     const contract = getAuthContract(signer);
 
     try {
-      const transaction = await contract.registerUser(name, image);
-      console.log("transaction: ", transaction);
-      const receipt = await transaction.wait();
+      if (name === "" || !image) {
+        toast.error("Please fill in details");
+      } else {
+        const transaction = await contract.registerUser(name, image);
+        console.log("transaction: ", transaction);
+        const receipt = await transaction.wait();
 
-      console.log("receipt: ", receipt);
-
-      // return toast({
-      //   title: "Account created.",
-      //   status: "success",
-      //   position: "top-right",
-      //   duration: 9000,
-      //   isClosable: true,
-      // });
+        console.log("receipt: ", receipt);
+      }
     } catch (error: unknown) {
       console.log(error);
     }
