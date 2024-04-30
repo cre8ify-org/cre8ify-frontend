@@ -9,6 +9,7 @@ import Overview from "./pages/DAOdashboard/Overview";
 import Proposals from "./pages/DAOdashboard/Proposals";
 import Voting from "./pages/DAOdashboard/Voting";
 import Treasury from "./pages/DAOdashboard/Treasury";
+import { ToastContainer } from "react-toastify";
 
 configureWeb3Modal();
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="treasury" element={<Treasury />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer theme="colored" />
     </>
   );
 }
