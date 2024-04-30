@@ -73,7 +73,7 @@ export const content = [
 
 export const analytics = [
   {
-    title: "Engagement",
+    title: "Likes",
     amount: "250.9k",
   },
   {
@@ -81,8 +81,12 @@ export const analytics = [
     amount: "90.2k",
   },
   {
-    title: "Search Appearances",
+    title: "Post Created",
     amount: "10.0k",
+  },
+  {
+    title: "Content View",
+    amount: "1.6m",
   },
   {
     title: "Content View",
