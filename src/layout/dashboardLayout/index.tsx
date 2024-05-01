@@ -79,41 +79,46 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             ))}
           </Flex>
           <Box>
-            {!loading && !error && (
-              <Flex alignItems={"center"} gap={".4rem"}>
-                {userDetails?.profileImage && (
-                  <Image
-                    borderRadius="full"
-                    boxSize="40px"
-                    src={`https://${userDetails.profileImage}`}
-                    alt={`${userDetails.username}'s image`}
-                  />
+            {userDetails?.username ? (
+              <Box>
+                {!loading && !error && (
+                  <Flex alignItems={"center"} gap={".4rem"}>
+                    {userDetails?.profileImage && (
+                      <Image
+                        borderRadius="full"
+                        boxSize="40px"
+                        src={`https://${userDetails.profileImage}`}
+                        alt={`${userDetails.username}'s image`}
+                      />
+                    )}
+                    <Text fontSize={"1.2rem"} fontWeight={"500"}>
+                      {userDetails?.username}{" "}
+                    </Text>
+                  </Flex>
                 )}
-                <Text fontSize={"1.2rem"} fontWeight={"500"}>
-                  {userDetails?.username}{" "}
-                </Text>
-              </Flex>
+              </Box>
+            ) : (
+              <Button
+                bgGradient="linear(to-r, #04A67D, #24B1B6)"
+                borderRadius={"100rem"}
+                border={"none"}
+                color={"#fff"}
+                transition={"all .5s ease-in-out"}
+                w={"150px"}
+                _hover={{
+                  bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                  border: "none",
+                }}
+                _focus={{ outline: "none" }}
+                onClick={() => {
+                  setOverlay(<OverlayOne />);
+                  onOpen();
+                }}
+              >
+                <Text>Register</Text>
+              </Button>
             )}
             {/* {error && <Text>Error: {error}</Text>} */}
-            <Button
-              bgGradient="linear(to-r, #04A67D, #24B1B6)"
-              borderRadius={"100rem"}
-              border={"none"}
-              color={"#fff"}
-              transition={"all .5s ease-in-out"}
-              w={"150px"}
-              _hover={{
-                bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-                border: "none",
-              }}
-              _focus={{ outline: "none" }}
-              onClick={() => {
-                setOverlay(<OverlayOne />);
-                onOpen();
-              }}
-            >
-              <Text>Register</Text>
-            </Button>
           </Box>
         </Flex>
       </Box>
