@@ -15,14 +15,11 @@ import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
 import { RegisterCreator } from "../../components/RegisterCreator.tsx";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
-import useGetUserDetails from "../../hooks/useGetUserDetails.ts";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
-  const userDetails = useGetUserDetails();
-  console.log(userDetails);
   const { isConnected } = useWeb3ModalAccount();
   const navigate = useNavigate();
 
@@ -96,7 +93,6 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             >
               <Text>Register</Text>
             </Button>
-            <Text color={"#fff"}>{userDetails.username}</Text>
           </Box>
         </Flex>
       </Box>

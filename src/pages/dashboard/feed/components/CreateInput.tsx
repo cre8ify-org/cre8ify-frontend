@@ -7,7 +7,7 @@ import {
   Icon,
   Button,
 } from "@chakra-ui/react";
-import { FaImage, FaMusic, FaVideo } from "react-icons/fa6";
+import { FaImage, FaMusic } from "react-icons/fa6";
 import { RiFileVideoFill } from "react-icons/ri";
 
 const CreateInput = () => {
