@@ -9,16 +9,31 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
 import { RegisterCreator } from "../../components/RegisterCreator.tsx";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import useGetUserDetails from "../../hooks/useGetUserDetails.ts";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
+  const userDetails = useGetUserDetails();
+  console.log(userDetails);
+  const { isConnected } = useWeb3ModalAccount();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect to "/feed" if the wallet is connected
+    if (isConnected === false) {
+      navigate("/");
+    } else {
+      navigate("/feed");
+    }
+  }, [isConnected]);
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -50,7 +65,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
           <ConnectButton />
         </Box>
 
-        <Flex flexDirection={"column"} justify={"space-between"} h={"77%"}>
+        <Flex flexDirection={"column"} justify={"space-between"} h={"76%"}>
           <Flex flexDirection={"column"} gap={"1rem"}>
             {menu.map((item, index) => (
               <NavLink to={item.link} key={index} className="activeClassName">
@@ -83,6 +98,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             >
               <Text>Register</Text>
             </Button>
+            <Text color={"#fff"}>{userDetails.username}</Text>
           </Box>
         </Flex>
       </Box>

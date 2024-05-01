@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 const useRegister = (name: string, image: string) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
-  // const toast = useToast();
 
   return useCallback(async () => {
     if (chainId === undefined)
