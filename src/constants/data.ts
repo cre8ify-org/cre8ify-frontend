@@ -15,8 +15,8 @@ export const menu = [
     icon: SiGoogleanalytics,
   },
   {
-    link: "/monetization",
-    title: "Monetization",
+    link: "/subscription",
+    title: "Subscription",
     icon: FaMoneyBillTrendUp,
   },
 ];
