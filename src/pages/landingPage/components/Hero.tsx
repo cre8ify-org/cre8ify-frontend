@@ -1,4 +1,5 @@
 import { Flex, Box, Text, Image, Heading } from "@chakra-ui/react";
+import "../../../App.css";
 
 const heroImage = "./assets/heroImage.jpg";
 const image5 = "./assets/image5.jpg";
@@ -15,7 +16,7 @@ export default function Hero() {
         w={"100%"}
       >
         <Box flex="1" mr="2rem">
-          <Heading as="h1" size="2xl" noOfLines={2} mb="50px">
+          <Heading className="font" as="h1" size="2xl" noOfLines={2} mb="50px">
             Discover Top Creators And Influencers
           </Heading>
           <Text fontSize="xl">
@@ -67,7 +68,7 @@ export default function Hero() {
           />
         </Box>
         <Box flex="1">
-          <Heading as="h1" size="2xl" noOfLines={2} mb={6}>
+          <Heading className="font" as="h1" size="2xl" noOfLines={2} mb={6}>
             Why Choose Us
           </Heading>
           <Text fontSize="xl">

@@ -7,45 +7,16 @@ import {
   Icon,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FaImage, FaMusic } from "react-icons/fa6";
-import { FaPhotoVideo } from "react-icons/fa";
+import { RiFileVideoFill } from "react-icons/ri";
 
 const CreateInput = () => {
-  const [text, setText] = useState(false);
-  const [image, setImage] = useState(false);
-  const [video, setVideo] = useState(false);
-  const [audio, setAudio] = useState(false);
-  const handleText = () => {
-    setText(true);
-    setImage(false);
-    setVideo(false);
-    setAudio(false);
-  };
-  const handleImage = () => {
-    setImage(true);
-    setText(false);
-    setVideo(false);
-    setAudio(false);
-  };
-  const handleVideo = () => {
-    setVideo(true);
-    setImage(false);
-    setText(false);
-    setAudio(false);
-  };
-  const handleAudio = () => {
-    setAudio(true);
-    setImage(false);
-    setText(false);
-    setVideo(false);
-  };
   return (
     <Box mb={"3rem"}>
       <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"}>
         What will create today, Username?
       </Text>
-      <Flex
+      {/* <Flex
         w={"500px"}
         justify={"space-between"}
         bg={"#252528"}
@@ -118,60 +89,76 @@ const CreateInput = () => {
         >
           <Text>Audio</Text>
         </Button>
-      </Flex>
-      {text && (
-        <Box
-          border={"1px solid #535354"}
-          py={"1rem"}
-          px={".8rem"}
-          borderRadius={".8rem"}
-          transition={"all 1s"}
-        >
-          <Textarea
-            placeholder="What is in your mind, Username?"
-            resize={"none"}
-            border={"none"}
-            _focus={{ boxShadow: "none" }}
-            _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
-            p={"0"}
-            mb={"0.5rem"}
-          />
-          <Button
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            w={"150px"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            <Text>Create</Text>
-          </Button>
-        </Box>
-      )}
-      {image && (
-        <Box>
-          <Input type="file" border={"none"} id="selectFile" hidden />
-          <Flex align={"end"} justify={"space-between"} mb={".5rem"}>
-            <label htmlFor="selectFile">
-              <Flex
-                borderRadius={".5rem"}
-                align={"center"}
-                justify={"center"}
-                color={"#B7B7B6"}
-                w={"400px"}
-                h={"200px"}
-                bg={"#323436"}
-              >
-                <Flex flexDirection={"column"} align={"center"}>
-                  <Icon as={FaImage} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Photo</Text>
-                </Flex>
+      </Flex> */}
+      <Box
+        border={"1px solid #535354"}
+        py={"1rem"}
+        px={".8rem"}
+        borderRadius={".8rem"}
+        transition={"all 1s"}
+      >
+        <Textarea
+          placeholder="What is in your mind, Username?"
+          resize={"none"}
+          border={"none"}
+          _focus={{ boxShadow: "none" }}
+          _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
+          p={"0"}
+          mb={"0.5rem"}
+        />
+        <Flex justify={"space-between"} align={"end"}>
+          <Flex gap={"1rem"}>
+            <Flex>
+              <Input
+                accept="image/*"
+                type="file"
+                border={"none"}
+                id="image"
+                hidden
+              />
+              <Flex align={"end"} justify={"space-between"}>
+                <label style={{ cursor: "pointer" }} htmlFor="image">
+                  <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                    <Icon as={FaImage} fontSize={".7rem"} />
+                    <Text fontSize={".8rem"}>Photo</Text>
+                  </Flex>
+                </label>
               </Flex>
-            </label>
+            </Flex>
+            <Flex>
+              <Input
+                accept="video/*"
+                type="file"
+                border={"none"}
+                id="video"
+                hidden
+              />
+              <Flex align={"end"} justify={"space-between"}>
+                <label style={{ cursor: "pointer" }} htmlFor="video">
+                  <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                    <Icon as={RiFileVideoFill} fontSize={".8rem"} />
+                    <Text fontSize={".8rem"}>Video</Text>
+                  </Flex>
+                </label>
+              </Flex>
+            </Flex>
+            <Flex>
+              <Input
+                accept="audio/mp3, audio/WAV, audio/FLAC, audio/M4A"
+                type="file"
+                border={"none"}
+                id="audio"
+                hidden
+              />
+              <Flex align={"end"} justify={"space-between"}>
+                <label style={{ cursor: "pointer" }} htmlFor="audio">
+                  <Flex color={"#B7B7B6"} align={"center"} gap={".2rem"}>
+                    <Icon as={FaMusic} fontSize={".7rem"} />
+                    <Text fontSize={".8rem"}>Audio</Text>
+                  </Flex>
+                </label>
+              </Flex>
+            </Flex>
           </Flex>
           <Button
             bgGradient="linear(to-r, #04A67D, #24B1B6)"
@@ -187,82 +174,8 @@ const CreateInput = () => {
           >
             <Text>Create</Text>
           </Button>
-        </Box>
-      )}
-      {video && (
-        <Box>
-          <Input type="file" border={"none"} id="selectFile" hidden />
-          <Flex align={"end"} justify={"space-between"} mb={".5rem"}>
-            <label htmlFor="selectFile">
-              <Flex
-                borderRadius={".5rem"}
-                align={"center"}
-                justify={"center"}
-                color={"#B7B7B6"}
-                w={"400px"}
-                h={"200px"}
-                bg={"#323436"}
-              >
-                <Flex flexDirection={"column"} align={"center"}>
-                  <Icon as={FaPhotoVideo} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Video</Text>
-                </Flex>
-              </Flex>
-            </label>
-          </Flex>
-          <Button
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            w={"150px"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            <Text>Create</Text>
-          </Button>
-        </Box>
-      )}
-      {audio && (
-        <Box>
-          <Input type="file" border={"none"} id="selectFile" hidden />
-          <Flex align={"end"} justify={"space-between"} mb={".5rem"}>
-            <label htmlFor="selectFile">
-              <Flex
-                borderRadius={".5rem"}
-                align={"center"}
-                justify={"center"}
-                color={"#B7B7B6"}
-                w={"400px"}
-                h={"200px"}
-                bg={"#323436"}
-              >
-                <Flex flexDirection={"column"} align={"center"}>
-                  <Icon as={FaMusic} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Audio</Text>
-                </Flex>
-              </Flex>
-            </label>
-          </Flex>
-          <Button
-            bgGradient="linear(to-r, #04A67D, #24B1B6)"
-            border={"none"}
-            color={"#fff"}
-            transition={"all .5s ease-in-out"}
-            w={"150px"}
-            _hover={{
-              bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-              border: "none",
-            }}
-            _focus={{ outline: "none" }}
-          >
-            <Text>Create</Text>
-          </Button>
-        </Box>
-      )}
+        </Flex>
+      </Box>
     </Box>
   );
 };
