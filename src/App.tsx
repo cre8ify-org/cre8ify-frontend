@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./pages/landingPage";
 import Feed from "./pages/dashboard/feed";
-import Monetization from "./pages/dashboard/monetization";
+import Subscription from "./pages/dashboard/subscription";
 import Analytics from "./pages/dashboard/analytics";
 import Overview from "./pages/DAOdashboard/Overview";
 import Proposals from "./pages/DAOdashboard/Proposals";
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="feed" element={<Feed />} />
           <Route path="analytics" element={<Analytics />} />
-          <Route path="monetization" element={<Monetization />} />
+          <Route path="subscription" element={<Subscription />} />
           <Route path="overview" element={<Overview />} />
           <Route path="proposals" element={<Proposals />} />
           <Route path="voting" element={<Voting />} />
