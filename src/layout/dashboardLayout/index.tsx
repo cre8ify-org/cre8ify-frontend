@@ -30,8 +30,6 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
     // Redirect to "/feed" if the wallet is connected
     if (isConnected === false) {
       navigate("/");
-    } else {
-      navigate("/feed");
     }
   }, [isConnected]);
   const OverlayOne = () => (

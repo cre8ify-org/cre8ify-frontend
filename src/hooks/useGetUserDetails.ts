@@ -28,20 +28,18 @@ const useGetUserDetails = () => {
 
       const contract = getAuthContract(signer);
 
-      try {
-        const userDetails = await contract
-          .getUserDetails(address)
-          .then((res: any) => {
-            setUserDetails({
-              username: res.username,
-              walletAddress: res.walletAddress,
-              profileImage: res.profileImage,
-            });
+      contract
+        .getUserDetails(address)
+        .then((res: any) => {
+          setUserDetails({
+            username: res.username,
+            walletAddress: res.walletAddress,
+            profileImage: res.profileImage,
           });
-        console.log("transaction: ", userDetails);
-      } catch (error: unknown) {
-        console.log(error);
-      }
+        })
+        .catch((error: unknown) => {
+          console.log(error);
+        });
     };
   }, [chainId, walletProvider]);
 
