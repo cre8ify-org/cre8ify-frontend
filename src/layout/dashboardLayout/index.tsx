@@ -7,6 +7,7 @@ import {
   Modal,
   ModalOverlay,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
 import { NavLink } from "react-router-dom";
@@ -14,11 +15,15 @@ import { useState } from "react";
 import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
 import { RegisterCreator } from "../../components/RegisterCreator.tsx";
+import useGetUserDetails from "../../hooks/useGetUserDetails.ts";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
+  const { data: userDetails, loading, error } = useGetUserDetails();
+  console.log(userDetails);
+
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -64,6 +69,22 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             ))}
           </Flex>
           <Box>
+            {!loading && !error && (
+              <Flex alignItems={"center"} gap={".4rem"}>
+                {userDetails?.profileImage && (
+                  <Image
+                    borderRadius="full"
+                    boxSize="40px"
+                    src={`https://${userDetails.profileImage}`}
+                    alt={`${userDetails.username}'s image`}
+                  />
+                )}
+                <Text fontSize={"1.2rem"} fontWeight={"500"}>
+                  {userDetails?.username}{" "}
+                </Text>
+              </Flex>
+            )}
+            {/* {error && <Text>Error: {error}</Text>} */}
             <Button
               bgGradient="linear(to-r, #04A67D, #24B1B6)"
               borderRadius={"100rem"}
