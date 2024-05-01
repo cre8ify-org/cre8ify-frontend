@@ -50,24 +50,32 @@ export const content = [
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_2.jpeg",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_3.avif",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_4.jpeg",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
 ];
 

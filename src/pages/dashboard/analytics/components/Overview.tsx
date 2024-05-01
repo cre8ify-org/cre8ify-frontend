@@ -1,7 +1,6 @@
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { analytics } from "../../../../constants/data";
 import Example from "./Chart";
-import { AiOutlineLike } from "react-icons/ai";
 
 const Overview = () => {
   return (
@@ -24,7 +23,7 @@ const Overview = () => {
                 mb={"1rem"}
               >
                 <Flex alignItems="center" gap="2">
-                  <AiOutlineLike />
+                  {/* <AiOutlineLike /> */}
                   {item.title}
                 </Flex>
               </Text>

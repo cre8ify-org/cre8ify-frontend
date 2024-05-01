@@ -101,11 +101,11 @@ const Content = () => {
                     fontSize={"1.5rem"}
                     color={liked ? "#ff0000" : ""}
                   />
-                  <Text>18.3k</Text>
+                  <Text>{item.likes}</Text>
                 </Flex>
                 <Flex gap={".2rem"}>
                   <Icon as={FiEye} fontSize={"1.5rem"} />
-                  <Text>100.3k</Text>
+                  <Text>{item.views}</Text>
                 </Flex>
               </Flex>
             </Box>
