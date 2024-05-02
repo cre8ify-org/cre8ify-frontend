@@ -78,7 +78,14 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
               </NavLink>
             ))}
           </Flex>
-          <Box>
+          <Box
+            bg={"#262628"}
+            px={".5rem"}
+            py={".5rem"}
+            boxShadow={"0 0 0 1px #2f2f30"}
+            w={"165px"}
+            borderRadius={"100rem"}
+          >
             {userDetails?.username ? (
               <Box>
                 {!loading && !error && (
@@ -87,6 +94,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
                       <Image
                         borderRadius="full"
                         boxSize="40px"
+                        objectFit={"cover"}
                         src={`https://${userDetails.profileImage}`}
                         alt={`${userDetails.username}'s image`}
                       />
