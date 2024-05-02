@@ -9,87 +9,77 @@ import {
 } from "@chakra-ui/react";
 import { FaImage, FaMusic } from "react-icons/fa6";
 import { RiFileVideoFill } from "react-icons/ri";
+import useCreateContent from "../../../../hooks/useCreateContent";
+import { ChangeEvent, useState } from "react";
 
 const CreateInput = () => {
+  const [title, setTitle] = useState<string>("");
+  const [ipfsHash, setIpfsHash] = useState<string>("");
+  const [contentType, setContentType] = useState("");
+
+  const handleCreateContent = useCreateContent(
+    title,
+    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
+    contentType
+  );
+  // const handleCreateContent = useCreateContent(title, ipfsHash, contentType);
+
+  const handleCaption = (e: any) => {
+    setTitle(e.target.value);
+    console.log(title);
+  };
+
+  const changeHandler = async (e: any) => {
+    if (e.target.files && e.target.files[0]) {
+      const selectedFile = e.target.files[0];
+      await handleSubmission(selectedFile);
+
+      setContentType("jpg");
+
+      // const fileExtension = selectedFile.name.split('.').pop();
+      // setContentType(fileExtension || '');
+    }
+  };
+
+  const handleSubmission = async (fileToUpload: string | Blob) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", fileToUpload);
+      const metadata = JSON.stringify({
+        name: "File name",
+      });
+      formData.append("pinataMetadata", metadata);
+
+      const options = JSON.stringify({
+        cidVersion: 0,
+      });
+      formData.append("pinataOptions", options);
+
+      const res = await fetch(
+        "https://api.pinata.cloud/pinning/pinFileToIPFS",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_PINATA_JWT}`,
+          },
+          body: formData,
+        }
+      );
+
+      const resData = await res.json();
+
+      setIpfsHash(resData.IpfsHash);
+      console.log(resData.IpfsHash);
+    } catch (e) {
+      console.log(e);
+      alert("Trouble uploading file");
+    }
+  };
   return (
     <Box mb={"3rem"}>
       <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"}>
         What will create today, Username?
       </Text>
-      {/* <Flex
-        w={"500px"}
-        justify={"space-between"}
-        bg={"#252528"}
-        gap={"1rem"}
-        p={".5rem"}
-        borderRadius={".5rem"}
-        mb={"1.5rem"}
-      >
-        <Button
-          p={"1rem"}
-          h={"0"}
-          bg={"none"}
-          color={"#fff"}
-          _hover={{ border: "none", boxShadow: "0px 0px 0px 1px #15AB99" }}
-          boxShadow={`${text && "0px 0px 0px 1px #15AB99"}`}
-          border={"none"}
-          textAlign={"center"}
-          w={"100%"}
-          _active={{ bg: "none" }}
-          _focus={{ outline: "none" }}
-          onClick={handleText}
-        >
-          <Text>Text</Text>
-        </Button>
-        <Button
-          p={"1rem"}
-          h={"0"}
-          bg={"none"}
-          color={"#fff"}
-          _hover={{ border: "none", boxShadow: "0px 0px 0px 1px #15AB99" }}
-          boxShadow={`${image && "0px 0px 0px 1px #15AB99"}`}
-          border={"none"}
-          textAlign={"center"}
-          w={"100%"}
-          _active={{ bg: "none" }}
-          _focus={{ outline: "none" }}
-          onClick={handleImage}
-        >
-          <Text>Image</Text>
-        </Button>
-        <Button
-          p={"1rem"}
-          h={"0"}
-          bg={"none"}
-          color={"#fff"}
-          _hover={{ border: "none", boxShadow: "0px 0px 0px 1px #15AB99" }}
-          boxShadow={`${video && "0px 0px 0px 1px #15AB99"}`}
-          border={"none"}
-          textAlign={"center"}
-          w={"100%"}
-          _active={{ bg: "none" }}
-          _focus={{ outline: "none" }}
-          onClick={handleVideo}
-        >
-          <Text>Video</Text>
-        </Button>
-        <Button
-          p={"1rem"}
-          h={"0"}
-          bg={"none"}
-          color={"#fff"}
-          _hover={{ border: "none", boxShadow: "0px 0px 0px 1px #15AB99" }}
-          boxShadow={`${audio && "0px 0px 0px 1px #15AB99"}`}
-          border={"none"}
-          textAlign={"center"}
-          w={"100%"}
-          _active={{ bg: "none" }}
-          _focus={{ outline: "none" }}
-          onClick={handleAudio}
-        >
-          <Text>Audio</Text>
-        </Button>
-      </Flex> */}
       <Box
         border={"1px solid #535354"}
         py={"1rem"}
@@ -99,18 +89,21 @@ const CreateInput = () => {
       >
         <Textarea
           placeholder="What is in your mind, Username?"
+          value={title}
           resize={"none"}
           border={"none"}
           _focus={{ boxShadow: "none" }}
           _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
           p={"0"}
           mb={"0.5rem"}
+          onChange={handleCaption}
         />
         <Flex justify={"space-between"} align={"end"}>
           <Flex gap={"1rem"}>
             <Flex>
               <Input
-                accept="image/*"
+                onChange={changeHandler}
+                accept="image/jpg, image/jpeg, image/png, image/gif"
                 type="file"
                 border={"none"}
                 id="image"
@@ -127,7 +120,7 @@ const CreateInput = () => {
             </Flex>
             <Flex>
               <Input
-                accept="video/*"
+                accept="video/mp4, video/avi, video/mov"
                 type="file"
                 border={"none"}
                 id="video"
@@ -144,7 +137,7 @@ const CreateInput = () => {
             </Flex>
             <Flex>
               <Input
-                accept="audio/mp3, audio/WAV, audio/FLAC, audio/M4A"
+                accept="audio/mp3, audio/wav, audio/ogg"
                 type="file"
                 border={"none"}
                 id="audio"
@@ -171,6 +164,9 @@ const CreateInput = () => {
               border: "none",
             }}
             _focus={{ outline: "none" }}
+            onClick={() => {
+              handleCreateContent();
+            }}
           >
             <Text>Create</Text>
           </Button>

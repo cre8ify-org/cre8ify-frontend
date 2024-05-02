@@ -38,7 +38,7 @@ const useGetUserDetails = (): State => {
           },
           error: undefined,
         });
-      } catch (err) {
+      } catch (err: any) {
         setUserDetails({
           loading: false,
           data: undefined,
