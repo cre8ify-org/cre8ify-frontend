@@ -6,6 +6,7 @@ import {
   Flex,
   Icon,
   Button,
+  Img,
 } from "@chakra-ui/react";
 import { FaImage, FaMusic } from "react-icons/fa";
 import { RiFileVideoFill } from "react-icons/ri";
@@ -99,6 +100,16 @@ const CreateInput = () => {
           mb={"0.5rem"}
           onChange={handleCaption}
         />
+        {ipfsHash && (
+          <Img
+            src={`https://${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`}
+            alt="image"
+            w={"300px"}
+            h={"300px"}
+            objectFit={"cover"}
+            borderRadius={".5rem"}
+          />
+        )}
         <Flex justify={"space-between"} align={"end"}>
           <Flex gap={"1rem"}>
             <Flex>
