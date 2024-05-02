@@ -27,7 +27,8 @@ const getContentType = (fileExtension: any) => {
 const useCreateContent = (
   title: string,
   ipfsHash: string,
-  fileExtension: string
+  fileExtension: string,
+  username: string
 ) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -47,7 +48,12 @@ const useCreateContent = (
         console.error("Unknown file extension");
         return null;
       }
-      const transaction = await contract.createContent(title, ipfsHash);
+      const transaction = await contract.createContent(
+        title,
+        ipfsHash,
+        contentType,
+        username
+      );
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
@@ -55,7 +61,7 @@ const useCreateContent = (
     } catch (error: unknown) {
       console.log(error);
     }
-  }, [chainId, walletProvider, title, ipfsHash, fileExtension]);
+  }, [chainId, walletProvider, fileExtension, title, ipfsHash, username]);
 };
 
 export default useCreateContent;

@@ -8,24 +8,19 @@ import {
   Button,
   Img,
 } from "@chakra-ui/react";
-import { FaImage, FaMusic } from "react-icons/fa6";
+import { FaImage, FaMusic } from "react-icons/fa";
 import { RiFileVideoFill } from "react-icons/ri";
 import useCreateContent from "../../../../hooks/useCreateContent";
 import { ChangeEvent, useState } from "react";
+import useGetUserDetails from "../../../../hooks/useGetUserDetails";
 
 const CreateInput = () => {
   const [title, setTitle] = useState<string>("");
   const [ipfsHash, setIpfsHash] = useState<string>("");
   const [contentType, setContentType] = useState("");
+  const { data: userDetails } = useGetUserDetails();
 
-  const handleCreateContent = useCreateContent(
-    title,
-    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
-    contentType
-  );
-  // const handleCreateContent = useCreateContent(title, ipfsHash, contentType);
-
-  const handleCaption = (e: any) => {
+  const handleCaption = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
     console.log(title);
   };
@@ -74,10 +69,18 @@ const CreateInput = () => {
       alert("Trouble uploading file");
     }
   };
+
+  const handleCreateContent = useCreateContent(
+    title,
+    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
+    contentType,
+    userDetails?.username || "" // Use optional chaining to access username
+  );
+
   return (
     <Box mb={"3rem"}>
       <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"}>
-        What will create today, Username?
+        What will you create today, {userDetails?.username || "Username"}?
       </Text>
       <Box
         border={"1px solid #535354"}
@@ -87,7 +90,7 @@ const CreateInput = () => {
         transition={"all 1s"}
       >
         <Textarea
-          placeholder="What is in your mind, Username?"
+          placeholder="What's on your mind?"
           value={title}
           resize={"none"}
           border={"none"}
