@@ -6,6 +6,7 @@ import {
   Flex,
   Icon,
   Button,
+  Img,
 } from "@chakra-ui/react";
 import { FaImage, FaMusic } from "react-icons/fa6";
 import { RiFileVideoFill } from "react-icons/ri";
@@ -29,15 +30,13 @@ const CreateInput = () => {
     console.log(title);
   };
 
-  const changeHandler = async (e: any) => {
+  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
       await handleSubmission(selectedFile);
 
-      setContentType("jpg");
-
-      // const fileExtension = selectedFile.name.split('.').pop();
-      // setContentType(fileExtension || '');
+      const fileExtension = selectedFile.name.split(".").pop();
+      setContentType(fileExtension || "");
     }
   };
 
@@ -98,6 +97,16 @@ const CreateInput = () => {
           mb={"0.5rem"}
           onChange={handleCaption}
         />
+        {ipfsHash && (
+          <Img
+            src={`https://${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`}
+            alt="image"
+            w={"300px"}
+            h={"300px"}
+            objectFit={"cover"}
+            borderRadius={".5rem"}
+          />
+        )}
         <Flex justify={"space-between"} align={"end"}>
           <Flex gap={"1rem"}>
             <Flex>

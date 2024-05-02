@@ -11,6 +11,7 @@ import {
   FormLabel,
   Input,
   FormControl,
+  Img,
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { FaImage } from "react-icons/fa6";
@@ -97,10 +98,23 @@ export const RegisterCreator = () => {
                 h={"150px"}
                 bg={"#323436"}
               >
-                <Flex flexDirection={"column"} align={"center"}>
-                  <Icon as={FaImage} fontSize={"3rem"} />
-                  <Text fontSize={"1rem"}>Upload Profile Image</Text>
-                </Flex>
+                {cid ? (
+                  <Img
+                    src={`https://${
+                      import.meta.env.VITE_GATEWAY_URL
+                    }/ipfs/${cid}`}
+                    alt="image"
+                    w={"200px"}
+                    h={"150px"}
+                    objectFit={"cover"}
+                    borderRadius={".5rem"}
+                  />
+                ) : (
+                  <Flex flexDirection={"column"} align={"center"}>
+                    <Icon as={FaImage} fontSize={"3rem"} />
+                    <Text fontSize={"1rem"}>Upload Profile Image</Text>
+                  </Flex>
+                )}
               </Flex>
             </FormLabel>
           </Flex>
