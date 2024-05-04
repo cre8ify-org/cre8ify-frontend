@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import ConnectButton from "./ConnectButton";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +24,18 @@ export default function Header() {
       justify={"space-between"}
       w={"100%"}
     >
-      <div>LOGO</div>
+      <Text
+        className="fontOne"
+        fontSize={"1.5rem"}
+        fontWeight={"500"}
+        color={"#04A67D"}
+      >
+        cre
+        <Text as={"span"} fontSize={"1.8rem"} color={"#fff"}>
+          8
+        </Text>
+        ify
+      </Text>
       <ConnectButton />
     </Flex>
   );
