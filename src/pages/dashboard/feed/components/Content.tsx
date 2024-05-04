@@ -26,7 +26,7 @@ interface ContentItem {
   creator: string;
   isDeleted: boolean;
   isMonetized: boolean;
-  views: bigint;
+  views: number;
   likes: number;
   dislikes: number;
   shares: number;
