@@ -16,8 +16,11 @@ import { content } from "../../../../constants/data";
 import { useState } from "react";
 import { GoHeartFill } from "react-icons/go";
 import { FiEye } from "react-icons/fi";
+import useGetContent from "../../../../hooks/useGetContent";
 
 const Content = () => {
+  const { data: contentItem, loading, error } = useGetContent();
+  console.log(contentItem);
   const [fullContent, setFullContent] = useState(content);
   const [id, setId] = useState(fullContent[0]);
   const [liked, setLiked] = useState(false);

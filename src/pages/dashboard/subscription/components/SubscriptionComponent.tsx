@@ -12,13 +12,11 @@ import "../../../../App.css";
 const SubscriptionComponent = () => {
   return (
     <Box
-      bgGradient="linear(to-r, #1d1d1e, #252528)"
       color="#fff"
       boxShadow="2xl"
       border={"1px"}
       borderColor="#04A67D"
       transition={"all .5s ease-in-out"}
-      m={20}
       p={5}
     >
       <Text
@@ -29,11 +27,7 @@ const SubscriptionComponent = () => {
       >
         Subscription Plans
       </Text>
-      <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-        p={"2rem"}
-      >
+      <SimpleGrid spacing={4} templateColumns="repeat(2, 1fr)" p={"2rem"}>
         <Card
           bgGradient="linear(to-r, #1d1d1e, #252528)"
           color="#fff"
