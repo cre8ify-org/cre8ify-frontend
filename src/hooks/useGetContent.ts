@@ -40,7 +40,7 @@ const useGetContent = (): State => {
         const contentItems = await contract.fetchAllContent(); // Assuming this returns an array of ContentItem
         setContent({
           loading: false,
-          data: contentItems.map((item) => ({
+          data: contentItems.map((item: any) => ({
             title: item.title,
             id: item.id,
             dateCreated: item.dateCreated,
