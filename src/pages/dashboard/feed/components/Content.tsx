@@ -36,12 +36,21 @@ interface ContentItem {
 
 const Content = () => {
   const { data: contentItems = [], loading, error } = useGetContent();
+  const [fullContent, setFullContent] = useState(contentItems);
+  const [id, setId] = useState<ContentItem | undefined>(
+    (fullContent as ContentItem[])[0]
+  );
   const [liked, setLiked] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(contentItems);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const handleFullContent = (e: any) => {
+    setId(e);
+
+    setFullContent((prev) => prev);
+  };
 
   const handleLiked = () => {
     setLiked((prevLiked) => !prevLiked);
@@ -76,6 +85,7 @@ const Content = () => {
           <Box
             onClick={() => {
               onOpen();
+              handleFullContent(item);
             }}
           >
             <Text>{item.title}</Text>
@@ -132,7 +142,7 @@ const Content = () => {
               <ModalBody pb={6} pt={9}>
                 <Img
                   mb={"1rem"}
-                  src={`https://${item.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
+                  src={`https://${id?.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
                   alt="Content Image"
                   objectFit={"cover"}
                   borderRadius={".5rem"}
