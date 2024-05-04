@@ -19,6 +19,7 @@ const PTable = () => {
             <Th color="#fff">Time Left</Th>
           </Tr>
         </Thead>
+
         <Tbody>
           <Tr>
             <Td color="#000">Market Place</Td>
