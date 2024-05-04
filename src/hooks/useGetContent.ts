@@ -26,7 +26,7 @@ interface State {
 }
 
 const useGetContent = (): State => {
-  const [lastId, setLastId] = useState(0);
+  // const [lastId, setLastId] = useState(0);
   const [content, setContent] = useState<State>({
     loading: true,
     data: undefined,
@@ -37,43 +37,27 @@ const useGetContent = (): State => {
     const fetchContent = async () => {
       try {
         const contract = getContentContract(readOnlyProvider);
-        const [
-          title,
-          id,
-          dateCreated,
-          creatorProfile,
-          ipfsHash,
-          creator,
-          isDeleted,
-          isMonetized,
-          views,
-          likes,
-          dislikes,
-          shares,
-          rating,
-          contentType,
-        ] = await contract.fetchContent(lastId);
+        const contentItems = await contract.fetchAllContent(); // Assuming this returns an array of ContentItem
         setContent({
           loading: false,
-          data: {
-            title: title,
-            id: id,
-            dateCreated: dateCreated,
-            creatorProfile: creatorProfile,
-            ipfsHash: ipfsHash,
-            creator: creator,
-            isDeleted: isDeleted,
-            isMonetized: isMonetized,
-            views: views,
-            likes: likes,
-            dislikes: dislikes,
-            shares: shares,
-            rating: rating,
-            contentType: contentType,
-          },
+          data: contentItems.map((item) => ({
+            title: item.title,
+            id: item.id,
+            dateCreated: item.dateCreated,
+            creatorProfile: item.creatorProfile,
+            ipfsHash: item.ipfsHash,
+            creator: item.creator,
+            isDeleted: item.isDeleted,
+            isMonetized: item.isMonetized,
+            views: item.views,
+            likes: item.likes,
+            dislikes: item.dislikes,
+            shares: item.shares,
+            rating: item.rating,
+            contentType: item.contentType,
+          })),
           error: undefined,
         });
-        setLastId(id);
       } catch (err: any) {
         setContent({
           loading: false,
@@ -84,7 +68,7 @@ const useGetContent = (): State => {
     };
 
     fetchContent();
-  }, [lastId]);
+  }, []);
 
   return content;
 };

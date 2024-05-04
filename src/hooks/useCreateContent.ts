@@ -28,7 +28,9 @@ const useCreateContent = (
   title: string,
   ipfsHash: string,
   fileExtension: string,
-  username: string
+  username: string,
+  isMonetised: boolean,
+  creatorImage: string
 ) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -52,7 +54,9 @@ const useCreateContent = (
         title,
         ipfsHash,
         contentType,
-        username
+        username,
+        isMonetised,
+        creatorImage
       );
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
@@ -61,7 +65,16 @@ const useCreateContent = (
     } catch (error: unknown) {
       console.log(error);
     }
-  }, [chainId, walletProvider, fileExtension, title, ipfsHash, username]);
+  }, [
+    chainId,
+    walletProvider,
+    fileExtension,
+    title,
+    ipfsHash,
+    username,
+    isMonetised,
+    creatorImage,
+  ]);
 };
 
 export default useCreateContent;

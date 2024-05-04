@@ -92,7 +92,9 @@ const CreateInput = () => {
     title,
     `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${ipfsHash}`,
     contentType,
-    userDetails?.username || "" // Use optional chaining to access username
+    userDetails?.username || "",
+    false,
+    userDetails?.profileImage || "" // Use optional chaining to access username
   );
 
   return (
