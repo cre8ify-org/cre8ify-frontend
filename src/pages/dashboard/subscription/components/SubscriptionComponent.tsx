@@ -78,6 +78,47 @@ const SubscriptionComponent = () => {
         >
           <CardHeader pb={"0"}>
             <Text className="font" fontWeight={"600"} fontSize={"2rem"}>
+              3 Months
+            </Text>
+          </CardHeader>
+          <CardBody>
+            <Text
+              className="font"
+              fontWeight={"600"}
+              fontSize={"1.5rem"}
+              pb={"1.3rem"}
+            >
+              $35
+            </Text>
+
+            <Button
+              bg={"#16181E"}
+              borderRadius={".6rem"}
+              border={"none"}
+              boxShadow="lg"
+              color={"#fff"}
+              transition={"all .5s ease-in-out"}
+              w={"170px"}
+              _hover={{
+                bgGradient: "linear(to-r, #252528, #04A67D)",
+                border: "none",
+              }}
+              _focus={{ outline: "none" }}
+            >
+              <Text>Select Plan</Text>
+            </Button>
+          </CardBody>
+        </Card>
+
+        <Card
+          bgGradient="linear(to-r, #1d1d1e, #252528)"
+          color="#fff"
+          boxShadow="lg"
+          transition={"all .5s ease-in-out"}
+          textAlign={"center"}
+        >
+          <CardHeader pb={"0"}>
+            <Text className="font" fontWeight={"600"} fontSize={"2rem"}>
               6 Months
             </Text>
           </CardHeader>
