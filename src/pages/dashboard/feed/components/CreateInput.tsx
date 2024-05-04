@@ -101,6 +101,7 @@ const CreateInput = () => {
         What will you create today, {userDetails?.username || "Username"}?
       </Text>
       <Box
+        w={"550px"}
         border={"1px solid #535354"}
         py={".6rem"}
         px={".8rem"}
