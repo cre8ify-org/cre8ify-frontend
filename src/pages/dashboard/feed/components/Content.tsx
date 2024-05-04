@@ -132,7 +132,7 @@ const Content = () => {
               <ModalBody pb={6} pt={9}>
                 <Img
                   mb={"1rem"}
-                  src={item.ipfsHash} // Assuming ipfsHash is the URL to the content image
+                  src={`https://${item.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
                   alt="Content Image"
                   objectFit={"cover"}
                   borderRadius={".5rem"}
