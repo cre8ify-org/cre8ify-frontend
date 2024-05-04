@@ -38,6 +38,7 @@ const Content = () => {
   const { data: contentItems = [], loading, error } = useGetContent();
   const [liked, setLiked] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log(contentItems);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -58,7 +59,7 @@ const Content = () => {
         >
           <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
             <Img
-              src={item.creatorProfile} // Assuming creatorProfile is the URL to the creator's profile image
+              src={`https://${item.ipfsHash}`} // Assuming creatorProfile is the URL to the creator's profile image
               w={"50px"}
               h={"50px"}
               objectFit={"cover"}
@@ -67,12 +68,9 @@ const Content = () => {
             />
             <Flex align={"end"} gap={".4rem"}>
               <Box>
-                <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                  {item.creator}
-                </Text>
-                <Text>{item.title}</Text>
+                <Text>{item.creatorProfile}</Text>
               </Box>
-              <Text color={"#15AB99"}>. 1 hr ago</Text>
+              {/* <Text color={"#15AB99"}>. 1 hr ago</Text> */}
             </Flex>
           </Flex>
           <Box
@@ -80,9 +78,10 @@ const Content = () => {
               onOpen();
             }}
           >
+            <Text>{item.title}</Text>
             <Img
               mb={"1rem"}
-              src={item.ipfsHash} // Assuming ipfsHash is the URL to the content image
+              src={`https://${item.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
               alt="Content Image"
               h={"200px"}
               w={"100%"}
