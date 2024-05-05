@@ -96,8 +96,4 @@ export const analytics = [
     title: "Content View",
     amount: "1.6m",
   },
-  {
-    title: "Content View",
-    amount: "1.6m",
-  },
 ];
