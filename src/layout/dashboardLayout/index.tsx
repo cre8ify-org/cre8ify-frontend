@@ -23,7 +23,6 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
   const { data: userDetails } = useGetUserDetails();
-  console.log(userDetails);
 
   const { isConnected } = useWeb3ModalAccount();
   const navigate = useNavigate();
