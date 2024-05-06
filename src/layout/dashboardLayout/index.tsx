@@ -9,16 +9,30 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
 import { RegisterCreator } from "../../components/RegisterCreator.tsx";
+import useGetUserDetails from "../../hooks/useGetUserDetails.ts";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import ProfileDetails from "../../components/ProfileDetails.tsx";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 const DashboardLayout = (props: DashboardLayoutProps) => {
+  const { data: userDetails } = useGetUserDetails();
+
+  const { isConnected } = useWeb3ModalAccount();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect to "/feed" if the wallet is connected
+    if (isConnected === false) {
+      navigate("/");
+    }
+  }, [isConnected]);
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -39,18 +53,41 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
         bg={"#171717"}
         overflowY={"auto"}
         overflowX={"hidden"}
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#fff",
+          },
+        }}
       >
         <Box
           mb={"5rem"}
           display={"flex"}
-          alignItems={"center"}
+          alignItems={"start"}
+          flexDirection={"column"}
           justifyContent={"space-between"}
         >
-          <Text>LOGO</Text>
+          <Text
+            className="fontOne"
+            fontSize={"1.5rem"}
+            fontWeight={"500"}
+            color={"#04A67D"}
+          >
+            cre
+            <Text as={"span"} fontSize={"1.8rem"} color={"#fff"}>
+              8
+            </Text>
+            ify
+          </Text>
           <ConnectButton />
         </Box>
 
-        <Flex flexDirection={"column"} justify={"space-between"} h={"77%"}>
+        <Flex flexDirection={"column"} justify={"space-between"} h={"69%"}>
           <Flex flexDirection={"column"} gap={"1rem"}>
             {menu.map((item, index) => (
               <NavLink to={item.link} key={index} className="activeClassName">
@@ -63,7 +100,10 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
               </NavLink>
             ))}
           </Flex>
-          <Box>
+
+          {userDetails?.username ? (
+            <ProfileDetails />
+          ) : (
             <Button
               bgGradient="linear(to-r, #04A67D, #24B1B6)"
               borderRadius={"100rem"}
@@ -83,7 +123,8 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             >
               <Text>Register</Text>
             </Button>
-          </Box>
+          )}
+          {/* {error && <Text>Error: {error}</Text>} */}
         </Flex>
       </Box>
       <Box
@@ -93,9 +134,21 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
         overflowX={"hidden"}
         py={"2.5rem"}
         px={"1.5rem"}
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#fff",
+          },
+        }}
       >
         {props.children}
       </Box>
+
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
         <RegisterCreator />

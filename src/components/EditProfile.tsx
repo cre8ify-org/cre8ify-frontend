@@ -15,18 +15,16 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import { FaImage } from "react-icons/fa6";
-import { useWeb3ModalAccount } from "@web3modal/ethers/react";
-import useRegister from "../hooks/useRegister";
+import useEditProfile from "../hooks/useEditProfile";
 
-export const RegisterCreator = () => {
-  const [username, setUsername] = useState<string>("");
-  const [cid, setCid] = useState<string>("");
+export const EditProfile = (props: any) => {
+  const [newUsername, setNewUsername] = useState<string>("");
+  const [hash, setHash] = useState<string>("");
+  console.log(hash);
 
-  const { address } = useWeb3ModalAccount();
-
-  const handleRegister = useRegister(
-    username,
-    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${cid}`
+  const handleEditProfile = useEditProfile(
+    newUsername,
+    `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${hash}`
   );
 
   const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +61,7 @@ export const RegisterCreator = () => {
 
       const resData = await res.json();
 
-      setCid(resData.IpfsHash);
+      setHash(resData.IpfsHash);
       console.log(resData.IpfsHash);
     } catch (e) {
       console.log(e);
@@ -72,7 +70,7 @@ export const RegisterCreator = () => {
   };
   return (
     <ModalContent bg={"#262628"} className="font">
-      <ModalHeader>Create your account</ModalHeader>
+      <ModalHeader>Change Details</ModalHeader>
       <ModalCloseButton
         _focus={{ outline: "none" }}
         _hover={{ border: "1px solid #15AB99" }}
@@ -98,11 +96,11 @@ export const RegisterCreator = () => {
                 h={"150px"}
                 bg={"#323436"}
               >
-                {cid ? (
+                {hash ? (
                   <Img
                     src={`https://${
                       import.meta.env.VITE_GATEWAY_URL
-                    }/ipfs/${cid}`}
+                    }/ipfs/${hash}`}
                     alt="image"
                     w={"200px"}
                     h={"150px"}
@@ -124,7 +122,7 @@ export const RegisterCreator = () => {
           <Input
             required
             placeholder="Username"
-            value={username}
+            value={newUsername}
             _placeholder={{ color: "#767677" }}
             size="md"
             border={"1px solid #535354"}
@@ -132,21 +130,7 @@ export const RegisterCreator = () => {
             _hover={{ outline: "none" }}
             _focus={{ boxShadow: "none" }}
             px={".5rem"}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </FormControl>
-
-        <FormControl mt={4}>
-          <FormLabel>Address</FormLabel>
-          <Input
-            size="md"
-            border={"1px solid #535354"}
-            outline={"none"}
-            _hover={{ outline: "none" }}
-            _focus={{ boxShadow: "none" }}
-            px={".5rem"}
-            value={address}
-            disabled
+            onChange={(e) => setNewUsername(e.target.value)}
           />
         </FormControl>
       </ModalBody>
@@ -165,10 +149,11 @@ export const RegisterCreator = () => {
           }}
           _focus={{ outline: "none" }}
           onClick={() => {
-            handleRegister();
+            handleEditProfile();
+            props.onClose;
           }}
         >
-          <Text>Register</Text>
+          <Text>Change</Text>
         </Button>
       </ModalFooter>
     </ModalContent>

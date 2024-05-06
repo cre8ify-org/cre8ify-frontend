@@ -4,11 +4,11 @@ import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
-import { getAuthContract } from "../constants/contract";
+import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 
-const useRegister = (name: string, image: string) => {
+const useSubscription = () => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -19,22 +19,18 @@ const useRegister = (name: string, image: string) => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
-    const contract = getAuthContract(signer);
+    const contract = getSubscriptionContract(signer);
 
     try {
-      if (name === "" || !image) {
-        toast.error("Please fill in details");
-      } else {
-        const transaction = await contract.registerUser(name, image);
-        console.log("transaction: ", transaction);
-        const receipt = await transaction.wait();
+      const transaction = await contract.subscribeOneMonth();
+      console.log("transaction: ", transaction);
+      const receipt = await transaction.wait();
 
-        console.log("receipt: ", receipt);
-      }
+      console.log("receipt: ", receipt);
     } catch (error: unknown) {
       console.log(error);
     }
-  }, [chainId, walletProvider, name, image]);
+  }, [chainId, walletProvider]);
 };
 
-export default useRegister;
+export default useSubscription;

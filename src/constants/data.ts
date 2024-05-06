@@ -50,24 +50,32 @@ export const content = [
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_2.jpeg",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_3.avif",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
   {
     img: "./images/profile_4.jpeg",
     username: "@Muhadrehh",
     name: "Muhadreh Kumbirai",
     tag: "free",
+    likes: "18.3k",
+    views: "100.3k",
   },
 ];
 
@@ -83,10 +91,6 @@ export const analytics = [
   {
     title: "Post Created",
     amount: "10.0k",
-  },
-  {
-    title: "Content View",
-    amount: "1.6m",
   },
   {
     title: "Content View",

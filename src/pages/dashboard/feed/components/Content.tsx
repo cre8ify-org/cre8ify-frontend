@@ -12,42 +12,58 @@ import {
   useDisclosure,
   Icon,
 } from "@chakra-ui/react";
-import { content } from "../../../../constants/data";
 import { useState } from "react";
 import { GoHeartFill } from "react-icons/go";
 import { FiEye } from "react-icons/fi";
+import useGetContent from "../../../../hooks/useGetContent";
+
+interface ContentItem {
+  title: string;
+  id: number;
+  dateCreated: number;
+  creatorProfile: string;
+  ipfsHash: string;
+  creator: string;
+  isDeleted: boolean;
+  isMonetized: boolean;
+  views: number;
+  likes: number;
+  dislikes: number;
+  shares: number;
+  rating: number;
+  contentType: string;
+}
 
 const Content = () => {
-  const [fullContent, setFullContent] = useState(content);
-  const [id, setId] = useState(fullContent[0]);
-  const [liked, setLiked] = useState(false);
-  const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
+  const { data: contentItems = [], loading, error } = useGetContent();
+  const [fullContent, setFullContent] = useState(contentItems);
+  const [id, setId] = useState<ContentItem | undefined>(
+    (fullContent as ContentItem[])[0]
   );
-
+  const [liked, setLiked] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [overlay, setOverlay] = useState(<OverlayOne />);
 
-  const handleFullContent = (e: any) => {
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  /**
+   * Handles when a user clicks on a content item in the feed.
+   * @param {ContentItem} e The content item that was clicked on.
+   * @returns {void}
+   */
+  const handleFullContent = (e: ContentItem): void => {
     setId(e);
 
     setFullContent((prev) => prev);
   };
 
   const handleLiked = () => {
-    if (!liked) {
-      setLiked(true);
-    } else {
-      setLiked(false);
-    }
+    setLiked((prevLiked) => !prevLiked);
   };
 
   return (
     <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-      {content.map((item, index) => (
+      {(contentItems as ContentItem[]).map((item, index) => (
         <GridItem
           key={index}
           w={"100%"}
@@ -57,34 +73,31 @@ const Content = () => {
         >
           <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
             <Img
-              src={item.img}
+              src={`https://${item.ipfsHash}`} // Assuming creatorProfile is the URL to the creator's profile image
               w={"50px"}
               h={"50px"}
               objectFit={"cover"}
               borderRadius={"100%"}
-              alt="image"
+              alt="Creator Profile"
             />
             <Flex align={"end"} gap={".4rem"}>
               <Box>
-                <Text color={"#B1B1B1"} fontSize={".9rem"}>
-                  {item.username}
-                </Text>
-                <Text>{item.name}</Text>
+                <Text>{item.creatorProfile}</Text>
               </Box>
-              <Text color={"#15AB99"}>. 1 hr ago</Text>
+              {/* <Text color={"#15AB99"}>. 1 hr ago</Text> */}
             </Flex>
           </Flex>
           <Box
             onClick={() => {
-              setOverlay(<OverlayOne />);
               onOpen();
               handleFullContent(item);
             }}
           >
+            <Text>{item.title}</Text>
             <Img
               mb={"1rem"}
-              src={item.img}
-              alt="image"
+              src={`https://${item.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
+              alt="Content Image"
               h={"200px"}
               w={"100%"}
               objectFit={"cover"}
@@ -101,11 +114,11 @@ const Content = () => {
                     fontSize={"1.5rem"}
                     color={liked ? "#ff0000" : ""}
                   />
-                  <Text>18.3k</Text>
+                  <Text>{item.likes}</Text>
                 </Flex>
                 <Flex gap={".2rem"}>
                   <Icon as={FiEye} fontSize={"1.5rem"} />
-                  <Text>100.3k</Text>
+                  <Text>{item.views}</Text>
                 </Flex>
               </Flex>
             </Box>
@@ -122,17 +135,20 @@ const Content = () => {
               }}
               _focus={{ outline: "none" }}
             >
-              {item.tag}
+              {item.contentType}
             </Box>
           </Flex>
           <Modal isCentered isOpen={isOpen} onClose={onClose}>
-            {overlay}
+            <ModalOverlay
+              bg="blackAlpha.300"
+              backdropFilter="blur(10px) hue-rotate(90deg)"
+            />
             <ModalContent bg={"#262628"} className="font">
               <ModalBody pb={6} pt={9}>
                 <Img
                   mb={"1rem"}
-                  src={id.img}
-                  alt="image"
+                  src={`https://${id?.ipfsHash}`} // Assuming ipfsHash is the URL to the content image
+                  alt="Content Image"
                   objectFit={"cover"}
                   borderRadius={".5rem"}
                 />
