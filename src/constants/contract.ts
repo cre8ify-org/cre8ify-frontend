@@ -2,6 +2,8 @@ import { ethers } from "ethers";
 import AuthAbi from "./ABI/Auth.json";
 import ContentAbi from "./ABI/Content.json";
 import SubscriptionAbi from "./ABI/Subscription.json";
+import ContentDAOAbi from "./ABI/ContentDAO.json";
+import VaultAbi from "./ABI/Vault.json";
 
 export const getAuthContract = (
   providerOrSigner: ethers.ContractRunner | null | undefined
@@ -27,3 +29,21 @@ export const getSubscriptionContract = (
     SubscriptionAbi,
     providerOrSigner
   );
+
+  export const getContentDAOContract = (
+    providerOrSigner: ethers.ContractRunner | null | undefined
+  ) =>
+    new ethers.Contract(
+      import.meta.env.VITE_dao_contract_address,
+      ContentDAOAbi,
+      providerOrSigner
+    );
+
+      export const getVaultContract = (
+        providerOrSigner: ethers.ContractRunner | null | undefined
+      ) =>
+        new ethers.Contract(
+          import.meta.env.VITE_subscription_contract_address,
+          VaultAbi,
+          providerOrSigner
+        );
