@@ -46,7 +46,12 @@ const Content = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const handleFullContent = (e: any) => {
+  /**
+   * Handles when a user clicks on a content item in the feed.
+   * @param {ContentItem} e The content item that was clicked on.
+   * @returns {void}
+   */
+  const handleFullContent = (e: ContentItem): void => {
     setId(e);
 
     setFullContent((prev) => prev);
