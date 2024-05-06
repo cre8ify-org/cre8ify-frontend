@@ -49,7 +49,7 @@ const PTable = () => {
             <Heading size="md"> Total Proposals Created</Heading>
           </CardHeader>
           <CardBody>
-            <Text>Fetch number</Text>
+            <Text>Fetch </Text>
           </CardBody>
           <CardFooter>
             <Button>View here</Button>
@@ -116,6 +116,42 @@ const PTable = () => {
                     <Button color="primary">Ongoing</Button>
                   ) : (
                     <Button color="secondary">Completed</Button>
+                  )}
+                </Td>
+                <Td isNumeric>{item.timeLeft}</Td>
+                <Td isNumeric>{item.totalVotes}</Td>
+                <Td isNumeric>{item.votesFor}</Td>
+                <Td isNumeric>{item.votesAgainst}</Td>
+                <Td isNumeric>
+                  <HStack spacing={2}>
+                    <LuThumbsUp
+                      style={{ marginRight: "10px" }}
+                      onClick={() => {
+                        /* Increase votes for */
+                      }}
+                    />
+                    <LuThumbsDown
+                      onClick={() => {
+                        /* Increase votes against */
+                      }}
+                    />
+                  </HStack>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+          <Tbody>
+            {proposalData.map((item, index) => (
+              <Tr key={index}>
+                <Td>
+                  {item.proposal}
+                  <GoArrowUpRight />
+                </Td>
+                <Td>
+                  {item.status === "Completed" ? (
+                    <Button colorScheme="blue">Ongoing</Button>
+                  ) : (
+                    <Button colorScheme="red">Completed</Button>
                   )}
                 </Td>
                 <Td isNumeric>{item.timeLeft}</Td>
