@@ -8,7 +8,7 @@ import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 
-const useSubscription = () => {
+const useSubscribe = () => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -33,4 +33,4 @@ const useSubscription = () => {
   }, [chainId, walletProvider]);
 };
 
-export default useSubscription;
+export default useSubscribe;
