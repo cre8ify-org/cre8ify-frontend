@@ -147,7 +147,22 @@ const CreateInput = () => {
                 mb={"0.5rem"}
                 onChange={handleCaption}
               />
-              {ipfsHash && (
+              {(contentType === "mp4" ||
+                contentType === "avi" ||
+                contentType === "mov") && (
+                <video width={"500"} controls>
+                  <source
+                    src={`https://${
+                      import.meta.env.VITE_GATEWAY_URL
+                    }/ipfs/${ipfsHash}`}
+                  />
+                </video>
+              )}
+
+              {(contentType === "jpeg" ||
+                contentType === "jpg" ||
+                contentType === "png" ||
+                contentType === "gif") && (
                 <Img
                   src={`https://${
                     import.meta.env.VITE_GATEWAY_URL
@@ -158,6 +173,19 @@ const CreateInput = () => {
                   objectFit={"cover"}
                   borderRadius={".5rem"}
                 />
+              )}
+
+              {(contentType === "mp3" ||
+                contentType === "wav" ||
+                contentType === "ogg") && (
+                <audio controls>
+                  <source
+                    src={`https://${
+                      import.meta.env.VITE_GATEWAY_URL
+                    }/ipfs/${ipfsHash}`}
+                  />
+                  Your browser does not support the audio element.
+                </audio>
               )}
               <Flex justify={"space-between"} align={"end"}>
                 <Flex gap={"1rem"}>
