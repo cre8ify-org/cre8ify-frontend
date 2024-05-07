@@ -1,8 +1,8 @@
 import CreateInput from "./components/CreateInput";
 import Head from "./components/Head";
 import DashboardLayout from "../../../layout/dashboardLayout";
-import Content from "./components/Content";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import ContentMap from "./components/ContentMap";
 
 const Feed = () => {
   return (
@@ -63,7 +63,7 @@ const Feed = () => {
 
         <TabPanels>
           <TabPanel>
-            <Content />
+            <ContentMap />
           </TabPanel>
           <TabPanel>
             <p>Your Posts</p>
