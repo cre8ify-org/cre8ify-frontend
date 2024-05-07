@@ -8,7 +8,6 @@ import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 import { isSupportedChain } from "../utils";
 
-
 const useContentDAO = () => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -38,7 +37,7 @@ const useContentDAO = () => {
 
   const leaveDAO = useCallback(async () => {
     if (chainId === undefined)
-      return toast.error("Please connect your wallet first");
+      return toast.error("Please connect your wallet first.");
     if (!isSupportedChain(chainId)) return toast.error("Wrong network");
 
     const readWriteProvider = getProvider(walletProvider);
@@ -154,6 +153,31 @@ const useContentDAO = () => {
     [chainId, walletProvider]
   );
 
+  const getProposals = useCallback(async () => {
+    if (chainId === undefined) {
+      toast.error("Please connect your wallet first");
+      return [];
+    }
+    if (!isSupportedChain(chainId)) {
+      toast.error("Wrong network");
+      return [];
+    }
+
+    const readWriteProvider = getProvider(walletProvider);
+    const signer = await readWriteProvider.getSigner();
+    const contract = getContentDAOContract(signer);
+    console.log(contract); // Check the contract object
+    const proposals = await contract.getProposals(); 
+    console.log(proposals)
+    try {
+      const proposals = await contract.getProposals();
+      return proposals;
+    } catch (error: unknown) {
+      console.log(error);
+      return [];
+    }
+  }, [chainId, walletProvider]);
+
   return {
     joinDAO,
     leaveDAO,
@@ -161,6 +185,7 @@ const useContentDAO = () => {
     voteForProposal,
     voteAgainstProposal,
     executeProposal,
+    getProposals,
   };
 };
 
