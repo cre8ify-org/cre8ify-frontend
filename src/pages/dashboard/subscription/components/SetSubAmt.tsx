@@ -17,7 +17,7 @@ import { useState } from "react";
 import useSetSubAmt from "../../../../hooks/useSetSubAmt";
 
 export const SetSubAmt = () => {
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number | undefined>();
 
   const OverlayOne = () => (
     <ModalOverlay
@@ -29,7 +29,7 @@ export const SetSubAmt = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
-  const handleSubAmt = useSetSubAmt(amount);
+  const handleSubAmt = useSetSubAmt(amount || 0);
 
   return (
     <>
@@ -51,8 +51,7 @@ export const SetSubAmt = () => {
                 _hover={{ outline: "none" }}
                 _focus={{ boxShadow: "none" }}
                 px={".5rem"}
-                value={amount}
-                onChange={(e) => setAmount(amount + Number(e.target.value))}
+                onChange={(e) => setAmount(parseInt(e.target.value))}
               />
             </FormControl>
           </ModalBody>

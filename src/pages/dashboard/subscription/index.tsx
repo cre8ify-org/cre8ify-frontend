@@ -5,7 +5,6 @@ import SubscriptionComponent from "./components/SubscriptionComponent";
 const Subscription = () => {
   return (
     <DashboardLayout>
-      {/* <Head /> */}
       <SubscriptionComponent />
       <CreatorsList />
     </DashboardLayout>
