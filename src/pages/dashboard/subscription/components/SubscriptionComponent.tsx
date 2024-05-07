@@ -12,6 +12,7 @@ import {
 import "../../../../App.css";
 import { Subscribe } from "./Subscribe";
 import { SetSubAmt } from "./SetSubAmt";
+import { Approve } from "./Approve";
 
 const SubscriptionComponent = () => {
   return (
@@ -69,6 +70,7 @@ const SubscriptionComponent = () => {
           p={"1rem"}
         >
           <Flex gap={"1rem"} flexDirection={"column"} alignItems={"end"}>
+            <Approve />
             <Subscribe />
             <SetSubAmt />
           </Flex>

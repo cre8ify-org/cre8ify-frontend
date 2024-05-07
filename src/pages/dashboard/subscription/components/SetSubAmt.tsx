@@ -17,7 +17,7 @@ import { useState } from "react";
 import useSetSubAmt from "../../../../hooks/useSetSubAmt";
 
 export const SetSubAmt = () => {
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
 
   const OverlayOne = () => (
     <ModalOverlay
@@ -25,6 +25,7 @@ export const SetSubAmt = () => {
       backdropFilter="blur(10px) hue-rotate(90deg)"
     />
   );
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
@@ -34,7 +35,6 @@ export const SetSubAmt = () => {
     <>
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
-
         <ModalContent bg={"#262628"} className="font">
           <ModalHeader>Set Subscription Amount</ModalHeader>
           <ModalCloseButton
@@ -52,7 +52,7 @@ export const SetSubAmt = () => {
                 _focus={{ boxShadow: "none" }}
                 px={".5rem"}
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => setAmount(amount + Number(e.target.value))}
               />
             </FormControl>
           </ModalBody>

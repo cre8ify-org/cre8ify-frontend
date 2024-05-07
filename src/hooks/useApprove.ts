@@ -4,11 +4,14 @@ import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
-import { getSubscriptionContract } from "../constants/contract";
+import {
+  getSubscriptionContract,
+  getTokenContract,
+} from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 
-const useSetSubAmt = () => {
+const useApprove = (amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -19,18 +22,24 @@ const useSetSubAmt = () => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
-    const contract = getSubscriptionContract(signer);
+    const subContract = getSubscriptionContract(signer);
+    const contract = getTokenContract(signer);
 
     try {
-      const transaction = await contract.subscribeOneMonth();
-      console.log("transaction: ", transaction);
+      const transaction = await contract.approve(subContract.target, amount);
       const receipt = await transaction.wait();
 
-      console.log("receipt: ", receipt);
-    } catch (error: unknown) {
+      if (!receipt.status) {
+        toast.error("Approval failed!");
+        return;
+      }
+
+      toast.success("Approval successful!");
+    } catch (error) {
       console.log(error);
+      toast.error("An error occurred while approving.");
     }
-  }, [chainId, walletProvider]);
+  }, [amount, chainId, walletProvider]);
 };
 
-export default useSetSubAmt;
+export default useApprove;

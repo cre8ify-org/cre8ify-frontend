@@ -8,7 +8,7 @@ import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 
-const useSubscribe = (creatorAddr: string, amount: number | undefined) => {
+const useSetSubAmt = (amount: number) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -22,22 +22,21 @@ const useSubscribe = (creatorAddr: string, amount: number | undefined) => {
     const contract = getSubscriptionContract(signer);
 
     try {
-      const transaction = await contract.subscribeToCreator(
-        creatorAddr,
-        amount
-      );
+      const transaction = await contract.setMonthlySubscriptionAmount(amount);
+      console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
       if (receipt.status) {
-        toast.success("Subscription successful!");
-      } else {
-        toast.error("Subscription failed!");
+        return toast.success("Set subscription amount successful!");
       }
-    } catch (error) {
+
+      console.log("receipt: ", receipt);
+
+      toast.error("Set subscription amount failed!");
+    } catch (error: unknown) {
       console.log(error);
-      toast.error("An error occurred while subscribing.");
     }
-  }, [amount, chainId, creatorAddr, walletProvider]);
+  }, [amount, chainId, walletProvider]);
 };
 
-export default useSubscribe;
+export default useSetSubAmt;

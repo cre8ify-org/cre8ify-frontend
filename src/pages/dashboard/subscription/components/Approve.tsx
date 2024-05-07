@@ -14,10 +14,9 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import useSubscribe from "../../../../hooks/useSubscribe";
+import useApprove from "../../../../hooks/useApprove";
 
-export const Subscribe = () => {
-  const [addr, setAddr] = useState<string>("");
+export const Approve = () => {
   const [amount, setAmount] = useState<number | undefined>();
 
   const OverlayOne = () => (
@@ -29,7 +28,7 @@ export const Subscribe = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
 
-  const handleSubscribe = useSubscribe(addr, amount || 0);
+  const handleSubscribe = useApprove(amount || 0);
 
   return (
     <>
@@ -37,29 +36,12 @@ export const Subscribe = () => {
         {overlay}
 
         <ModalContent bg={"#262628"} className="font">
-          <ModalHeader>Subscribe to Creator</ModalHeader>
+          <ModalHeader>Approve DApp to spend</ModalHeader>
           <ModalCloseButton
             _focus={{ outline: "none" }}
             _hover={{ border: "1px solid #15AB99" }}
           />
           <ModalBody pb={6}>
-            <FormControl isRequired={true}>
-              <FormLabel>Creator's Address</FormLabel>
-              <Input
-                required
-                placeholder="Address"
-                value={addr}
-                _placeholder={{ color: "#767677" }}
-                size="md"
-                border={"1px solid #535354"}
-                outline={"none"}
-                _hover={{ outline: "none" }}
-                _focus={{ boxShadow: "none" }}
-                px={".5rem"}
-                onChange={(e) => setAddr(e.target.value)}
-              />
-            </FormControl>
-
             <FormControl mt={4}>
               <FormLabel>Amount</FormLabel>
               <Input
@@ -95,7 +77,7 @@ export const Subscribe = () => {
                 handleSubscribe();
               }}
             >
-              <Text>Subscribe</Text>
+              <Text>Approve</Text>
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -118,7 +100,7 @@ export const Subscribe = () => {
           onOpen();
         }}
       >
-        <Text>Subscribe</Text>
+        <Text>Approve</Text>
       </Button>
     </>
   );
