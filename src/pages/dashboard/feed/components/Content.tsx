@@ -24,11 +24,12 @@ const Content = ({ item, id, handleFullContent }: any) => {
 
   const handleLiked = () => {
     setLiked((prevLiked) => !prevLiked);
-    
+    setDisLiked(false);
   };
 
   const handleDisLiked = () => {
     setDisLiked((prevDisLiked) => !prevDisLiked);
+    setLiked(false);
   };
 
   useEffect(() => {
@@ -119,7 +120,7 @@ const Content = ({ item, id, handleFullContent }: any) => {
       </Box>
       <Flex justify={"space-between"}>
         <Box>
-          <Flex gap={"2rem"} align={"center"}>
+          <Flex gap={"1.5rem"} align={"center"}>
             <Flex
               gap={".2rem"}
               onClick={handleLiked}
@@ -128,21 +129,26 @@ const Content = ({ item, id, handleFullContent }: any) => {
             >
               <Icon
                 as={FaThumbsUp}
-                fontSize={"1.5rem"}
+                fontSize={"1rem"}
                 color={liked ? "#ff0000" : ""}
               />
               <Text>{Number(item.likes)}</Text>
             </Flex>
-            <Flex gap={".2rem"} onClick={handleDisLiked} cursor={"pointer"}>
+            <Flex
+              gap={".2rem"}
+              onClick={handleDisLiked}
+              cursor={"pointer"}
+              align={"center"}
+            >
               <Icon
                 as={FaThumbsDown}
-                fontSize={"1.5rem"}
+                fontSize={"1rem"}
                 color={disLiked ? "#ff0000" : ""}
               />
               <Text>{Number(item.dislikes)}</Text>
             </Flex>
-            <Flex gap={".2rem"}>
-              <Icon as={FiEye} fontSize={"1.5rem"} />
+            <Flex gap={".2rem"} align={"center"}>
+              <Icon as={FiEye} fontSize={"1rem"} />
               <Text>{Number(item.views)}</Text>
             </Flex>
           </Flex>
