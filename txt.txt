@@ -1,180 +1,9 @@
-import ContentDAOContract from "../constants/ABI/ContentDAO.json";
+import { useState, useEffect } from 'react';
+import useContentDAO from '../../../hooks/useDAO';
+import { ProposalView, ProposalStatus } from '../../../hooks/types'; // Make sure to import the ProposalView and ProposalStatus types
 
-
-import { useCallback } from "react";
-import {
-  useWeb3ModalAccount,
-  useWeb3ModalProvider,
-} from "@web3modal/ethers/react";
-import { getContentDAOContract } from "../constants/contract";
-import { getProvider } from "../constants/provider";
-import { toast } from "react-toastify";
-import { isSupportedChain } from "../utils";
-
-
-const useContentDAO = () => {
-  const { chainId } = useWeb3ModalAccount();
-  const { walletProvider } = useWeb3ModalProvider();
-
-  const joinDAO = useCallback(
-    async (stakeAmount: number) => {
-      if (chainId === undefined)
-        return toast.error("Please connect your wallet first");
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-      const readWriteProvider = getProvider(walletProvider);
-      const signer = await readWriteProvider.getSigner();
-      const contract = getContentDAOContract(signer);
-
-      try {
-        const transaction = await contract.joinDAO(stakeAmount);
-        console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
-      } catch (error: unknown) {
-        console.log(error);
-      }
-    },
-    [chainId, walletProvider]
-  );
-
-  const leaveDAO = useCallback(async () => {
-    if (chainId === undefined)
-      return toast.error("Please connect your wallet first.");
-    if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-    const readWriteProvider = getProvider(walletProvider);
-    const signer = await readWriteProvider.getSigner();
-    const contract = getContentDAOContract(signer);
-
-    try {
-      const transaction = await contract.leaveDAO();
-      console.log("transaction: ", transaction);
-
-      const receipt = await transaction.wait();
-      console.log("receipt: ", receipt);
-    } catch (error: unknown) {
-      console.log(error);
-    }
-  }, [chainId, walletProvider]);
-
-  const createProposal = useCallback(
-    async (name: string, description: string, duration: number) => {
-      if (chainId === undefined)
-        return toast.error("Please connect your wallet first");
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-      const readWriteProvider = getProvider(walletProvider);
-      const signer = await readWriteProvider.getSigner();
-      const contract = getContentDAOContract(signer);
-
-      try {
-        const transaction = await contract.createProposal(
-          name,
-          description,
-          duration
-        );
-        console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
-      } catch (error: unknown) {
-        console.log(error);
-      }
-    },
-    [chainId, walletProvider]
-  );
-
-  // Add other functions for interacting with the ContentDAO contract
-
-  const voteForProposal = useCallback(
-    async (proposalId: number) => {
-      if (chainId === undefined)
-        return toast.error("Please connect your wallet first");
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-      const readWriteProvider = getProvider(walletProvider);
-      const signer = await readWriteProvider.getSigner();
-      const contract = getContentDAOContract(signer);
-
-      try {
-        const transaction = await contract.voteForProposal(proposalId);
-        console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
-      } catch (error: unknown) {
-        console.log(error);
-      }
-    },
-    [chainId, walletProvider]
-  );
-
-  const voteAgainstProposal = useCallback(
-    async (proposalId: number) => {
-      if (chainId === undefined)
-        return toast.error("Please connect your wallet first");
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-      const readWriteProvider = getProvider(walletProvider);
-      const signer = await readWriteProvider.getSigner();
-      const contract = getContentDAOContract(signer);
-
-      try {
-        const transaction = await contract.voteAgainstProposal(proposalId);
-        console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
-      } catch (error: unknown) {
-        console.log(error);
-      }
-    },
-    [chainId, walletProvider]
-  );
-
-  const executeProposal = useCallback(
-    async (proposalId: number) => {
-      if (chainId === undefined)
-        return toast.error("Please connect your wallet first");
-      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-      const readWriteProvider = getProvider(walletProvider);
-      const signer = await readWriteProvider.getSigner();
-      const contract = getContentDAOContract(signer);
-
-      try {
-        const transaction = await contract.executeProposal(proposalId);
-        console.log("transaction: ", transaction);
-
-        const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
-      } catch (error: unknown) {
-        console.log(error);
-      }
-    },
-    [chainId, walletProvider]
-  );
-
-  const getProposals = useCallback(async () => {
-    if (chainId === undefined)
-      return toast.error("Please connect your wallet first");
-    if (!isSupportedChain(chainId)) return toast.error("Wrong network");
-
-    const readWriteProvider = getProvider(walletProvider);
-    const signer = await readWriteProvider.getSigner();
-    const contract = getContentDAOContract(signer);
-
-    try {
-      const proposals = await contract.getProposals();
-      return proposals;
-    } catch (error: unknown) {
-      console.log(error);
-    }
-  }, [chainId, walletProvider]);
-
-  return {
+const ContentDAOInterface = () => {
+  const {
     joinDAO,
     leaveDAO,
     createProposal,
@@ -182,48 +11,125 @@ const useContentDAO = () => {
     voteAgainstProposal,
     executeProposal,
     getProposals,
-  };
-};
-
-export default useContentDAO;
-
-
-
-import React from "react";
-import useContentDAO from "../../../hooks/useDAO";
-
-const ProposalsTable = () => {
-  const { getProposals } = useContentDAO();
-  const [proposals, setProposals] = useState([]);
+  } = useContentDAO();
+  const [stakeAmount, setStakeAmount] = useState('');
+  const [proposalName, setProposalName] = useState('');
+  const [proposalDescription, setProposalDescription] = useState('');
+  const [proposalDuration, setProposalDuration] = useState('');
+  const [proposals, setProposals] = useState<ProposalView[]>([]); // Initialize with an empty array of ProposalView
 
   useEffect(() => {
-    getProposals().then((proposals) => setProposals(proposals));
+    const fetchProposals = async () => {
+      const fetchedProposals = await getProposals();
+      setProposals(fetchedProposals);
+    };
+    fetchProposals();
   }, [getProposals]);
 
+  const handleJoinDAO = async () => {
+    await joinDAO(parseFloat(stakeAmount));
+    setStakeAmount('');
+  };
+
+  const handleLeaveDAO = async () => {
+    await leaveDAO();
+  };
+
+  const handleCreateProposal = async () => {
+    await createProposal(proposalName, proposalDescription, parseInt(proposalDuration));
+    setProposalName('');
+    setProposalDescription('');
+    setProposalDuration('');
+  };
+
+  const handleVoteForProposal = async (proposalIndex: number) => {
+    await voteForProposal(proposalIndex);
+  };
+
+  const handleVoteAgainstProposal = async (proposalIndex: number) => {
+    await voteAgainstProposal(proposalIndex);
+  };
+
+  const handleExecuteProposal = async (proposalIndex: number) => {
+    await executeProposal(proposalIndex);
+  };
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Duration</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {proposals.map((proposal) => (
-          <tr >
-            <td>{proposal.name}</td>
-            <td>{proposal.description}</td>
-            <td>{proposal.duration}</td>
-            <td>{proposal.status}</td>
-            <td>{proposal.voteFor}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <h2>Content DAO Interface</h2>
+      <div>
+        <h3>Join DAO</h3>
+        <input
+          type="number"
+          placeholder="Stake Amount"
+          value={stakeAmount}
+          onChange={(e) => setStakeAmount(e.target.value)}
+        />
+        <button onClick={handleJoinDAO}>Join DAO</button>
+      </div>
+      <div>
+        <h3>Leave DAO</h3>
+        <button onClick={handleLeaveDAO}>Leave DAO</button>
+      </div>
+      <div>
+        <h3>Create Proposal</h3>
+        <input
+          type="text"
+          placeholder="Proposal Name"
+          value={proposalName}
+          onChange={(e) => setProposalName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Proposal Description"
+          value={proposalDescription}
+          onChange={(e) => setProposalDescription(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Proposal Duration (seconds)"
+          value={proposalDuration}
+          onChange={(e) => setProposalDuration(e.target.value)}
+        />
+        <button onClick={handleCreateProposal}>Create Proposal</button>
+      </div>
+      <div>
+        <h3>Proposals</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Time Left</th>
+              <th>Vote For</th>
+              <th>Vote Against</th>
+              <th>Total Votes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {proposals.map((proposal, index) => (
+              <tr key={index}>
+                <td>{proposal.name}</td>
+                <td>{proposal.description}</td>
+                <td>{ProposalStatus[proposal.status]}</td>
+                <td>{proposal.timeLeft}</td>
+                <td>{proposal.voteCountYes}</td>
+                <td>{proposal.voteCountNo}</td>
+                <td>{proposal.totalVotes}</td>
+                <td>
+                  <button onClick={() => handleVoteForProposal(index)}>Vote For</button>
+                  <button onClick={() => handleVoteAgainstProposal(index)}>Vote Against</button>
+                  <button onClick={() => handleExecuteProposal(index)}>Execute</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
-export default ProposalsTable;
+export default ContentDAOInterface;

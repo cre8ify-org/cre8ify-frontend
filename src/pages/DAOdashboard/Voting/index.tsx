@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import useContentDAO from '../../../hooks/useDAO';
-import { ProposalView } from '../../../hooks/types'; // Make sure to import the ProposalView type
+import { ProposalView, ProposalStatus } from '../../../hooks/types'; // Make sure to import the ProposalView / Make sure to import the ProposalView type
 
 const ContentDAOInterface = () => {
   const {
@@ -110,7 +110,7 @@ const ContentDAOInterface = () => {
               <tr key={index}>
                 <td>{proposal.name}</td>
                 <td>{proposal.description}</td>
-                <td>{proposal.status}</td>
+                <td>{ProposalStatus[proposal.status]}</td>
                 <td>{proposal.totalVotes.toString()}</td>
                 <td>
                   <button onClick={() => handleVoteForProposal(index)}>Vote For</button>

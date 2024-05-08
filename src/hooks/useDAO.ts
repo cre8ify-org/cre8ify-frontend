@@ -152,7 +152,7 @@ const useContentDAO = () => {
     [chainId, walletProvider]
   );
 
-  const getProposals = useCallback(async () => {
+const getProposals = useCallback(async () => {
     if (chainId === undefined) {
       toast.error("Please connect your wallet first");
       return [];
