@@ -74,6 +74,52 @@ const Content = ({
     setTimestamp((prevTime: any) => prevTime);
   }, [timestamp]);
 
+  const handleDisLiked = () => {
+    setDisLiked((prevDisLiked) => !prevDisLiked);
+    setLiked(false);
+  };
+
+  useEffect(() => {
+    const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    const elapsedTime = currentTime - Number(timestamp); // Elapsed time in seconds
+
+    const getTimeAgo = (elapsedTime: any) => {
+      // Define time intervals in seconds
+      const minute = 60;
+      const hour = 60 * minute;
+      const day = 24 * hour;
+      const week = 7 * day;
+      const month = 30 * day;
+      const year = 365 * day;
+
+      // Determine the appropriate time interval
+      if (elapsedTime < minute) {
+        return "Just now";
+      } else if (elapsedTime < hour) {
+        const minutes = Math.floor(elapsedTime / minute);
+        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+      } else if (elapsedTime < day) {
+        const hours = Math.floor(elapsedTime / hour);
+        return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+      } else if (elapsedTime < week) {
+        const days = Math.floor(elapsedTime / day);
+        return `${days} day${days > 1 ? "s" : ""} ago`;
+      } else if (elapsedTime < month) {
+        const weeks = Math.floor(elapsedTime / week);
+        return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+      } else if (elapsedTime < year) {
+        const months = Math.floor(elapsedTime / month);
+        return `${months} month${months > 1 ? "s" : ""} ago`;
+      } else {
+        const years = Math.floor(elapsedTime / year);
+        return `${years} year${years > 1 ? "s" : ""} ago`;
+      }
+    };
+
+    setTimeAgo(getTimeAgo(elapsedTime));
+    setTimestamp((prevTime: any) => prevTime);
+  }, [timestamp]);
+
   return (
     <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
       <Flex align={"center"} justify={"space-between"}>
@@ -128,7 +174,6 @@ const Content = ({
           )}
         </Menu>
       </Flex>
-
       <Box
         mb={"1rem"}
         onClick={() => {
