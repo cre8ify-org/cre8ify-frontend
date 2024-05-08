@@ -87,7 +87,7 @@ const ContentDAOInterface = () => {
         />
         <input
           type="number"
-          placeholder="Proposal Duration (seconds)"
+          placeholder="Proposal Duration (min)"
           value={proposalDuration}
           onChange={(e) => setProposalDuration(e.target.value)}
         />
