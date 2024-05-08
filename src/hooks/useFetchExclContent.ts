@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { getContentContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
+import { toast } from "react-toastify";
+import { isSupportedChain } from "../utils";
 import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
-import { toast } from "react-toastify";
-import { isSupportedChain } from "../utils";
 
 interface ContentItem {
   title?: string;
@@ -28,23 +28,22 @@ interface ContentItem {
 
 interface State {
   loading: boolean;
-  data?: ContentItem | any;
+  data?: ContentItem[] | any;
   error?: string;
 }
 
-const useFetchExclContent = (): State => {
+const useFetchExclContent = (): [State, (creator: string) => void] => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
-  const [creator, setCreator] = useState("");
-  const [content, setContent] = useState<any>({
+  const [content, setContent] = useState<State>({
     loading: true,
     data: null,
     error: undefined,
   });
 
-  useEffect(() => {
-    const fetchContent = async () => {
+  const fetchContent = useCallback(
+    async (creator: string) => {
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -53,30 +52,10 @@ const useFetchExclContent = (): State => {
 
       const contract = getContentContract(signer);
       try {
-        const contentItems = await contract.fetchExclusiveContent(creator); // Assuming this returns an array of ContentItem
-        console.log("transaction: ", contentItems);
-        const receipt = await contentItems.wait();
-        console.log(receipt);
-        const exclusiveContent = receipt.map((item: any) => ({
-          title: item.title,
-          id: item.id,
-          dateCreated: item.dateCreated,
-          creatorProfile: item.creatorProfile,
-          ipfsHash: item.ipfsHash,
-          creator: item.creator,
-          isDeleted: item.isDeleted,
-          isMonetized: item.isMonetized,
-          views: item.views,
-          likes: item.likes,
-          dislikes: item.dislikes,
-          shares: item.shares,
-          rating: item.rating,
-          contentType: item.contentType,
-          creatorImage: item.creatorImage,
-        }));
+        const contentItems = await contract.fetchExclusiveContent(creator);
         setContent({
           loading: false,
-          data: exclusiveContent,
+          data: contentItems,
           error: undefined,
         });
       } catch (err: any) {
@@ -86,19 +65,11 @@ const useFetchExclContent = (): State => {
           error: err.message,
         });
       }
-    };
+    },
+    [chainId, walletProvider]
+  );
 
-    fetchContent();
-  }, [chainId, creator, walletProvider]);
-
-  const toReturn = {
-    loading: content.loading,
-    data: content.data,
-    error: content.error,
-    setCreator,
-  };
-
-  return toReturn;
+  return [content, fetchContent];
 };
 
 export default useFetchExclContent;

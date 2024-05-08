@@ -37,16 +37,16 @@ const useGetAllUsers = (): State => {
 
         const usersWithSubscriptionAmount = await Promise.all(
           userDetails.map(async (item: any) => {
-            const subAmtWei = await subContract.creatorSubscriptionAmount(
+            const subAmt = await subContract.creatorSubscriptionAmount(
               item.walletAddress
             );
-            const subAmtEth = ethers.formatEther(subAmtWei); // Convert wei to ethers
+            // const subAmtEth = ethers.formatEther(subAmtWei);
 
             return {
               username: item.username,
               walletAddress: item.walletAddress,
               profileImage: item.profileImage,
-              subscriptionAmount: subAmtEth,
+              subscriptionAmount: subAmt,
             };
           })
         );

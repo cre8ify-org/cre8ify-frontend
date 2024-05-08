@@ -22,7 +22,7 @@ interface UserDetails {
 const CreatorsList = () => {
   const { data: userDetails = [], loading, error } = useGetAllUsers();
 
-  console.log(userDetails);
+  // console.log(userDetails);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -57,7 +57,7 @@ const CreatorsList = () => {
                 </Td>
                 <Td>{details.username}</Td>
                 <Td>{details.walletAddress}</Td>
-                <Td>{details.subscriptionAmount}</Td>{" "}
+                <Td>{details.subscriptionAmount.toString()}</Td>
               </Tr>
             ))}
           </Tbody>

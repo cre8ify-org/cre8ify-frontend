@@ -23,11 +23,11 @@ const useSetSubAmt = (amount: number | undefined) => {
     const contract = getSubscriptionContract(signer);
 
     try {
-      const amountInWei =
-        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
-      const transaction = await contract.setMonthlySubscriptionAmount(
-        amountInWei
-      );
+      // const amountInWei =
+      //   amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
+      // const amountInWei = ethers.formatEther(amount);
+
+      const transaction = await contract.setMonthlySubscriptionAmount(amount);
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 

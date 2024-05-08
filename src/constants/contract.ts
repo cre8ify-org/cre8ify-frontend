@@ -31,23 +31,23 @@ export const getSubscriptionContract = (
     providerOrSigner
   );
 
-  export const getContentDAOContract = (
-    providerOrSigner: ethers.ContractRunner | null | undefined
-  ) =>
-    new ethers.Contract(
-      import.meta.env.VITE_dao_contract_address,
-      ContentDAOAbi,
-      providerOrSigner
-    );
+export const getContentDAOContract = (
+  providerOrSigner: ethers.ContractRunner | null | undefined
+) =>
+  new ethers.Contract(
+    import.meta.env.VITE_dao_contract_address,
+    ContentDAOAbi,
+    providerOrSigner
+  );
 
-      export const getVaultContract = (
-        providerOrSigner: ethers.ContractRunner | null | undefined
-      ) =>
-        new ethers.Contract(
-          import.meta.env.VITE_subscription_contract_address,
-          VaultAbi,
-          providerOrSigner
-        );
+export const getVaultContract = (
+  providerOrSigner: ethers.ContractRunner | null | undefined
+) =>
+  new ethers.Contract(
+    import.meta.env.VITE_subscription_contract_address,
+    VaultAbi,
+    providerOrSigner
+  );
 export const getTokenContract = (
   providerOrSigner: ethers.ContractRunner | null | undefined
 ) =>
