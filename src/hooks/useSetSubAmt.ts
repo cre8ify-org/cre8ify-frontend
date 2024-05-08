@@ -7,6 +7,7 @@ import {
 import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
 
 const useSetSubAmt = (amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();
@@ -22,7 +23,11 @@ const useSetSubAmt = (amount: number | undefined) => {
     const contract = getSubscriptionContract(signer);
 
     try {
-      const transaction = await contract.setMonthlySubscriptionAmount(amount);
+      const amountInWei =
+        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
+      const transaction = await contract.setMonthlySubscriptionAmount(
+        amountInWei
+      );
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
