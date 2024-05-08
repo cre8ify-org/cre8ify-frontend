@@ -1,4 +1,13 @@
-import { List, ListItem } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Text,
+} from "@chakra-ui/react";
 import useGetMySubscribers from "../../../../hooks/useGetMySubscribers";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
@@ -20,12 +29,27 @@ const MySubscribers = () => {
 
   return (
     <>
-      {(subscribersInfo as subscriberInfo[]).map((info, index) => (
-        <List spacing={3} key={index}>
-          <ListItem>Address: {info.addr}</ListItem>
-          <ListItem>Username: {info.username}</ListItem>
-        </List>
-      ))}
+      <Text className="font" fontWeight={"600"} fontSize={"1.4rem"}>
+        My Subscribers
+      </Text>
+      <TableContainer>
+        <Table variant="unstyled">
+          <Thead>
+            <Tr>
+              <Th>Address</Th>
+              <Th>Username</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {(subscribersInfo as subscriberInfo[]).map((info, index) => (
+              <Tr key={index}>
+                <Td>{info.addr}</Td>
+                <Td>{info.username}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 };
