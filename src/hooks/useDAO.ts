@@ -7,6 +7,7 @@ import { getContentDAOContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 import { isSupportedChain } from "../utils";
+import { ProposalView } from "./types"; // Assuming you have a ProposalView type defined
 
 const useContentDAO = () => {
   const { chainId } = useWeb3ModalAccount();
@@ -82,10 +83,8 @@ const useContentDAO = () => {
     [chainId, walletProvider]
   );
 
-  // Add other functions for interacting with the ContentDAO contract
-
   const voteForProposal = useCallback(
-    async (proposalId: number) => {
+    async (proposalIndex: number) => {
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -95,7 +94,7 @@ const useContentDAO = () => {
       const contract = getContentDAOContract(signer);
 
       try {
-        const transaction = await contract.voteForProposal(proposalId);
+        const transaction = await contract.voteForProposal(proposalIndex);
         console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
@@ -108,7 +107,7 @@ const useContentDAO = () => {
   );
 
   const voteAgainstProposal = useCallback(
-    async (proposalId: number) => {
+    async (proposalIndex: number) => {
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -118,7 +117,7 @@ const useContentDAO = () => {
       const contract = getContentDAOContract(signer);
 
       try {
-        const transaction = await contract.voteAgainstProposal(proposalId);
+        const transaction = await contract.voteAgainstProposal(proposalIndex);
         console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
@@ -131,7 +130,7 @@ const useContentDAO = () => {
   );
 
   const executeProposal = useCallback(
-    async (proposalId: number) => {
+    async (proposalIndex: number) => {
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -141,7 +140,7 @@ const useContentDAO = () => {
       const contract = getContentDAOContract(signer);
 
       try {
-        const transaction = await contract.executeProposal(proposalId);
+        const transaction = await contract.executeProposal(proposalIndex);
         console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
@@ -166,11 +165,16 @@ const useContentDAO = () => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
     const contract = getContentDAOContract(signer);
-    console.log(contract); // Check the contract object
-    const proposals = await contract.getProposals(); 
-    console.log(proposals)
+
     try {
-      const proposals = await contract.getProposals();
+      const proposalCount = await contract.getProposalCount();
+      const proposals: ProposalView[] = [];
+
+      for (let i = 0; i < proposalCount; i++) {
+        const proposal = await contract.getProposal(i);
+        proposals.push(proposal);
+      }
+
       return proposals;
     } catch (error: unknown) {
       console.log(error);
