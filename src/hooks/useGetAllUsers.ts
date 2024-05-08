@@ -4,7 +4,6 @@ import {
   getSubscriptionContract,
 } from "../constants/contract";
 import { readOnlyProvider } from "../constants/provider";
-import { ethers } from "ethers";
 
 interface UserDetails {
   username: string;
@@ -26,7 +25,7 @@ const useGetAllUsers = (): State => {
     error: undefined,
   });
 
-  console.log("details", details);
+  // console.log("details", details);
 
   useEffect(() => {
     const fetchDetails = async () => {

@@ -7,7 +7,6 @@ import {
 import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
-import { ethers } from "ethers";
 
 const useSetSubAmt = (amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();

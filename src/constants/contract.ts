@@ -44,7 +44,7 @@ export const getVaultContract = (
   providerOrSigner: ethers.ContractRunner | null | undefined
 ) =>
   new ethers.Contract(
-    import.meta.env.VITE_subscription_contract_address,
+    import.meta.env.VITE_vault_contract_address,
     VaultAbi,
     providerOrSigner
   );
