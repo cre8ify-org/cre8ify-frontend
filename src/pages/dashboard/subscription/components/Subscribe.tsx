@@ -65,7 +65,6 @@ export const Subscribe = () => {
               <Input
                 required
                 placeholder="Amount"
-                // value={amount}
                 _placeholder={{ color: "#767677" }}
                 size="md"
                 border={"1px solid #535354"}
@@ -73,7 +72,7 @@ export const Subscribe = () => {
                 _hover={{ outline: "none" }}
                 _focus={{ boxShadow: "none" }}
                 px={".5rem"}
-                onChange={(e) => setAmount(parseInt(e.target.value))}
+                onChange={(e) => setAmount(Number(e.target.value))}
               />
             </FormControl>
           </ModalBody>

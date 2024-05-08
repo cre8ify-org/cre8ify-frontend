@@ -4,10 +4,7 @@ import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
-import {
-  getSubscriptionContract,
-  getTokenContract,
-} from "../constants/contract";
+import { getTokenContract, getVaultContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
@@ -23,14 +20,14 @@ const useApprove = (amount: number | undefined) => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
-    const subContract = getSubscriptionContract(signer);
+    const vaultContract = getVaultContract(signer);
     const contract = getTokenContract(signer);
 
     try {
       const amountInWei =
         amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
       const transaction = await contract.approve(
-        subContract.target,
+        vaultContract.target,
         amountInWei
       );
       const receipt = await transaction.wait();
