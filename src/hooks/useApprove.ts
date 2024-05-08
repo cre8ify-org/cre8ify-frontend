@@ -10,6 +10,7 @@ import {
 } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
 
 const useApprove = (amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();
@@ -26,7 +27,12 @@ const useApprove = (amount: number | undefined) => {
     const contract = getTokenContract(signer);
 
     try {
-      const transaction = await contract.approve(subContract.target, amount);
+      const amountInWei =
+        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
+      const transaction = await contract.approve(
+        subContract.target,
+        amountInWei
+      );
       const receipt = await transaction.wait();
 
       if (!receipt.status) {
