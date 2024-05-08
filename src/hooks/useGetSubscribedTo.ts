@@ -14,7 +14,6 @@ interface State {
 }
 
 const useGetSubscribedTo = (addr: `0x${string}` | undefined): State => {
-  // const [lastId, setLastId] = useState(0);
   const [info, setInfo] = useState<State>({
     loading: true,
     data: undefined,
