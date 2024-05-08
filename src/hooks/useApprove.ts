@@ -23,12 +23,15 @@ const useApprove = (amount: number | undefined) => {
     const vaultContract = getVaultContract(signer);
     const contract = getTokenContract(signer);
 
+    const convertToSmallestUnit = (amount: number): ethers.BigNumberish => {
+      return ethers.parseUnits(amount.toString(), 18);
+    };
     try {
-      const amountInWei =
-        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
+      const convertedAmount = convertToSmallestUnit(amount || 0);
+
       const transaction = await contract.approve(
         vaultContract.target,
-        amountInWei
+        convertedAmount
       );
       const receipt = await transaction.wait();
 
