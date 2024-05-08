@@ -7,6 +7,7 @@ import {
 import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
 
 const useSubscribe = (creatorAddr: string, amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();
@@ -22,9 +23,11 @@ const useSubscribe = (creatorAddr: string, amount: number | undefined) => {
     const contract = getSubscriptionContract(signer);
 
     try {
+      const amountInWei =
+        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
       const transaction = await contract.subscribeToCreator(
         creatorAddr,
-        amount
+        amountInWei
       );
       const receipt = await transaction.wait();
 
