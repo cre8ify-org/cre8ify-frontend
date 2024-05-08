@@ -7,8 +7,9 @@ import {
 import { getSubscriptionContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
 
-const useSubscription = () => {
+const useSetSubAmt = (amount: number | undefined) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -22,15 +23,25 @@ const useSubscription = () => {
     const contract = getSubscriptionContract(signer);
 
     try {
-      const transaction = await contract.subscribeOneMonth();
+      const amountInWei =
+        amount !== undefined ? ethers.parseEther(amount.toString()) : 0;
+      const transaction = await contract.setMonthlySubscriptionAmount(
+        amountInWei
+      );
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
+      if (receipt.status) {
+        return toast.success("Set subscription amount successful!");
+      }
+
       console.log("receipt: ", receipt);
+
+      toast.error("Set subscription amount failed!");
     } catch (error: unknown) {
       console.log(error);
     }
-  }, [chainId, walletProvider]);
+  }, [amount, chainId, walletProvider]);
 };
 
-export default useSubscription;
+export default useSetSubAmt;
