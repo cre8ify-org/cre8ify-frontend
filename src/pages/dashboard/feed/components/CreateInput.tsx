@@ -50,7 +50,7 @@ const CreateInput = () => {
 
   const handleCaption = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
