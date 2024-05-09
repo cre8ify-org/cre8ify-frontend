@@ -58,8 +58,14 @@ const useCreateFreeContent = (
       );
       console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
-
       console.log("receipt: ", receipt);
+
+      if (!receipt.status) {
+        toast.error("Content Creation failed!");
+        return;
+      }
+
+      toast.success("Free Content Created!");
     } catch (error: unknown) {
       console.log(error);
     }

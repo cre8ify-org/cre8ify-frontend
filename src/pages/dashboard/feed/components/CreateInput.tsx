@@ -181,48 +181,50 @@ const CreateInput = () => {
                   _focus={{ boxShadow: "none" }}
                   _placeholder={{ color: "#B7B7B6", fontSize: ".9rem" }}
                   p={"0"}
-                  mb={"1rem"}
+                  mb={"0.5"}
                   onChange={handleCaption}
                 />
-                {(contentType === "mp4" ||
-                  contentType === "avi" ||
-                  contentType === "mov") && (
-                  <video width={"500"} controls>
-                    <source
+                <Box mb={"1rem"}>
+                  {(contentType === "mp4" ||
+                    contentType === "avi" ||
+                    contentType === "mov") && (
+                    <video width={"500"} controls>
+                      <source
+                        src={`https://${
+                          import.meta.env.VITE_GATEWAY_URL
+                        }/ipfs/${ipfsHash}`}
+                      />
+                    </video>
+                  )}
+                  {(contentType === "jpeg" ||
+                    contentType === "jpg" ||
+                    contentType === "png" ||
+                    contentType === "gif") && (
+                    <Img
                       src={`https://${
                         import.meta.env.VITE_GATEWAY_URL
                       }/ipfs/${ipfsHash}`}
+                      alt="image"
+                      w={"300px"}
+                      h={"300px"}
+                      objectFit={"cover"}
+                      borderRadius={".5rem"}
                     />
-                  </video>
-                )}
-                {(contentType === "jpeg" ||
-                  contentType === "jpg" ||
-                  contentType === "png" ||
-                  contentType === "gif") && (
-                  <Img
-                    src={`https://${
-                      import.meta.env.VITE_GATEWAY_URL
-                    }/ipfs/${ipfsHash}`}
-                    alt="image"
-                    w={"300px"}
-                    h={"300px"}
-                    objectFit={"cover"}
-                    borderRadius={".5rem"}
-                  />
-                )}
+                  )}
 
-                {(contentType === "mp3" ||
-                  contentType === "wav" ||
-                  contentType === "ogg") && (
-                  <audio controls>
-                    <source
-                      src={`https://${
-                        import.meta.env.VITE_GATEWAY_URL
-                      }/ipfs/${ipfsHash}`}
-                    />
-                    Your browser does not support the audio element.
-                  </audio>
-                )}
+                  {(contentType === "mp3" ||
+                    contentType === "wav" ||
+                    contentType === "ogg") && (
+                    <audio controls>
+                      <source
+                        src={`https://${
+                          import.meta.env.VITE_GATEWAY_URL
+                        }/ipfs/${ipfsHash}`}
+                      />
+                      Your browser does not support the audio element.
+                    </audio>
+                  )}
+                </Box>
                 <Flex justify={"space-between"} align={"end"}>
                   <Flex gap={"1rem"}>
                     <Flex>
@@ -330,45 +332,47 @@ const CreateInput = () => {
                   mb={"0.5rem"}
                   onChange={handleCaption}
                 />
-                {(contentType === "mp4" ||
-                  contentType === "avi" ||
-                  contentType === "mov") && (
-                  <video width={"500"} controls>
-                    <source
+                <Box mb={"1rem"}>
+                  {(contentType === "mp4" ||
+                    contentType === "avi" ||
+                    contentType === "mov") && (
+                    <video width={"500"} controls>
+                      <source
+                        src={`https://${
+                          import.meta.env.VITE_GATEWAY_URL
+                        }/ipfs/${ipfsHash}`}
+                      />
+                    </video>
+                  )}
+                  {(contentType === "jpeg" ||
+                    contentType === "jpg" ||
+                    contentType === "png" ||
+                    contentType === "gif") && (
+                    <Img
                       src={`https://${
                         import.meta.env.VITE_GATEWAY_URL
                       }/ipfs/${ipfsHash}`}
+                      alt="image"
+                      w={"300px"}
+                      h={"300px"}
+                      objectFit={"cover"}
+                      borderRadius={".5rem"}
                     />
-                  </video>
-                )}
-                {(contentType === "jpeg" ||
-                  contentType === "jpg" ||
-                  contentType === "png" ||
-                  contentType === "gif") && (
-                  <Img
-                    src={`https://${
-                      import.meta.env.VITE_GATEWAY_URL
-                    }/ipfs/${ipfsHash}`}
-                    alt="image"
-                    w={"300px"}
-                    h={"300px"}
-                    objectFit={"cover"}
-                    borderRadius={".5rem"}
-                  />
-                )}
+                  )}
 
-                {(contentType === "mp3" ||
-                  contentType === "wav" ||
-                  contentType === "ogg") && (
-                  <audio controls>
-                    <source
-                      src={`https://${
-                        import.meta.env.VITE_GATEWAY_URL
-                      }/ipfs/${ipfsHash}`}
-                    />
-                    Your browser does not support the audio element.
-                  </audio>
-                )}
+                  {(contentType === "mp3" ||
+                    contentType === "wav" ||
+                    contentType === "ogg") && (
+                    <audio controls>
+                      <source
+                        src={`https://${
+                          import.meta.env.VITE_GATEWAY_URL
+                        }/ipfs/${ipfsHash}`}
+                      />
+                      Your browser does not support the audio element.
+                    </audio>
+                  )}
+                </Box>
                 <Flex justify={"space-between"} align={"end"}>
                   <Flex gap={"1rem"}>
                     <Flex>

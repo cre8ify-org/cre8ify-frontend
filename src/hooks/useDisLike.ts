@@ -27,8 +27,14 @@ const useDisLike = () => {
         const transaction = await contract.dislikeFreeContent(id);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-
         console.log("receipt: ", receipt);
+
+        if (!receipt.status) {
+          toast.error("DisLiking failed!");
+          return;
+        }
+
+        toast.success("DisLiked!");
       } catch (error: unknown) {
         console.log(error);
       }

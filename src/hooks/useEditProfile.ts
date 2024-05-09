@@ -28,8 +28,14 @@ const useEditProfile = (newName: string, newImage: string) => {
         const transaction = await contract.editProfile(newName, newImage);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-
         console.log("receipt: ", receipt);
+
+        if (!receipt.status) {
+          toast.error("Update failed!");
+          return;
+        }
+
+        toast.success("Updated!");
       }
     } catch (error: unknown) {
       console.log(error);
