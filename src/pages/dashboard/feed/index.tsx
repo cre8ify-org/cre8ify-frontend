@@ -1,10 +1,14 @@
 import CreateInput from "./components/CreateInput";
 import Head from "./components/Head";
 import DashboardLayout from "../../../layout/dashboardLayout";
-import Content from "./components/Content";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import FreeContentMap from "./components/ContentMap";
+import AllUser from "./components/AllUser";
+import MyFreeContentMap from "./components/MyFreeContentMap";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 const Feed = () => {
+  const { address } = useWeb3ModalAccount();
   return (
     <DashboardLayout>
       <Head />
@@ -21,7 +25,19 @@ const Feed = () => {
             _focus={{ outline: "none" }}
             borderRadius={"0"}
           >
-            For you
+            Free
+          </Tab>
+          <Tab
+            _selected={{
+              color: "#15AB99",
+              boxShadow: "0px 0px 0px 1px #15AB99",
+            }}
+            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
+            border={"none"}
+            _focus={{ outline: "none" }}
+            borderRadius={"0"}
+          >
+            Exclusive
           </Tab>
           <Tab
             _selected={{
@@ -47,29 +63,17 @@ const Feed = () => {
           >
             Live
           </Tab>
-          <Tab
-            _selected={{
-              color: "#15AB99",
-              boxShadow: "0px 0px 0px 1px #15AB99",
-            }}
-            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
-            border={"none"}
-            _focus={{ outline: "none" }}
-            borderRadius={"0"}
-          >
-            Top Creators
-          </Tab>
         </TabList>
 
         <TabPanels>
           <TabPanel>
-            <Content />
+            <FreeContentMap />
           </TabPanel>
           <TabPanel>
-            <p>Your Posts</p>
+            <AllUser />
           </TabPanel>
           <TabPanel>
-            <p>Live</p>
+            <MyFreeContentMap userAddress={address} />
           </TabPanel>
           <TabPanel>
             <p>Top Creators</p>

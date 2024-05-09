@@ -14,7 +14,7 @@ const useRegister = (name: string, image: string) => {
 
   return useCallback(async () => {
     if (chainId === undefined)
-      return toast.error("Please connect your wallet first");
+      return console.error("Please connect your wallet first");
     if (!isSupportedChain(chainId)) return toast.error("Wrong network");
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
@@ -28,8 +28,14 @@ const useRegister = (name: string, image: string) => {
         const transaction = await contract.registerUser(name, image);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-
         console.log("receipt: ", receipt);
+
+        if (!receipt.status) {
+          toast.error("Registration failed!");
+          return;
+        }
+
+        toast.success("User Registered");
       }
     } catch (error: unknown) {
       console.log(error);

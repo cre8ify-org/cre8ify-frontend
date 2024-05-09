@@ -17,15 +17,16 @@ interface ContentItem {
   shares: number;
   rating: number;
   contentType: string;
+  creatorImage: string;
 }
 
 interface State {
   loading: boolean;
-  data?: ContentItem;
+  data?: ContentItem[];
   error?: string;
 }
 
-const useGetContent = (): State => {
+const useMyFreeContent = (userAddress: any): State => {
   // const [lastId, setLastId] = useState(0);
   const [content, setContent] = useState<State>({
     loading: true,
@@ -33,11 +34,14 @@ const useGetContent = (): State => {
     error: undefined,
   });
 
+  console.log(content);
+
   useEffect(() => {
     const fetchContent = async () => {
       try {
         const contract = getContentContract(readOnlyProvider);
-        const contentItems = await contract.fetchAllContent(); // Assuming this returns an array of ContentItem
+        const contentItems = await contract.fetchMyFreeContent();
+        console.log(contentItems); // Assuming this returns an array of ContentItem
         setContent({
           loading: false,
           data: contentItems.map((item: any) => ({
@@ -55,6 +59,7 @@ const useGetContent = (): State => {
             shares: item.shares,
             rating: item.rating,
             contentType: item.contentType,
+            creatorImage: item.creatorImage,
           })),
           error: undefined,
         });
@@ -68,9 +73,9 @@ const useGetContent = (): State => {
     };
 
     fetchContent();
-  }, []);
+  }, [userAddress]);
 
   return content;
 };
 
-export default useGetContent;
+export default useMyFreeContent;
