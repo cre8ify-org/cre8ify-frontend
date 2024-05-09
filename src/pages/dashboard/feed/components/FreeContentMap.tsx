@@ -24,7 +24,7 @@ interface ContentItem {
   creatorImage: string;
 }
 
-const ContentMap = () => {
+const FreeContentMap = () => {
   const { data: contentItems = [], loading, error } = useFetchFreeContent();
   const [fullContent, setFullContent] = useState(contentItems);
   const [id, setId] = useState<ContentItem | undefined>(
@@ -32,6 +32,7 @@ const ContentMap = () => {
   );
   const [contentId, setContentId] = useState(Number(""));
   console.log(contentId);
+  console.log(contentItems);
 
   const like = useLike();
   const disLike = useDisLike();
@@ -81,4 +82,4 @@ const ContentMap = () => {
   );
 };
 
-export default ContentMap;
+export default FreeContentMap;

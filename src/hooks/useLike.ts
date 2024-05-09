@@ -27,8 +27,14 @@ const useLike = () => {
         const transaction = await contract.likeFreeContent(id);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-
         console.log("receipt: ", receipt);
+
+        if (!receipt.status) {
+          toast.error("Liking failed!");
+          return;
+        }
+
+        toast.success("Liked!");
       } catch (error: unknown) {
         console.log(error);
       }

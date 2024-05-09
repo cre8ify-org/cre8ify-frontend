@@ -27,10 +27,19 @@ const useDelete = () => {
         const transaction = await contract.deleteFreeContent(id);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-
         console.log("receipt: ", receipt);
-      } catch (error: unknown) {
+
+        if (!receipt.status) {
+          toast.error("Deletion failed!");
+          return;
+        }
+
+        toast.success("Deleted!");
+      } catch (error: any) {
         console.log(error);
+        if ((error.message = "You are not the creator")) {
+          toast.error("You're not the creator");
+        }
       }
     },
     [chainId, walletProvider]

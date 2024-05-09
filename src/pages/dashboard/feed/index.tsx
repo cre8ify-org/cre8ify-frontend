@@ -4,8 +4,11 @@ import DashboardLayout from "../../../layout/dashboardLayout";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import FreeContentMap from "./components/ContentMap";
 import AllUser from "./components/AllUser";
+import MyFreeContentMap from "./components/MyFreeContentMap";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 const Feed = () => {
+  const { address } = useWeb3ModalAccount();
   return (
     <DashboardLayout>
       <Head />
@@ -70,7 +73,7 @@ const Feed = () => {
             <AllUser />
           </TabPanel>
           <TabPanel>
-            <p>Live</p>
+            <MyFreeContentMap userAddress={address} />
           </TabPanel>
           <TabPanel>
             <p>Top Creators</p>

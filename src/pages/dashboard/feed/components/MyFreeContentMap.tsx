@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Content from "./Content";
-import useFetchFreeContent from "../../../../hooks/useFetchFreeContent";
 import { Grid } from "@chakra-ui/react";
 import useLike from "../../../../hooks/useLike";
 import useDisLike from "../../../../hooks/useDisLike";
 import useDelete from "../../../../hooks/useDelete";
+import useMyFreeContent from "../../../../hooks/useMyFreeContent";
 
 interface ContentItem {
   title: string;
@@ -24,14 +24,19 @@ interface ContentItem {
   creatorImage: string;
 }
 
-const ContentMap = () => {
-  const { data: contentItems = [], loading, error } = useFetchFreeContent();
+const FreeContentMap: React.FC<{ userAddress: any }> = ({ userAddress }) => {
+  const {
+    data: contentItems = [],
+    loading,
+    error,
+  } = useMyFreeContent(userAddress);
   const [fullContent, setFullContent] = useState(contentItems);
   const [id, setId] = useState<ContentItem | undefined>(
     (fullContent as ContentItem[])[0]
   );
   const [contentId, setContentId] = useState(Number(""));
   console.log(contentId);
+  console.log(contentItems);
 
   const like = useLike();
   const disLike = useDisLike();
@@ -81,4 +86,4 @@ const ContentMap = () => {
   );
 };
 
-export default ContentMap;
+export default FreeContentMap;
