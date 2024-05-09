@@ -1,37 +1,40 @@
-import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
-import { analytics } from "../../../../constants/data";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
+import FreeLike from "./OverviewComponents/FreeLike";
+import FreeDislike from "./OverviewComponents/FreeDislike";
+import FreeContent from "./OverviewComponents/FreeContent";
+import ExclusiveDislike from "./OverviewComponents/ExclusiveDislike";
+import ExclusiveLike from "./OverviewComponents/ExclusiveLike";
+import ExclusiveContent from "./OverviewComponents/ExclusiveContent";
 
 const Overview = () => {
+  // Queries to fetch data
+
   return (
     <Box>
-      <Grid templateColumns="repeat(5, 1fr)" gap={6} mb={"5rem"}>
-        {analytics.map((item, index) => (
-          <GridItem key={index}>
-            <Box
-              bgGradient="linear(to-r, #1d1d1e, #252528)"
-              color="#fff"
-              boxShadow="lg"
-              transition={"all .5s ease-in-out"}
-              py={"1.5rem"}
-              px={"1rem"}
-            >
-              <Text
-                className="font"
-                fontWeight={"500"}
-                fontSize={"1rem"}
-                mb={"1rem"}
-              >
-                <Flex alignItems="center" gap="2">
-                  {/* <AiOutlineLike /> */}
-                  {item.title}
-                </Flex>
-              </Text>
-              <Text className="font" fontWeight={"600"} fontSize={"1.5rem"}>
-                {item.amount}
-              </Text>
-            </Box>
-          </GridItem>
-        ))}
+      <Grid templateColumns="repeat(3, 1fr)" gap={6} mb={"5rem"}>
+        <GridItem>
+          <FreeLike />
+        </GridItem>
+
+        <GridItem>
+          <FreeDislike />
+        </GridItem>
+
+        <GridItem>
+          <FreeContent />
+        </GridItem>
+
+        <GridItem>
+          <ExclusiveLike />
+        </GridItem>
+
+        <GridItem>
+          <ExclusiveDislike />
+        </GridItem>
+
+        <GridItem>
+          <ExclusiveContent />
+        </GridItem>
       </Grid>
     </Box>
   );
