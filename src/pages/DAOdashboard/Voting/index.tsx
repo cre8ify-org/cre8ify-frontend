@@ -1,10 +1,3 @@
-// import DAODashboardLayout from "../../../layout/DAOdashboardLayout";
-
-// const Voting = () => {
-//   return <DAODashboardLayout>Voting</DAODashboardLayout>;
-// };
-
-// export default Voting;
 import { useState } from 'react';
 import useContentDAO from '../../../hooks/useDAO';
 
