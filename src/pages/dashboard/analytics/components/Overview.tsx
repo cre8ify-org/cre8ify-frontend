@@ -1,6 +1,5 @@
 import { Box, Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { analytics } from "../../../../constants/data";
-import Example from "./Chart";
 
 const Overview = () => {
   return (
@@ -34,7 +33,6 @@ const Overview = () => {
           </GridItem>
         ))}
       </Grid>
-      <Example />
     </Box>
   );
 };
