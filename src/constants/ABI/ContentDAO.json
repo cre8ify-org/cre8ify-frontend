@@ -18,7 +18,13 @@
       }
     ],
     "name": "createProposal",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -26,7 +32,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "proposalIndex",
+        "name": "proposalId",
         "type": "uint256"
       }
     ],
@@ -40,6 +46,11 @@
       {
         "internalType": "uint256",
         "name": "stakeAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lockPeriod",
         "type": "uint256"
       }
     ],
@@ -75,6 +86,16 @@
       {
         "internalType": "address",
         "name": "_vaultAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_authorizationAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_subscriptionAddress",
         "type": "address"
       }
     ],
@@ -125,7 +146,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "proposalIndex",
+        "name": "id",
         "type": "uint256"
       },
       {
@@ -150,7 +171,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "proposalIndex",
+        "name": "id",
         "type": "uint256"
       }
     ],
@@ -176,7 +197,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "proposalIndex",
+        "name": "proposalId",
         "type": "uint256"
       },
       {
@@ -212,6 +233,44 @@
     "name": "voteForProposal",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "proposalId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "inFavor",
+        "type": "bool"
+      }
+    ],
+    "name": "voteProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawStake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "authorizationContract",
+    "outputs": [
+      {
+        "internalType": "contract Authorization",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -322,6 +381,35 @@
         "type": "address"
       }
     ],
+    "name": "memberInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "stakeAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lockPeriod",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "joinedAt",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "members",
     "outputs": [
       {
@@ -347,6 +435,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "numProposals",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -354,8 +455,13 @@
         "type": "uint256"
       }
     ],
-    "name": "ongoingProposals",
+    "name": "proposals",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
       {
         "internalType": "string",
         "name": "name",
@@ -367,13 +473,8 @@
         "type": "string"
       },
       {
-        "internalType": "enum ContentDAO.ProposalStatus",
-        "name": "status",
-        "type": "uint8"
-      },
-      {
         "internalType": "uint256",
-        "name": "timeLeft",
+        "name": "duration",
         "type": "uint256"
       },
       {
@@ -387,57 +488,27 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "totalVotes",
-        "type": "uint256"
-      },
-      {
         "internalType": "bool",
         "name": "executed",
         "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       },
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "proposalVotes",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "startTime",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "stakedTokens",
+    "inputs": [],
+    "name": "subscriptionContract",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "contract Subscription",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
     "stateMutability": "view",

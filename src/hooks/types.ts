@@ -20,6 +20,8 @@ export enum ProposalStatus {
   PENDING,
   EXECUTED,
   CANCELED,
+  Approved,
+  Rejected,
 }
 
 export interface ProposalView {
@@ -29,7 +31,10 @@ export interface ProposalView {
   totalVotes: number;
   votesFor: number; // Add this new field
   votesAgainst: number; // Add this new field
-  startTime: number;
+  timeLeft: number;
   executed: boolean;
+  voteCountYes: number;
+  voteCountNo: number;
+
   // Add this new field (in seconds)
 }

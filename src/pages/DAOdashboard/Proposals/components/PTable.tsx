@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Table,
   Thead,
@@ -9,32 +9,31 @@ import {
   TableContainer,
   Button,
   HStack,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Box,
-  Heading,
-  Text,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
   FormControl,
   FormLabel,
   Input,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
 } from "@chakra-ui/react";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuThumbsUp, LuThumbsDown } from "react-icons/lu";
-import {  useEffect } from 'react';
-import useContentDAO from '../../../../hooks/useDAO';
-import { ProposalView, ProposalStatus } from '../../../../hooks/types'; 
+import useContentDAO from "../../../../hooks/useDAO";
+import { ProposalView, ProposalStatus } from "../../../../hooks/types";
 
 const PTable: React.FC = () => {
- const {
+ 
+  const {
     joinDAO,
     leaveDAO,
     createProposal,
@@ -43,10 +42,10 @@ const PTable: React.FC = () => {
     executeProposal,
     getProposals,
   } = useContentDAO();
-  const [stakeAmount, setStakeAmount] = useState('');
-  const [proposalName, setProposalName] = useState('');
-  const [proposalDescription, setProposalDescription] = useState('');
-  const [proposalDuration, setProposalDuration] = useState('');
+  const [stakeAmount, setStakeAmount] = useState("");
+  const [proposalName, setProposalName] = useState("");
+  const [proposalDescription, setProposalDescription] = useState("");
+  const [proposalDuration, setProposalDuration] = useState("");
   const [proposals, setProposals] = useState<ProposalView[]>([]); // Initialize with an empty array of ProposalView
 
   useEffect(() => {
@@ -59,7 +58,7 @@ const PTable: React.FC = () => {
 
   const handleJoinDAO = async () => {
     await joinDAO(parseFloat(stakeAmount));
-    setStakeAmount('');
+    setStakeAmount("");
   };
 
   const handleLeaveDAO = async () => {
@@ -67,10 +66,14 @@ const PTable: React.FC = () => {
   };
 
   const handleCreateProposal = async () => {
-    await createProposal(proposalName, proposalDescription, parseInt(proposalDuration));
-    setProposalName('');
-    setProposalDescription('');
-    setProposalDuration('');
+    await createProposal(
+      proposalName,
+      proposalDescription,
+      parseInt(proposalDuration)
+    );
+    setProposalName("");
+    setProposalDescription("");
+    setProposalDuration("");
   };
 
   const handleVoteForProposal = async (proposalIndex: number) => {
@@ -84,207 +87,155 @@ const PTable: React.FC = () => {
   const handleExecuteProposal = async (proposalIndex: number) => {
     await executeProposal(proposalIndex);
   };
+ const handleOpenStakeModal = () => {
+   setIsStakeModalOpen(true);
+ };
 
-  // State for dialog
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+ const handleCloseStakeModal = () => {
+   setIsStakeModalOpen(false);
+   setStakeAmount("");
+ };
 
-  // Ref for cancel button
-  const cancelRef = useRef<HTMLButtonElement>(null);
+ const handleOpenCreateProposalModal = () => {
+   setIsCreateProposalModalOpen(true);
+ };
 
-  // State for form data
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   description: "",
-  //   duration: "",
-  // });
+ const handleCloseCreateProposalModal = () => {
+   setIsCreateProposalModalOpen(false);
+   setProposalName("");
+   setProposalDescription("");
+   setProposalDuration("");
+ };
 
-  // let proposalData = [
-  //   {
-  //     proposal: "Market Place ",
-  //     status: "Ongoing button",
-  //     timeLeft: "25hrs 15mins",
-  //     totalVotes: "1000",
-  //     votesFor: "925",
-  //     votesAgainst: "25",
-  //     vote: "Thumbs up or down click",
-  //   },
-  // ];
+ const cancelRef = useRef<HTMLButtonElement>(null);
 
-  // Function to handle form input change
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
+ const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
+   useState(false);
 
-  // Function to handle dialog close
-  const handleCloseDialog = (): void => {
-    setIsDialogOpen(false);
-  };
-
-  // // Function to handle form submit
-  // const handleSubmit = (): void => {
-  //   const durationNumber: number = parseInt(formData.duration);
-  //   // Call your DAO function to create proposal
-  //   createProposal(formData.name, formData.description, durationNumber);
-  //   // Close dialog
-  //   setIsDialogOpen(false);
-  //   // Clear form data
-  //   setFormData({ name: "", description: "", duration: "" });
-  // };
+ const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
 
   return (
     <>
-      <Button
-        colorScheme="teal"
-        size="md"
-        mb="20px"
-        onClick={() => setIsDialogOpen(true)}
-      >
-        Create Proposal
-      </Button>
+     <Button
+       colorScheme="teal"
+       size="md"
+       mb="20px"
+       onClick={handleOpenCreateProposalModal}
+     >
+       Create Proposal
+     </Button>
 
-      {/* Dialog for creating proposal */}
-      <AlertDialog
-        isOpen={isDialogOpen}
-        onClose={handleCloseDialog}
-        leastDestructiveRef={cancelRef}
-        size="lg" // optional: specify the size of the dialog
-      >
-        <AlertDialogOverlay />
-        <AlertDialogContent
-          bg="gray.800" // set background color to match dark mode theme
-          color="white" // set text color to match dark mode theme
-        >
-          <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Create Proposal
-          </AlertDialogHeader>
-          <AlertDialogBody>
-            {/* Form for creating proposal */}
-            <FormControl>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                placeholder="Proposal Name"
-                value={proposalName}
-                onChange={(e) => setProposalName(e.target.value)}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Description</FormLabel>
-              <Input
-                type="text"
-                placeholder="Proposal Description"
-                value={proposalDescription}
-                onChange={(e) => setProposalDescription(e.target.value)}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Duration</FormLabel>
-              <Input
-                type="number"
-                placeholder="Proposal Duration (seconds)"
-                value={proposalDuration}
-                onChange={(e) => setProposalDuration(e.target.value)}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
-              />
-            </FormControl>
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={handleCloseDialog}>
-              Cancel
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={handleCreateProposal}
-              ml={3}
-              bg="blue.600" // set background color to match dark mode theme
-            >
-              Create
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-      <div>
-        <h3>Join DAO</h3>
-        <input
-          type="number"
-          placeholder="Stake Amount"
-          value={stakeAmount}
-          onChange={(e) => setStakeAmount(e.target.value)}
-        />
-        <button onClick={handleJoinDAO}>Join DAO</button>
-      </div>
-      <div>
-        <button onClick={handleLeaveDAO}>Leave DAO</button>
-      </div>
-      {/* <SimpleGrid
-        spacing={9}
-        m="20px"
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-      >
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Total Proposals Created</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch </Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Approved Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Rejected Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md">My Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-      </SimpleGrid> */}
+     <Button
+       colorScheme="teal"
+       size="md"
+       mb="20px"
+       onClick={handleOpenStakeModal}
+     >
+       Join DAO
+     </Button>
+
+     <Button colorScheme="red" size="md" mb="20px" onClick={handleLeaveDAO}>
+       Leave DAO
+     </Button>
+
+     <Modal isOpen={isStakeModalOpen} onClose={handleCloseStakeModal}>
+       <ModalOverlay />
+       <ModalContent>
+         <ModalHeader>Join DAO</ModalHeader>
+         <ModalCloseButton />
+         <ModalBody>
+           <FormControl>
+             <FormLabel>Stake Amount</FormLabel>
+             <Input
+               type="number"
+               placeholder="Enter stake amount"
+               value={stakeAmount}
+               onChange={(e) => setStakeAmount(e.target.value)}
+             />
+           </FormControl>
+         </ModalBody>
+         <ModalFooter>
+           <Button colorScheme="blue" mr={3} onClick={handleCloseStakeModal}>
+             Cancel
+           </Button>
+           <Button colorScheme="teal" onClick={handleJoinDAO}>
+             Join DAO
+           </Button>
+         </ModalFooter>
+       </ModalContent>
+     </Modal>
+
+     <AlertDialog
+       isOpen={isCreateProposalModalOpen}
+       onClose={handleCloseCreateProposalModal}
+       leastDestructiveRef={cancelRef}
+       size="lg"
+     >
+       <AlertDialogOverlay />
+       <AlertDialogContent bg="gray.800" color="white">
+         <AlertDialogHeader fontSize="lg" fontWeight="bold">
+           Create Proposal
+         </AlertDialogHeader>
+         <AlertDialogBody>
+           <FormControl>
+             <FormLabel>Name</FormLabel>
+             <Input
+               type="text"
+               placeholder="Proposal Name"
+               value={proposalName}
+               onChange={(e) => setProposalName(e.target.value)}
+               bg="gray.700"
+               color="white"
+             />
+           </FormControl>
+           <FormControl mt={4}>
+             <FormLabel>Description</FormLabel>
+             <Input
+               type="text"
+               placeholder="Proposal Description"
+               value={proposalDescription}
+               onChange={(e) => setProposalDescription(e.target.value)}
+               bg="gray.700"
+               color="white"
+             />
+           </FormControl>
+           <FormControl mt={4}>
+             <FormLabel>Duration</FormLabel>
+             <Input
+               type="number"
+               placeholder="Proposal Duration (seconds)"
+               value={proposalDuration}
+               onChange={(e) => setProposalDuration(e.target.value)}
+               bg="gray.700"
+               color="white"
+             />
+           </FormControl>
+         </AlertDialogBody>
+         <AlertDialogFooter>
+           <Button ref={cancelRef} onClick={handleCloseCreateProposalModal}>
+             Cancel
+           </Button>
+           <Button
+             colorScheme="blue"
+             onClick={handleCreateProposal}
+             ml={3}
+             bg="blue.600"
+           >
+             Create
+           </Button>
+         </AlertDialogFooter>
+       </AlertDialogContent>
+     </AlertDialog>
 
       <TableContainer>
         <Table variant="striped" colorScheme="">
-          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
               <Th>Name</Th>
               <Th>Description</Th>
               <Th>Status</Th>
-              {/* <Th isNumeric>Time Left</Th> */}
               <Th isNumeric>Total Votes</Th>
-              {/* <Th isNumeric>Votes For</Th> */}
-              {/* <Th isNumeric>Votes Against</Th> */}
+          
               <Th isNumeric>Vote</Th>
               <Th isNumeric>Execute</Th>
             </Tr>
@@ -296,11 +247,10 @@ const PTable: React.FC = () => {
                   {proposal.name}
                   <GoArrowUpRight />
                 </Td>
+                <Td>{proposal.description}</Td>
+
                 <Td>{ProposalStatus[proposal.status]}</Td>
-                {/* <Td isNumeric>{proposal.timeLeft}</Td> */}
                 <Td isNumeric>{proposal.totalVotes.toString()}</Td>
-                {/* <Td isNumeric>{proposal.votesFor}</Td> */}
-                {/* <Td isNumeric>{proposal.votesAgainst}</Td> */}
                 <Td isNumeric>
                   <HStack spacing={2}>
                     <LuThumbsUp
@@ -320,14 +270,6 @@ const PTable: React.FC = () => {
               </Tr>
             ))}
           </Tbody>
-
-          {/* <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot> */}
         </Table>
       </TableContainer>
     </>
@@ -335,3 +277,7 @@ const PTable: React.FC = () => {
 };
 
 export default PTable;
+// const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
+//   useState(false);
+
+//  const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
