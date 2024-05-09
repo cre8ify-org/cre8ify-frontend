@@ -1,7 +1,6 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import useGetRegUsers from "../../../../hooks/useGetRegUsers";
 import useFetchExclContent from "../../../../hooks/useFetchExclContent";
-// import { useState } from "react";
 
 interface RegUser {
   username: string;
@@ -10,14 +9,13 @@ interface RegUser {
 }
 
 const AllUser = () => {
-  // const [exContent, setExContent] = useState("");
   const allUsers = useGetRegUsers();
   const [content, fetchContent] = useFetchExclContent();
 
   const handleUserClick = (creator: string) => {
     fetchContent(creator);
   };
-  // console.log("Content", content);
+  console.log("Content", content);
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"2rem"}>
