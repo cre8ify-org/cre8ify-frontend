@@ -32,7 +32,6 @@ import useContentDAO from "../../../../hooks/useDAO";
 import { ProposalView, ProposalStatus } from "../../../../hooks/types";
 
 const PTable: React.FC = () => {
- 
   const {
     joinDAO,
     leaveDAO,
@@ -87,145 +86,145 @@ const PTable: React.FC = () => {
   const handleExecuteProposal = async (proposalIndex: number) => {
     await executeProposal(proposalIndex);
   };
- const handleOpenStakeModal = () => {
-   setIsStakeModalOpen(true);
- };
+  const handleOpenStakeModal = () => {
+    setIsStakeModalOpen(true);
+  };
 
- const handleCloseStakeModal = () => {
-   setIsStakeModalOpen(false);
-   setStakeAmount("");
- };
+  const handleCloseStakeModal = () => {
+    setIsStakeModalOpen(false);
+    setStakeAmount("");
+  };
 
- const handleOpenCreateProposalModal = () => {
-   setIsCreateProposalModalOpen(true);
- };
+  const handleOpenCreateProposalModal = () => {
+    setIsCreateProposalModalOpen(true);
+  };
 
- const handleCloseCreateProposalModal = () => {
-   setIsCreateProposalModalOpen(false);
-   setProposalName("");
-   setProposalDescription("");
-   setProposalDuration("");
- };
+  const handleCloseCreateProposalModal = () => {
+    setIsCreateProposalModalOpen(false);
+    setProposalName("");
+    setProposalDescription("");
+    setProposalDuration("");
+  };
 
- const cancelRef = useRef<HTMLButtonElement>(null);
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
- const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
-   useState(false);
+  const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
+    useState(false);
 
- const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
+  const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
 
   return (
     <>
-     <Button
-       colorScheme="teal"
-       size="md"
-       mb="20px"
-       onClick={handleOpenCreateProposalModal}
-     >
-       Create Proposal
-     </Button>
+      <Button
+        colorScheme="teal"
+        size="md"
+        mb="20px"
+        onClick={handleOpenCreateProposalModal}
+      >
+        Create Proposal
+      </Button>
 
-     <Button
-       colorScheme="teal"
-       size="md"
-       mb="20px"
-       onClick={handleOpenStakeModal}
-     >
-       Join DAO
-     </Button>
+      <Button
+        colorScheme="teal"
+        size="md"
+        mb="20px"
+        onClick={handleOpenStakeModal}
+      >
+        Join DAO
+      </Button>
 
-     <Button colorScheme="red" size="md" mb="20px" onClick={handleLeaveDAO}>
-       Leave DAO
-     </Button>
+      <Button colorScheme="red" size="md" mb="20px" onClick={handleLeaveDAO}>
+        Leave DAO
+      </Button>
 
-     <Modal isOpen={isStakeModalOpen} onClose={handleCloseStakeModal}>
-       <ModalOverlay />
-       <ModalContent>
-         <ModalHeader>Join DAO</ModalHeader>
-         <ModalCloseButton />
-         <ModalBody>
-           <FormControl>
-             <FormLabel>Stake Amount</FormLabel>
-             <Input
-               type="number"
-               placeholder="Enter stake amount"
-               value={stakeAmount}
-               onChange={(e) => setStakeAmount(e.target.value)}
-             />
-           </FormControl>
-         </ModalBody>
-         <ModalFooter>
-           <Button colorScheme="blue" mr={3} onClick={handleCloseStakeModal}>
-             Cancel
-           </Button>
-           <Button colorScheme="teal" onClick={handleJoinDAO}>
-             Join DAO
-           </Button>
-         </ModalFooter>
-       </ModalContent>
-     </Modal>
+      <Modal isOpen={isStakeModalOpen} onClose={handleCloseStakeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Join DAO</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl>
+              <FormLabel>Stake Amount</FormLabel>
+              <Input
+                type="number"
+                placeholder="Enter stake amount"
+                value={stakeAmount}
+                onChange={(e) => setStakeAmount(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleCloseStakeModal}>
+              Cancel
+            </Button>
+            <Button colorScheme="teal" onClick={handleJoinDAO}>
+              Join DAO
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
 
-     <AlertDialog
-       isOpen={isCreateProposalModalOpen}
-       onClose={handleCloseCreateProposalModal}
-       leastDestructiveRef={cancelRef}
-       size="lg"
-     >
-       <AlertDialogOverlay />
-       <AlertDialogContent bg="gray.800" color="white">
-         <AlertDialogHeader fontSize="lg" fontWeight="bold">
-           Create Proposal
-         </AlertDialogHeader>
-         <AlertDialogBody>
-           <FormControl>
-             <FormLabel>Name</FormLabel>
-             <Input
-               type="text"
-               placeholder="Proposal Name"
-               value={proposalName}
-               onChange={(e) => setProposalName(e.target.value)}
-               bg="gray.700"
-               color="white"
-             />
-           </FormControl>
-           <FormControl mt={4}>
-             <FormLabel>Description</FormLabel>
-             <Input
-               type="text"
-               placeholder="Proposal Description"
-               value={proposalDescription}
-               onChange={(e) => setProposalDescription(e.target.value)}
-               bg="gray.700"
-               color="white"
-             />
-           </FormControl>
-           <FormControl mt={4}>
-             <FormLabel>Duration</FormLabel>
-             <Input
-               type="number"
-               placeholder="Proposal Duration (seconds)"
-               value={proposalDuration}
-               onChange={(e) => setProposalDuration(e.target.value)}
-               bg="gray.700"
-               color="white"
-             />
-           </FormControl>
-         </AlertDialogBody>
-         <AlertDialogFooter>
-           <Button ref={cancelRef} onClick={handleCloseCreateProposalModal}>
-             Cancel
-           </Button>
-           <Button
-             colorScheme="blue"
-             onClick={handleCreateProposal}
-             ml={3}
-             bg="blue.600"
-           >
-             Create
-           </Button>
-         </AlertDialogFooter>
-       </AlertDialogContent>
-     </AlertDialog>
+      <AlertDialog
+        isOpen={isCreateProposalModalOpen}
+        onClose={handleCloseCreateProposalModal}
+        leastDestructiveRef={cancelRef}
+        size="lg"
+      >
+        <AlertDialogOverlay />
+        <AlertDialogContent bg="gray.800" color="white">
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Create Proposal
+          </AlertDialogHeader>
+          <AlertDialogBody>
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input
+                type="text"
+                placeholder="Proposal Name"
+                value={proposalName}
+                onChange={(e) => setProposalName(e.target.value)}
+                bg="gray.700"
+                color="white"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Description</FormLabel>
+              <Input
+                type="text"
+                placeholder="Proposal Description"
+                value={proposalDescription}
+                onChange={(e) => setProposalDescription(e.target.value)}
+                bg="gray.700"
+                color="white"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Duration</FormLabel>
+              <Input
+                type="number"
+                placeholder="Proposal Duration (seconds)"
+                value={proposalDuration}
+                onChange={(e) => setProposalDuration(e.target.value)}
+                bg="gray.700"
+                color="white"
+              />
+            </FormControl>
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={handleCloseCreateProposalModal}>
+              Cancel
+            </Button>
+            <Button
+              colorScheme="blue"
+              onClick={handleCreateProposal}
+              ml={3}
+              bg="blue.600"
+            >
+              Create
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       <TableContainer>
         <Table variant="striped" colorScheme="">
@@ -235,7 +234,7 @@ const PTable: React.FC = () => {
               <Th>Description</Th>
               <Th>Status</Th>
               <Th isNumeric>Total Votes</Th>
-          
+
               <Th isNumeric>Vote</Th>
               <Th isNumeric>Execute</Th>
             </Tr>
