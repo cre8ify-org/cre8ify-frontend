@@ -9,11 +9,17 @@ import CreatorsList from "./CreatorsList";
 
 const SubscriptionComponent = () => {
   return (
-    <Box color="#fff" boxShadow="2xl" transition={"all .5s ease-in-out"} p={5}>
+    <Box
+      color="#e9ecef"
+      boxShadow="2xl"
+      transition={"all .5s ease-in-out"}
+      p={5}
+    >
       <Flex flexDirection={"column"} gap={"3rem"}>
         <Card
-          bg="#1d1d1e"
-          color="#fff"
+          bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+          color="#e9ecef"
+          boxShadow="0 5px 14px 0 #0001"
           transition={"all .5s ease-in-out"}
           p={"1rem"}
         >

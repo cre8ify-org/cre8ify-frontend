@@ -74,7 +74,13 @@ const Content = ({
   }, [timestamp]);
 
   return (
-    <GridItem w={"100%"} bg={"#292929"} p={".7rem"} borderRadius={".5rem"}>
+    <GridItem
+      w={"100%"}
+      bg={"#1d1a27"}
+      p={".7rem"}
+      borderRadius={".5rem"}
+      boxShadow="0 5px 14px 0 #0001"
+    >
       <Flex align={"center"} justify={"space-between"}>
         <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
           <Img
@@ -89,7 +95,7 @@ const Content = ({
             <Box>
               <Text>{item.creatorProfile}</Text>
             </Box>
-            <Text color={"#15AB99"}>. {timeAgo}</Text>
+            <Text color={"#9f51c6"}>. {timeAgo}</Text>
           </Flex>
         </Flex>
         <Menu>
@@ -113,9 +119,9 @@ const Content = ({
                   fontSize={"1.3rem"}
                 />
               </MenuButton>
-              <MenuList bg={"#1C1C1E"} border={"none"}>
+              <MenuList bg={"#13111a"} border={"none"}>
                 <MenuItem
-                  bg={"#1C1C1E"}
+                  bg={"#13111a"}
                   _hover={{ background: "none" }}
                   _focus={{ background: "none", outline: "none" }}
                   onClick={() => handleDelete(Number(item.id))}
@@ -188,25 +194,18 @@ const Content = ({
         <Box
           borderRadius={"50rem"}
           px={"1rem"}
-          bgGradient="linear(to-r, #04A67D, #24B1B6)"
+          bgGradient="linear(to-r, #e94c91, #5555fb)"
           border={"none"}
           color={"#fff"}
           transition={"all .5s ease-in-out"}
-          _hover={{
-            bgGradient: "linear(to-r, #04A67D, #24B1B6)",
-            border: "none",
-          }}
           _focus={{ outline: "none" }}
         >
           {item.contentType}
         </Box>
       </Flex>
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          bg="blackAlpha.300"
-          backdropFilter="blur(10px) hue-rotate(90deg)"
-        />
-        <ModalContent mb={6} mt={20} bg={"#262628"} className="font">
+        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+        <ModalContent mb={6} mt={20} bg={"#1d1a27"} className="font">
           <ModalBody>
             <Text mb={".5rem"}>{id?.title}</Text>
             {(item.contentType === "image" && (

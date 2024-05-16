@@ -22,16 +22,16 @@
 }
 
 .active {
-  background-color: #262628;
-  box-shadow: 0px 0px 0px 1px #2f2f30;
+  background-color: #13111a;
+  box-shadow: 0px 0px 0px 1px #9f51c6;
   border-radius: 0.5rem;
   color: white !important;
 }
 
 .activeClassName:hover {
   color: white !important;
-  background-color: #262628;
-  box-shadow: 0px 0px 0px 1px #2f2f30;
+  background-color: #13111a;
+  box-shadow: 0px 0px 0px 1px #9f51c6;
   border-radius: 0.5rem;
 }
 

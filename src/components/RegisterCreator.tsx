@@ -71,7 +71,7 @@ export const RegisterCreator = () => {
     }
   };
   return (
-    <ModalContent bg={"#262628"} className="font">
+    <ModalContent bg={"#1d1a27"} className="font">
       <ModalHeader>Create your account</ModalHeader>
       <ModalCloseButton
         _focus={{ outline: "none" }}
@@ -96,7 +96,7 @@ export const RegisterCreator = () => {
                 color={"#B7B7B6"}
                 w={"200px"}
                 h={"150px"}
-                bg={"#323436"}
+                bg={"#13111a"}
               >
                 {cid ? (
                   <Img
@@ -153,14 +153,14 @@ export const RegisterCreator = () => {
 
       <ModalFooter>
         <Button
-          bgGradient="linear(to-r, #04A67D, #24B1B6)"
+          bgGradient="linear(to-r, #e94c91, #5555fb)"
           borderRadius={"100rem"}
           border={"none"}
           color={"#fff"}
           transition={"all .5s ease-in-out"}
           w={"150px"}
           _hover={{
-            bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+            bgGradient: "linear(to-r, #e94c91, #5555fb)",
             border: "none",
           }}
           _focus={{ outline: "none" }}

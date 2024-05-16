@@ -31,10 +31,7 @@ const CreateInput = () => {
   const [exclusive, setExclusive] = useState(false);
 
   const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
+    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -116,12 +113,12 @@ const CreateInput = () => {
 
   return (
     <Box mb={"3rem"}>
-      <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"}>
+      <Text fontSize={"2rem"} fontWeight={"600"} mb={"1rem"} color={"#e9ecef"}>
         What will you create today, {userDetails?.username || "Username"}?
       </Text>
       <Box
         w={"550px"}
-        border={"1px solid #535354"}
+        boxShadow={"0 0 0 1px #2f2f30"}
         py={".6rem"}
         px={".8rem"}
         borderRadius={"full"}
@@ -129,7 +126,7 @@ const CreateInput = () => {
         color={"#B7B7B6"}
         fontSize={".9rem"}
         cursor={"pointer"}
-        _hover={{ bg: "#272727" }}
+        _hover={{ bg: "#1d1a27" }}
         onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
@@ -139,7 +136,7 @@ const CreateInput = () => {
       </Box>
       <Modal isCentered isOpen={isOpen} onClose={onClose} size={"xl"}>
         {overlay}
-        <ModalContent bg={"#1C1C1E"} className="font" pt={"1.8rem"}>
+        <ModalContent bg={"#1d1a27"} className="font" pt={"1.8rem"}>
           <ModalHeader
             display={"flex"}
             justifyContent={"space-between"}
@@ -151,23 +148,23 @@ const CreateInput = () => {
             <Button
               onClick={handleExclusive}
               _focus={{ outline: "none" }}
-              _hover={{ bg: "none", border: "1px solid #15AB99" }}
+              _hover={{ bg: "none", border: "1px solid #9f51c6" }}
               bg={"none"}
-              border={"1px solid #15AB99"}
+              border={"1px solid #9f51c6"}
             >
-              <Text color={"#15AB99"}>
+              <Text bgGradient="linear(to-r, #e94c91, #5555fb)" bgClip={"text"}>
                 {exclusive ? "Switch to Free" : "Switch to Exclusive"}
               </Text>
             </Button>
           </ModalHeader>
           <ModalCloseButton
             _focus={{ outline: "none" }}
-            _hover={{ border: "1px solid #15AB99" }}
+            _hover={{ border: "1px solid #9f51c6" }}
           />
           <ModalBody pb={"1.7rem"}>
             {exclusive ? (
               <Box
-                border={"1px solid #535354"}
+                boxShadow={"0 0 0 1px #2f2f30"}
                 py={"1rem"}
                 px={".8rem"}
                 borderRadius={".8rem"}
@@ -295,13 +292,13 @@ const CreateInput = () => {
                     </Flex>
                   </Flex>
                   <Button
-                    bgGradient="linear(to-r, #04A67D, #24B1B6)"
+                    bgGradient="linear(to-r, #e94c91, #5555fb)"
                     border={"none"}
                     color={"#fff"}
                     transition={"all .5s ease-in-out"}
                     w={"150px"}
                     _hover={{
-                      bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                      bgGradient: "linear(to-r, #e94c91, #5555fb)",
                       border: "none",
                     }}
                     _focus={{ outline: "none" }}
@@ -315,7 +312,7 @@ const CreateInput = () => {
               </Box>
             ) : (
               <Box
-                border={"1px solid #535354"}
+                boxShadow={"0 0 0 1px #2f2f30"}
                 py={"1rem"}
                 px={".8rem"}
                 borderRadius={".8rem"}
@@ -443,13 +440,13 @@ const CreateInput = () => {
                     </Flex>
                   </Flex>
                   <Button
-                    bgGradient="linear(to-r, #04A67D, #24B1B6)"
+                    bgGradient="linear(to-r, #e94c91, #5555fb)"
                     border={"none"}
                     color={"#fff"}
                     transition={"all .5s ease-in-out"}
                     w={"150px"}
                     _hover={{
-                      bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                      bgGradient: "linear(to-r, #e94c91, #5555fb)",
                       border: "none",
                     }}
                     _focus={{ outline: "none" }}

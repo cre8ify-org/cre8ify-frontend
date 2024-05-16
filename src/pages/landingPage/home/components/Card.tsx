@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Image, Flex, Center, Heading } from "@chakra-ui/react";
-import "../../../App.css";
+import "../../../../App.css";
 
 interface CardProps {
   image: string;
@@ -53,7 +53,27 @@ const CardRow: React.FC = () => {
   const image4 = "./assets/image4.jpg";
 
   return (
-    <Box mx={"13rem"} my={"6rem"}>
+    <Box mx={"13rem"} my={"6rem"} position={"relative"}>
+      <Box
+        position={"absolute"}
+        bottom={"0"}
+        right={"0"}
+        bgGradient="linear(to-t, #e94c91, #5555fb)"
+        w={"100px"}
+        h={"100px"}
+        zIndex={"-10"}
+        filter={"blur(50px)"}
+      ></Box>
+      <Box
+        position={"absolute"}
+        bottom={"-5rem"}
+        left={"0"}
+        bgGradient="linear(to-t, #e94c91, #5555fb)"
+        w={"100px"}
+        h={"100px"}
+        zIndex={"-10"}
+        filter={"blur(50px)"}
+      ></Box>
       <Center>
         <Heading className="font" my="20px">
           Most Viewed Content

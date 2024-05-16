@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <Box as="footer" py="4">
       <Flex direction="column" align="center">
         <Text fontSize="sm" my="20px">
-          © 2024 Group 1. All rights reserved.
+          © 2024 Cre8ify. All rights reserved.
         </Text>
       </Flex>
     </Box>

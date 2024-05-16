@@ -56,9 +56,9 @@ const ExclusiveLike = () => {
   return (
     <div>
       <Box
-        bgGradient="linear(to-r, #1d1d1e, #252528)"
-        color="#fff"
-        boxShadow="lg"
+        bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+        color="#e9ecef"
+        boxShadow="0 5px 14px 0 #0001"
         transition={"all .5s ease-in-out"}
         py={"1.5rem"}
         px={"1rem"}

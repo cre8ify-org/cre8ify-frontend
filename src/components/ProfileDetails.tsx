@@ -14,10 +14,7 @@ import useGetUserDetails from "../hooks/useGetUserDetails";
 const ProfileDetails = () => {
   const { data: userDetails, loading, error } = useGetUserDetails();
   const OverlayTwo = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
+    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,14 +23,13 @@ const ProfileDetails = () => {
     <Box>
       <Box>
         <Box
-          bg={"#262628"}
+          bg={"#13111a"}
           px={".5rem"}
           py={".5rem"}
           boxShadow={"0 0 0 1px #2f2f30"}
           w={"165px"}
           borderRadius={"100rem"}
           cursor={"pointer"}
-          _hover={{ bg: "#272727" }}
           onClick={() => {
             setOverlayTwo(<OverlayTwo />);
             onOpen();
