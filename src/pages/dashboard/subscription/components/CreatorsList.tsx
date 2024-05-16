@@ -8,6 +8,7 @@ import {
   Td,
   TableContainer,
   Image,
+  Box,
 } from "@chakra-ui/react";
 import "../../../../App.css";
 import useGetAllUsers from "../../../../hooks/useGetAllUsers";
@@ -29,40 +30,47 @@ const CreatorsList = () => {
 
   return (
     <>
-      <Text className="font" fontWeight={"400"} fontSize={"1.4rem"}>
-        List of Creators
-      </Text>
+      <Box
+        p={"1rem"}
+        bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+        color="#e9ecef"
+        boxShadow="0 5px 14px 0 #0001"
+      >
+        <Text className="font" fontWeight={"400"} fontSize={"1.4rem"}>
+          List of Creators
+        </Text>
 
-      <TableContainer>
-        <Table variant="unstyled">
-          <Thead>
-            <Tr>
-              <Th>Image</Th>
-              <Th>Username</Th>
-              <Th>Address</Th>
-              <Th>Sub Amount</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {(userDetails as UserDetails[]).map((details, index) => (
-              <Tr key={index}>
-                <Td>
-                  <Image
-                    borderRadius="full"
-                    boxSize="40px"
-                    objectFit={"cover"}
-                    src={`https://${details.profileImage}`}
-                    alt={`${details.username}'s image`}
-                  />
-                </Td>
-                <Td>{details.username}</Td>
-                <Td>{details.walletAddress}</Td>
-                <Td>{details.subscriptionAmount.toString()}</Td>
+        <TableContainer>
+          <Table variant="unstyled">
+            <Thead>
+              <Tr>
+                <Th>Image</Th>
+                <Th>Username</Th>
+                <Th>Address</Th>
+                <Th>Sub Amount</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {(userDetails as UserDetails[]).map((details, index) => (
+                <Tr key={index}>
+                  <Td>
+                    <Image
+                      borderRadius="full"
+                      boxSize="40px"
+                      objectFit={"cover"}
+                      src={`https://${details.profileImage}`}
+                      alt={`${details.username}'s image`}
+                    />
+                  </Td>
+                  <Td>{details.username}</Td>
+                  <Td>{details.walletAddress}</Td>
+                  <Td>{details.subscriptionAmount.toString()}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 };

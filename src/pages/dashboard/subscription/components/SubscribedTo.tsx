@@ -7,6 +7,7 @@ import {
   Td,
   TableContainer,
   Text,
+  Box,
 } from "@chakra-ui/react";
 import useGetSubscribedTo from "../../../../hooks/useGetSubscribedTo";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
@@ -29,27 +30,34 @@ const SubscribedTo = () => {
 
   return (
     <>
-      <Text className="font" fontWeight={"600"} fontSize={"1.4rem"}>
-        Subscriptions
-      </Text>
-      <TableContainer>
-        <Table variant="unstyled">
-          <Thead>
-            <Tr>
-              <Th>Address</Th>
-              <Th>Username</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {(subscribersInfo as subscriberInfo[]).map((info, index) => (
-              <Tr key={index}>
-                <Td>{info.addr}</Td>
-                <Td>{info.username}</Td>
+      <Box
+        p={"1rem"}
+        bgGradient="linear(to-r, #1d1a27, #1d1a27)"
+        color="#e9ecef"
+        boxShadow="0 5px 14px 0 #0001"
+      >
+        <Text className="font" fontWeight={"600"} fontSize={"1.4rem"}>
+          Subscriptions
+        </Text>
+        <TableContainer>
+          <Table variant="unstyled">
+            <Thead>
+              <Tr>
+                <Th>Address</Th>
+                <Th>Username</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {(subscribersInfo as subscriberInfo[]).map((info, index) => (
+                <Tr key={index}>
+                  <Td>{info.addr}</Td>
+                  <Td>{info.username}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 };

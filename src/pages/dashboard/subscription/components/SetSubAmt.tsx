@@ -20,10 +20,7 @@ export const SetSubAmt = () => {
   const [amount, setAmount] = useState<number | undefined>();
 
   const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
+    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,11 +32,11 @@ export const SetSubAmt = () => {
     <>
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         {overlay}
-        <ModalContent bg={"#262628"} className="font">
+        <ModalContent bg={"#1d1a27"} className="font">
           <ModalHeader>Set Subscription Amount</ModalHeader>
           <ModalCloseButton
             _focus={{ outline: "none" }}
-            _hover={{ border: "1px solid #15AB99" }}
+            _hover={{ border: "1px solid #9f51c6" }}
           />
           <ModalBody pb={6}>
             <FormControl mt={4}>
@@ -58,14 +55,14 @@ export const SetSubAmt = () => {
 
           <ModalFooter>
             <Button
-              bgGradient="linear(to-r, #04A67D, #24B1B6)"
+              bgGradient="linear(to-r, #e94c91, #5555fb)"
               borderRadius={".7rem"}
               border={"none"}
               color={"#fff"}
               transition={"all .5s ease-in-out"}
               w={"150px"}
               _hover={{
-                bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                bgGradient: "linear(to-r, #e94c91, #5555fb)",
                 border: "none",
               }}
               _focus={{ outline: "none" }}
@@ -80,14 +77,14 @@ export const SetSubAmt = () => {
       </Modal>
 
       <Button
-        bgGradient="linear(to-r, #04A67D, #24B1B6)"
+        bgGradient="linear(to-r, #e94c91, #5555fb)"
         borderRadius={".7rem"}
         border={"none"}
         color={"#fff"}
         transition={"all .5s ease-in-out"}
         w={"150px"}
         _hover={{
-          bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+          bgGradient: "linear(to-r, #e94c91, #5555fb)",
           border: "none",
         }}
         _focus={{ outline: "none" }}

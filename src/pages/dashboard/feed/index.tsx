@@ -14,13 +14,24 @@ const Feed = () => {
       <Head />
       <CreateInput />
       <Tabs>
-        <TabList borderBottom={"1px solid #323436"} pb={".5rem"} gap={"1rem"}>
+        <TabList
+          color={"#e9ecef"}
+          borderBottom={"1px solid #323436"}
+          pb={".5rem"}
+          gap={"1rem"}
+        >
           <Tab
             _selected={{
-              color: "#15AB99",
-              boxShadow: "0px 0px 0px 1px #15AB99",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
-            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
+            _hover={{
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
+            }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}
@@ -29,10 +40,16 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              color: "#15AB99",
-              boxShadow: "0px 0px 0px 1px #15AB99",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
-            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
+            _hover={{
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
+            }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}
@@ -41,10 +58,16 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              color: "#15AB99",
-              boxShadow: "0px 0px 0px 1px #15AB99",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
-            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
+            _hover={{
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
+            }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}
@@ -53,10 +76,16 @@ const Feed = () => {
           </Tab>
           <Tab
             _selected={{
-              color: "#15AB99",
-              boxShadow: "0px 0px 0px 1px #15AB99",
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
-            _hover={{ color: "#15AB99", boxShadow: "0px 0px 0px 1px #15AB99" }}
+            _hover={{
+              bgGradient: "linear(to-r, #e94c91, #5555fb)",
+
+              bgClip: "text",
+              boxShadow: "0px 0px 0px 1px #9f51c6",
+            }}
             border={"none"}
             _focus={{ outline: "none" }}
             borderRadius={"0"}

@@ -34,10 +34,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
     }
   }, [isConnected]);
   const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.300"
-      backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
+    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,7 +47,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
         h="100vh"
         py={"2rem"}
         px={"1.8rem"}
-        bg={"#171717"}
+        bg={"#1d1a27"}
         overflowY={"auto"}
         overflowX={"hidden"}
         css={{
@@ -76,10 +73,11 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             className="fontOne"
             fontSize={"1.5rem"}
             fontWeight={"500"}
-            color={"#04A67D"}
+            bgGradient="linear(to-r, #e94c91, #5555fb)"
+            bgClip={"text"}
           >
             cre
-            <Text as={"span"} fontSize={"1.8rem"} color={"#fff"}>
+            <Text as={"span"} fontSize={"1.8rem"} color={"#e9ecef"}>
               8
             </Text>
             ify
@@ -105,14 +103,14 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             <ProfileDetails />
           ) : (
             <Button
-              bgGradient="linear(to-r, #04A67D, #24B1B6)"
+              bgGradient="linear(to-r, #e94c91, #5555fb)"
               borderRadius={"100rem"}
               border={"none"}
               color={"#fff"}
               transition={"all .5s ease-in-out"}
               w={"150px"}
               _hover={{
-                bgGradient: "linear(to-r, #04A67D, #24B1B6)",
+                bgGradient: "linear(to-r, #e94c91, #5555fb)",
                 border: "none",
               }}
               _focus={{ outline: "none" }}

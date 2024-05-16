@@ -12,8 +12,6 @@ export default function Header() {
     // Redirect to "/feed" if the wallet is connected
     if (isConnected) {
       navigate("/feed");
-    } else {
-      navigate("/");
     }
   }, [isConnected]);
   return (
