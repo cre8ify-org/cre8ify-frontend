@@ -30,7 +30,7 @@ const Offer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = useState(<OverlayOne />);
   return (
-    <Box py={"2rem"}>
+    <Box py={"3rem"}>
       <Heading
         className="font"
         textAlign={"center"}
@@ -42,7 +42,13 @@ const Offer = () => {
         What We Offer
       </Heading>
 
-      <Flex justifyContent={"center"} gap={"2rem"}>
+      <Flex
+        justifyContent={"center"}
+        align={"center"}
+        gap={"2rem"}
+        direction={["column", "column", "column", "row"]}
+        textAlign={["center", "center", "center", "left"]}
+      >
         {offer.map((item, index) => (
           <Box
             key={index}
@@ -76,7 +82,7 @@ const Offer = () => {
               <ModalContent bg={"#1d1a27"} className="font">
                 <ModalCloseButton
                   _focus={{ outline: "none" }}
-                  _hover={{ border: "1px solid #15AB99" }}
+                  _hover={{ border: "1px solid #9f51c6" }}
                 />
                 <ModalHeader color={"#e9ecef"}>{descId.name}</ModalHeader>
                 <ModalBody>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Image, Flex, Center, Heading } from "@chakra-ui/react";
+import { Box, Image, Flex, Heading } from "@chakra-ui/react";
 import "../../../../App.css";
 
 interface CardProps {
@@ -53,7 +53,14 @@ const CardRow: React.FC = () => {
   const image4 = "./assets/image4.jpg";
 
   return (
-    <Box mx={"13rem"} my={"6rem"} position={"relative"}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
+      my={"2rem"}
+      position={"relative"}
+      gap={"1rem"}
+    >
       <Box
         position={"absolute"}
         bottom={"0"}
@@ -74,15 +81,19 @@ const CardRow: React.FC = () => {
         zIndex={"-10"}
         filter={"blur(50px)"}
       ></Box>
-      <Center>
-        <Heading className="font" my="20px">
-          Most Viewed Content
-        </Heading>
-      </Center>
+      <Heading
+        className="font"
+        mb="20px"
+        as="h1"
+        size={["xl", "xl", "2xl", "2xl"]}
+        noOfLines={2}
+      >
+        Most Viewed Content
+      </Heading>
       <Flex
-        direction="row"
+        direction={["column", "column", "row", "row"]}
         justifyContent="space-between"
-        py="50px"
+        py="20px"
         gap={"1rem"}
       >
         <Card image={image1} />

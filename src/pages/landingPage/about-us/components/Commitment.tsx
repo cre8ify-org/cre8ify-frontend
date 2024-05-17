@@ -5,7 +5,13 @@ const Commitment = () => {
   return (
     <Box py={"2rem"}>
       {" "}
-      <Flex justify={"space-between"} align={"center"}>
+      <Flex
+        justify={"space-between"}
+        align={"center"}
+        direction={["column", "column", "column", "row"]}
+        textAlign={["center", "center", "center", "left"]}
+        gap={"1rem"}
+      >
         <Box w={"100%"}>
           <Heading
             className="font"

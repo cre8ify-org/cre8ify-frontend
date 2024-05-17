@@ -8,8 +8,10 @@ export default function Hero() {
   return (
     <>
       <Flex
-        gap={"10"}
-        px={"8rem"}
+        direction={["column", "column", "column", "row"]}
+        textAlign={["center", "center", "center", "left"]}
+        gap={["5", "5", "5", "10"]}
+        px={["0", "0", "5rem", "5rem"]}
         pb={"3rem"}
         align={"center"}
         justify={"space-between"}
@@ -26,11 +28,11 @@ export default function Hero() {
           zIndex={"-10"}
           filter={"blur(100px)"}
         ></Box>
-        <Box w={"100%"} mr="2rem">
+        <Box w={"100%"}>
           <Heading
             className="font"
             as="h1"
-            size="2xl"
+            size={["xl", "xl", "2xl", "2xl"]}
             mb="30px"
             color={"#e9ecef"}
           >
@@ -51,7 +53,6 @@ export default function Hero() {
           overflow="hidden"
           borderRadius="lg"
           transition="transform 0.3s"
-          _hover={{ transform: "scale(1.1)" }}
         >
           <Image
             src="./images/hero_asset.png"
@@ -64,9 +65,16 @@ export default function Hero() {
         </Box>
       </Flex>
       <Flex
-        gap={"8"}
-        px={"8rem"}
-        py={"3rem"}
+        direction={[
+          "column-reverse",
+          "column-reverse",
+          "column-reverse",
+          "row",
+        ]}
+        textAlign={["center", "center", "center", "left"]}
+        gap={["0", "0", "0", "8"]}
+        px={["0", "0", "5rem", "5rem"]}
+        py={"4rem"}
         align={"center"}
         justify={"space-between"}
         w={"100%"}
@@ -88,7 +96,6 @@ export default function Hero() {
           overflow="hidden"
           borderRadius="lg"
           transition="transform 0.3s"
-          _hover={{ transform: "scale(1.1)" }}
         >
           <Image
             src="./images/why_asset.png"
@@ -100,7 +107,13 @@ export default function Hero() {
           />
         </Box>
         <Box w={"100%"}>
-          <Heading className="font" as="h1" size="2xl" noOfLines={2} mb={6}>
+          <Heading
+            className="font"
+            as="h1"
+            size={["xl", "xl", "2xl", "2xl"]}
+            noOfLines={2}
+            mb={6}
+          >
             Why Choose Us
           </Heading>
           <Text color={"#b7b5c8"}>

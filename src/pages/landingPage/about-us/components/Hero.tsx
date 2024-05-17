@@ -3,12 +3,18 @@ import "../../../../App.css";
 
 const Hero = () => {
   return (
-    <Flex justify={"space-between"} align={"center"}>
+    <Flex
+      justify={"space-between"}
+      align={"center"}
+      direction={["column", "column", "column", "row"]}
+      textAlign={["center", "center", "center", "left"]}
+      pb={"3rem"}
+    >
       <Box w={"100%"}>
         <Heading
           className="font"
           as="h1"
-          size="2xl"
+          size={["xl", "xl", "2xl", "2xl"]}
           noOfLines={2}
           mb="40px"
           color={"#e9ecef"}
@@ -22,7 +28,7 @@ const Hero = () => {
           their audience, and monetize their creativity like never before.
         </Text>
       </Box>
-      <Box w={"100%"}>
+      <Box w={"100%"} display={"flex"} justifyContent={"center"}>
         <Image src="./images/about_us_hero.png" alt="img" />
       </Box>
     </Flex>

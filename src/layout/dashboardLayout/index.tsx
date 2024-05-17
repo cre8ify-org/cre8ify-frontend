@@ -43,6 +43,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
   return (
     <Flex h="100vh">
       <Box
+        display={["none", "none", "none", "block"]}
         w="500px"
         h="100vh"
         py={"2rem"}

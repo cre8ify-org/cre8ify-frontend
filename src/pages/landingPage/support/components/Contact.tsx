@@ -3,9 +3,19 @@ import { contact } from "../../../../constants/data";
 
 const Contact = () => {
   return (
-    <Box>
-      <Flex justify={"space-between"} align={"center"}>
-        <Box w={"100%"}>
+    <Box pt={"3rem"}>
+      <Flex
+        justify={"space-between"}
+        align={"center"}
+        direction={[
+          "column-reverse",
+          "column-reverse",
+          "column-reverse",
+          "row",
+        ]}
+        textAlign={["center", "center", "center", "left"]}
+      >
+        <Box w={"100%"} display={"flex"} justifyContent={"center"}>
           <Image src="./images/contact_asset.png" alt="img" />
         </Box>
         <Box w={"100%"}>
@@ -14,7 +24,7 @@ const Contact = () => {
             as="h1"
             size="xl"
             noOfLines={2}
-            mb="40px"
+            mb="30px"
             color={"#e9ecef"}
           >
             Need help with anything on Cre8ify?
