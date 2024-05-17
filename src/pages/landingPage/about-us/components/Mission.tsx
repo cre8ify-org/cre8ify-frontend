@@ -4,8 +4,19 @@ const Mission = () => {
   return (
     <Box py={"2rem"}>
       {" "}
-      <Flex justify={"space-between"} align={"center"}>
-        <Box w={"100%"}>
+      <Flex
+        justify={"space-between"}
+        align={"center"}
+        direction={[
+          "column-reverse",
+          "column-reverse",
+          "column-reverse",
+          "row",
+        ]}
+        gap={"1rem"}
+        textAlign={["center", "center", "center", "left"]}
+      >
+        <Box w={"100%"} display={"flex"} justifyContent={"center"}>
           <Image src="./images/mission_asset.png" alt="img" />
         </Box>
         <Box w={"100%"}>

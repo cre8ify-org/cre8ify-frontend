@@ -3,11 +3,9 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 const Footer: React.FC = () => {
   return (
-    <Box as="footer" py="4">
+    <Box as="footer" pb="4">
       <Flex direction="column" align="center">
-        <Text fontSize="sm" my="20px">
-          © 2024 Cre8ify. All rights reserved.
-        </Text>
+        <Text fontSize="sm">© 2024 Cre8ify. All rights reserved.</Text>
       </Flex>
     </Box>
   );

@@ -3,9 +3,21 @@ import "../../../../App.css";
 
 const Hero = () => {
   return (
-    <Flex justify={"space-between"} align={"center"}>
+    <Flex
+      justify={"space-between"}
+      align={"center"}
+      direction={["column-reverse", "column-reverse", "column-reverse", "row"]}
+      textAlign={["center", "center", "center", "left"]}
+    >
       <Box w={"100%"}>
-        <Heading className="font" as="h1" size="2xl" noOfLines={2} mb="40px">
+        <Heading
+          className="font"
+          as="h1"
+          noOfLines={2}
+          mb="30px"
+          size={["xl", "xl", "2xl", "2xl"]}
+          color={"#e9ecef"}
+        >
           Welcome to FAQ
         </Heading>
         <Text color={"#b7b5c8"}>
@@ -15,7 +27,7 @@ const Hero = () => {
           on our platform.
         </Text>
       </Box>
-      <Box w={"100%"}>
+      <Box w={"100%"} display={"flex"} justifyContent={"center"}>
         <Image src="./images/FAQ_hero.png" alt="img" />
       </Box>
     </Flex>

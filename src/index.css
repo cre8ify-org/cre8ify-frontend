@@ -16,6 +16,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.c_p {
+  padding: 0.3rem 0.7rem;
+}
+
 .activeClassName {
   transition: all 0.5s ease-in-out;
   color: #979797 !important;

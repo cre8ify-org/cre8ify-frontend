@@ -2,15 +2,20 @@ import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 const Hero = () => {
   return (
-    <Box>
-      <Flex justify={"space-between"} align={"center"}>
+    <Box pb={"3rem"}>
+      <Flex
+        justify={"space-between"}
+        align={"center"}
+        direction={["column", "column", "column", "row"]}
+        textAlign={["center", "center", "center", "left"]}
+      >
         <Box w={"100%"}>
           <Heading
             className="font"
             as="h1"
-            size="2xl"
+            size={["xl", "xl", "2xl", "2xl"]}
             noOfLines={2}
-            mb="40px"
+            mb="30px"
             color={"#e9ecef"}
           >
             We're Here to Help
@@ -24,7 +29,7 @@ const Hero = () => {
             answers you need to get the most out of Cre8ify.
           </Text>
         </Box>
-        <Box w={"100%"}>
+        <Box w={"100%"} display={"flex"} justifyContent={"center"}>
           <Image src="./images/support_hero.png" alt="img" />
         </Box>
       </Flex>
