@@ -36,7 +36,7 @@ const Commitment = () => {
           </Text>
           <ConnectButton />
         </Box>
-        <Box w={"100%"}>
+        <Box w={"100%"} display={"flex"} justifyContent={"center"}>
           <Image src="./images/commitment_asset.png" alt="img" />
         </Box>
       </Flex>

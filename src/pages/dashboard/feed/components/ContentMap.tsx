@@ -30,7 +30,7 @@ const ContentMap = () => {
   const [id, setId] = useState<ContentItem | undefined>(
     (fullContent as ContentItem[])[0]
   );
-  
+
   const [contentId, setContentId] = useState(Number(""));
   console.log(contentId);
 

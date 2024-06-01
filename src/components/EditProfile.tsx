@@ -18,12 +18,10 @@ import { FaImage } from "react-icons/fa6";
 import useEditProfile from "../hooks/useEditProfile";
 
 export const EditProfile = (props: any) => {
-  const [newUsername, setNewUsername] = useState<string>("");
   const [hash, setHash] = useState<string>("");
   console.log(hash);
 
   const handleEditProfile = useEditProfile(
-    newUsername,
     `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${hash}`
   );
 
@@ -116,22 +114,6 @@ export const EditProfile = (props: any) => {
               </Flex>
             </FormLabel>
           </Flex>
-        </FormControl>
-        <FormControl isRequired={true}>
-          <FormLabel>Username</FormLabel>
-          <Input
-            required
-            placeholder="Username"
-            value={newUsername}
-            _placeholder={{ color: "#767677" }}
-            size="md"
-            border={"1px solid #535354"}
-            outline={"none"}
-            _hover={{ outline: "none" }}
-            _focus={{ boxShadow: "none" }}
-            px={".5rem"}
-            onChange={(e) => setNewUsername(e.target.value)}
-          />
         </FormControl>
       </ModalBody>
 

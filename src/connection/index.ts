@@ -33,6 +33,8 @@ export const configureWeb3Modal = () =>
     projectId: import.meta.env.VITE_projectId,
     enableAnalytics: false, // Optional - defaults
     themeVariables: {
+      "--w3m-color-mix": "#9f51c6",
+      "--w3m-color-mix-strength": 30,
       "--w3m-accent": "#006AFF",
       "--w3m-border-radius-master": "",
       "--w3m-font-size-master": "16",

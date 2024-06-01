@@ -22,6 +22,7 @@ import { ChangeEvent, useState } from "react";
 import useGetUserDetails from "../../../../hooks/useGetUserDetails";
 import "../../../../App.css";
 import useCreateExclContent from "../../../../hooks/useCreateExclContent";
+import useCheckRegUser from "../../../../hooks/useCheckRegUser";
 
 const CreateInput = () => {
   const [title, setTitle] = useState<string>("");
@@ -29,6 +30,8 @@ const CreateInput = () => {
   const [contentType, setContentType] = useState("");
   const { data: userDetails } = useGetUserDetails();
   const [exclusive, setExclusive] = useState(false);
+  const regUser = useCheckRegUser();
+  console.log(regUser);
 
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
@@ -117,7 +120,7 @@ const CreateInput = () => {
         What will you create today, {userDetails?.username || "Username"}?
       </Text>
       <Box
-        w={"550px"}
+        w={["100%", "100%", "550px", "550px"]}
         boxShadow={"0 0 0 1px #2f2f30"}
         py={".6rem"}
         px={".8rem"}
@@ -222,7 +225,12 @@ const CreateInput = () => {
                     </audio>
                   )}
                 </Box>
-                <Flex justify={"space-between"} align={"end"}>
+                <Flex
+                  justify={"space-between"}
+                  gap={"1rem"}
+                  align={["baseline", "baseline", "end", "end"]}
+                  flexDirection={["column", "column", "row", "row"]}
+                >
                   <Flex gap={"1rem"}>
                     <Flex>
                       <Input
@@ -296,7 +304,7 @@ const CreateInput = () => {
                     border={"none"}
                     color={"#fff"}
                     transition={"all .5s ease-in-out"}
-                    w={"150px"}
+                    w={["100%", "100%", "150px", "150px"]}
                     _hover={{
                       bgGradient: "linear(to-r, #e94c91, #5555fb)",
                       border: "none",
@@ -370,7 +378,12 @@ const CreateInput = () => {
                     </audio>
                   )}
                 </Box>
-                <Flex justify={"space-between"} align={"end"}>
+                <Flex
+                  justify={"space-between"}
+                  gap={"1rem"}
+                  align={["baseline", "baseline", "end", "end"]}
+                  flexDirection={["column", "column", "row", "row"]}
+                >
                   <Flex gap={"1rem"}>
                     <Flex>
                       <Input
@@ -444,7 +457,7 @@ const CreateInput = () => {
                     border={"none"}
                     color={"#fff"}
                     transition={"all .5s ease-in-out"}
-                    w={"150px"}
+                    w={["100%", "100%", "150px", "150px"]}
                     _hover={{
                       bgGradient: "linear(to-r, #e94c91, #5555fb)",
                       border: "none",

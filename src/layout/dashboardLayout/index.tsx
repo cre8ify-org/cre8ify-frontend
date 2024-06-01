@@ -132,7 +132,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
         overflowY={"auto"}
         overflowX={"hidden"}
         py={"2.5rem"}
-        px={"1.5rem"}
+        px={[".5rem", ".5rem", "1.5rem", "1.5rem"]}
         css={{
           "&::-webkit-scrollbar": {
             width: "4px",
