@@ -23,7 +23,7 @@ export const Lisk_SEPOLIA_ID = 4202;
 
 const Lisk_sepolia = {
   chainId: Lisk_SEPOLIA_ID,
-  name: "Lisk Sepolia",
+  name: "Lisk Sepolia Testnet",
   currency: "ETH",
   explorerUrl: "https://blockscout.lisk.com/",
   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
