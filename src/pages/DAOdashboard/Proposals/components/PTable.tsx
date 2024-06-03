@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Table,
   Thead,
@@ -9,76 +9,109 @@ import {
   TableContainer,
   Button,
   HStack,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
-  Text,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
   FormControl,
   FormLabel,
   Input,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
 } from "@chakra-ui/react";
 import { GoArrowUpRight } from "react-icons/go";
 import { LuThumbsUp, LuThumbsDown } from "react-icons/lu";
 import useContentDAO from "../../../../hooks/useDAO";
+import { ProposalView, ProposalStatus } from "../../../../hooks/types";
 
 const PTable: React.FC = () => {
-  const { createProposal } = useContentDAO();
+  const {
+    joinDAO,
+    leaveDAO,
+    createProposal,
+    voteForProposal,
+    voteAgainstProposal,
+    executeProposal,
+    getProposals,
+  } = useContentDAO();
+  const [stakeAmount, setStakeAmount] = useState("");
+  const [proposalName, setProposalName] = useState("");
+  const [proposalDescription, setProposalDescription] = useState("");
+  const [proposalDuration, setProposalDuration] = useState("");
+  const [proposals, setProposals] = useState<ProposalView[]>([]); // Initialize with an empty array of ProposalView
 
-  // State for dialog
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  useEffect(() => {
+    const fetchProposals = async () => {
+      const fetchedProposals = await getProposals();
+      setProposals(fetchedProposals);
+    };
+    fetchProposals();
+  }, [getProposals]);
 
-  // Ref for cancel button
+  const handleJoinDAO = async () => {
+    await joinDAO(parseFloat(stakeAmount));
+    setStakeAmount("");
+  };
+
+  const handleLeaveDAO = async () => {
+    await leaveDAO();
+  };
+
+  const handleCreateProposal = async () => {
+    await createProposal(
+      proposalName,
+      proposalDescription,
+      parseInt(proposalDuration)
+    );
+    setProposalName("");
+    setProposalDescription("");
+    setProposalDuration("");
+  };
+
+  const handleVoteForProposal = async (proposalIndex: number) => {
+    await voteForProposal(proposalIndex);
+  };
+
+  const handleVoteAgainstProposal = async (proposalIndex: number) => {
+    await voteAgainstProposal(proposalIndex);
+  };
+
+  const handleExecuteProposal = async (proposalIndex: number) => {
+    await executeProposal(proposalIndex);
+  };
+  const handleOpenStakeModal = () => {
+    setIsStakeModalOpen(true);
+  };
+
+  const handleCloseStakeModal = () => {
+    setIsStakeModalOpen(false);
+    setStakeAmount("");
+  };
+
+  const handleOpenCreateProposalModal = () => {
+    setIsCreateProposalModalOpen(true);
+  };
+
+  const handleCloseCreateProposalModal = () => {
+    setIsCreateProposalModalOpen(false);
+    setProposalName("");
+    setProposalDescription("");
+    setProposalDuration("");
+  };
+
   const cancelRef = useRef<HTMLButtonElement>(null);
 
-  // State for form data
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    duration: "",
-  });
+  const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
+    useState(false);
 
-  let proposalData = [
-    {
-      proposal: "Market Place ",
-      status: "Ongoing button",
-      timeLeft: "25hrs 15mins",
-      totalVotes: "1000",
-      votesFor: "925",
-      votesAgainst: "25",
-      vote: "Thumbs up or down click",
-    },
-  ];
-
-  // Function to handle form input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Function to handle dialog close
-  const handleCloseDialog = (): void => {
-    setIsDialogOpen(false);
-  };
-
-  // Function to handle form submit
-  const handleSubmit = (): void => {
-    const durationNumber: number = parseInt(formData.duration);
-    // Call your DAO function to create proposal
-    createProposal(formData.name, formData.description, durationNumber);
-    // Close dialog
-    setIsDialogOpen(false);
-    // Clear form data
-    setFormData({ name: "", description: "", duration: "" });
-  };
+  const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
 
   return (
     <>
@@ -86,71 +119,106 @@ const PTable: React.FC = () => {
         colorScheme="teal"
         size="md"
         mb="20px"
-        onClick={() => setIsDialogOpen(true)}
+        onClick={handleOpenCreateProposalModal}
       >
         Create Proposal
       </Button>
 
-      {/* Dialog for creating proposal */}
+      <Button
+        colorScheme="teal"
+        size="md"
+        mb="20px"
+        onClick={handleOpenStakeModal}
+      >
+        Join DAO
+      </Button>
+
+      <Button colorScheme="red" size="md" mb="20px" onClick={handleLeaveDAO}>
+        Leave DAO
+      </Button>
+
+      <Modal isOpen={isStakeModalOpen} onClose={handleCloseStakeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Join DAO</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <FormControl>
+              <FormLabel>Stake Amount</FormLabel>
+              <Input
+                type="number"
+                placeholder="Enter stake amount"
+                value={stakeAmount}
+                onChange={(e) => setStakeAmount(e.target.value)}
+              />
+            </FormControl>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={handleCloseStakeModal}>
+              Cancel
+            </Button>
+            <Button colorScheme="teal" onClick={handleJoinDAO}>
+              Join DAO
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <AlertDialog
-        isOpen={isDialogOpen}
-        onClose={handleCloseDialog}
+        isOpen={isCreateProposalModalOpen}
+        onClose={handleCloseCreateProposalModal}
         leastDestructiveRef={cancelRef}
-        size="lg" // optional: specify the size of the dialog
+        size="lg"
       >
         <AlertDialogOverlay />
-        <AlertDialogContent
-          bg="gray.800" // set background color to match dark mode theme
-          color="white" // set text color to match dark mode theme
-        >
+        <AlertDialogContent bg="gray.800" color="white">
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             Create Proposal
           </AlertDialogHeader>
           <AlertDialogBody>
-            {/* Form for creating proposal */}
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input
                 type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
+                placeholder="Proposal Name"
+                value={proposalName}
+                onChange={(e) => setProposalName(e.target.value)}
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
               <Input
                 type="text"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
+                placeholder="Proposal Description"
+                value={proposalDescription}
+                onChange={(e) => setProposalDescription(e.target.value)}
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Duration</FormLabel>
               <Input
                 type="number"
-                name="duration"
-                value={formData.duration}
-                onChange={handleInputChange}
-                bg="gray.700" // set background color to match dark mode theme
-                color="white" // set text color to match dark mode theme
+                placeholder="Proposal Duration (seconds)"
+                value={proposalDuration}
+                onChange={(e) => setProposalDuration(e.target.value)}
+                bg="gray.700"
+                color="white"
               />
             </FormControl>
           </AlertDialogBody>
           <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={handleCloseDialog}>
+            <Button ref={cancelRef} onClick={handleCloseCreateProposalModal}>
               Cancel
             </Button>
             <Button
               colorScheme="blue"
-              onClick={handleSubmit}
+              onClick={handleCreateProposal}
               ml={3}
-              bg="blue.600" // set background color to match dark mode theme
+              bg="blue.600"
             >
               Create
             </Button>
@@ -158,150 +226,49 @@ const PTable: React.FC = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <SimpleGrid
-        spacing={9}
-        m="20px"
-        templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-      >
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Total Proposals Created</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch </Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Approved Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> Rejected Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <Heading size="md">My Proposals</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>Fetch number</Text>
-          </CardBody>
-          <CardFooter>
-            <Button>View here</Button>
-          </CardFooter>
-        </Card>
-      </SimpleGrid>
-
       <TableContainer>
         <Table variant="striped" colorScheme="">
-          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
-              <Th>Proposal</Th>
+              <Th>Name</Th>
+              <Th>Description</Th>
               <Th>Status</Th>
-              <Th isNumeric>Time Left</Th>
               <Th isNumeric>Total Votes</Th>
-              <Th isNumeric>Votes For</Th>
-              <Th isNumeric>Votes Against</Th>
+
               <Th isNumeric>Vote</Th>
+              <Th isNumeric>Execute</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {proposalData.map((item, index) => (
+            {proposals.map((proposal, index) => (
               <Tr key={index}>
                 <Td>
-                  {item.proposal}
+                  {proposal.name}
                   <GoArrowUpRight />
                 </Td>
-                <Td>
-                  {item.status === "Ongoing" ? (
-                    <Button color="primary">Ongoing</Button>
-                  ) : (
-                    <Button color="secondary">Completed</Button>
-                  )}
-                </Td>
-                <Td isNumeric>{item.timeLeft}</Td>
-                <Td isNumeric>{item.totalVotes}</Td>
-                <Td isNumeric>{item.votesFor}</Td>
-                <Td isNumeric>{item.votesAgainst}</Td>
+                <Td>{proposal.description}</Td>
+
+                <Td>{ProposalStatus[proposal.status]}</Td>
+                <Td isNumeric>{proposal.totalVotes.toString()}</Td>
                 <Td isNumeric>
                   <HStack spacing={2}>
                     <LuThumbsUp
                       style={{ marginRight: "10px" }}
-                      onClick={() => {
-                        /* Increase votes for */
-                      }}
+                      onClick={() => handleVoteForProposal(index)}
                     />
                     <LuThumbsDown
-                      onClick={() => {
-                        /* Increase votes against */
-                      }}
+                      onClick={() => handleVoteAgainstProposal(index)}
                     />
                   </HStack>
+                </Td>
+                <Td>
+                  <button onClick={() => handleExecuteProposal(index)}>
+                    Execute
+                  </button>
                 </Td>
               </Tr>
             ))}
           </Tbody>
-          <Tbody>
-            {proposalData.map((item, index) => (
-              <Tr key={index}>
-                <Td>
-                  {item.proposal}
-                  <GoArrowUpRight />
-                </Td>
-                <Td>
-                  {item.status === "Completed" ? (
-                    <Button colorScheme="blue">Ongoing</Button>
-                  ) : (
-                    <Button colorScheme="red">Completed</Button>
-                  )}
-                </Td>
-                <Td isNumeric>{item.timeLeft}</Td>
-                <Td isNumeric>{item.totalVotes}</Td>
-                <Td isNumeric>{item.votesFor}</Td>
-                <Td isNumeric>{item.votesAgainst}</Td>
-                <Td isNumeric>
-                  <HStack spacing={2}>
-                    <LuThumbsUp
-                      style={{ marginRight: "10px" }}
-                      onClick={() => {
-                        /* Increase votes for */
-                      }}
-                    />
-                    <LuThumbsDown
-                      onClick={() => {
-                        /* Increase votes against */
-                      }}
-                    />
-                  </HStack>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-          {/* <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot> */}
         </Table>
       </TableContainer>
     </>
@@ -309,3 +276,7 @@ const PTable: React.FC = () => {
 };
 
 export default PTable;
+// const [isCreateProposalModalOpen, setIsCreateProposalModalOpen] =
+//   useState(false);
+
+//  const [isStakeModalOpen, setIsStakeModalOpen] = useState(false);
