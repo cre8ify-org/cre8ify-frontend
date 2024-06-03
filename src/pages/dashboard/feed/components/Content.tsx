@@ -85,8 +85,8 @@ const Content = ({
         <Flex align={"center"} gap={".5rem"} mb={"1rem"}>
           <Img
             src={`https://${item.creatorImage}`} // Assuming creatorProfile is the URL to the creator's profile image
-            w={"50px"}
-            h={"50px"}
+            w={["40px", "40px", "50px", "50px"]}
+            h={["40px", "40px", "50px", "50px"]}
             objectFit={"cover"}
             borderRadius={"100%"}
             alt="Creator Profile"

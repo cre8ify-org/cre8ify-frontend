@@ -8,7 +8,7 @@ import { getAuthContract } from "../constants/contract";
 import { getProvider } from "../constants/provider";
 import { toast } from "react-toastify";
 
-const useEditProfile = (newName: string, newImage: string) => {
+const useEditProfile = (newImage: string) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -22,10 +22,10 @@ const useEditProfile = (newName: string, newImage: string) => {
     const contract = getAuthContract(signer);
 
     try {
-      if (newName === "" || newImage === "") {
+      if (newImage === "") {
         toast.error("Please fill in details");
       } else {
-        const transaction = await contract.editProfile(newName, newImage);
+        const transaction = await contract.editProfile(newImage);
         console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
         console.log("receipt: ", receipt);
@@ -40,7 +40,7 @@ const useEditProfile = (newName: string, newImage: string) => {
     } catch (error: unknown) {
       console.log(error);
     }
-  }, [chainId, walletProvider, newName, newImage]);
+  }, [chainId, walletProvider, newImage]);
 };
 
 export default useEditProfile;

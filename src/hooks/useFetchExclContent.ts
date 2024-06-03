@@ -51,6 +51,7 @@ const useFetchExclContent = (): [State, (creator: string) => void] => {
       const signer = await readWriteProvider.getSigner();
 
       const contract = getContentContract(signer);
+
       try {
         const contentItems = await contract.fetchExclusiveContent(creator);
         setContent({

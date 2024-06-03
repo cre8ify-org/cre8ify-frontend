@@ -1,9 +1,31 @@
 import { Flex, IconButton, Input, Text } from "@chakra-ui/react";
 import { IoSearchOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import "../../../../App.css";
+import { useEffect } from "react";
+import DashboardMenu from "./DashboardMenu";
+
 const Head = () => {
+  const { isConnected } = useWeb3ModalAccount();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Redirect to "/feed" if the wallet is connected
+    if (isConnected === false) {
+      navigate("/");
+    }
+  }, [isConnected]);
+
   return (
-    <Flex align={"center"} justify={"space-between"} mb={"3rem"}>
+    <Flex
+      align={"center"}
+      justify={"space-between"}
+      mb={"3rem"}
+      // flexDirection={["column", "column", "row", "row"]}
+    >
       <Text fontSize={"1.5rem"} fontWeight={"600"} color={"#e9ecef"}>
+        <DashboardMenu />
         Feed
       </Text>
       <Flex
@@ -26,7 +48,7 @@ const Head = () => {
           placeholder="Search Content"
           _placeholder={{ color: "#767677" }}
           size="md"
-          w={"300px"}
+          w={["100%", "100%", "300px", "300px"]}
           border={"none"}
           outline={"none"}
           _focus={{ boxShadow: "none" }}
