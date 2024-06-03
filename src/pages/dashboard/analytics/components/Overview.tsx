@@ -11,7 +11,11 @@ const Overview = () => {
 
   return (
     <Box>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6} mb={"5rem"}>
+      <Grid
+        templateColumns={["1fr", "1fr", "repeat(3, 1fr)", "repeat(3, 1fr)"]}
+        gap={6}
+        mb={"5rem"}
+      >
         <GridItem>
           <FreeLike />
         </GridItem>

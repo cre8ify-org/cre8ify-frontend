@@ -22,16 +22,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="about-us" element={<AboutUs />} />
-          <Route path="faq" element={<FAQ />} />
-          <Route path="support" element={<Support />} />
-          <Route path="feed" element={<Feed />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="subscription" element={<Subscription />} />
-          <Route path="overview" element={<Overview />} />
-          <Route path="proposals" element={<Proposals />} />
-          <Route path="voting" element={<Voting />} />
-          <Route path="treasury" element={<Treasury />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/subscription" element={<Subscription />} />
+          <Route path="/overview" element={<Overview />} />
+          <Route path="/proposals" element={<Proposals />} />
+          <Route path="/voting" element={<Voting />} />
+          <Route path="/treasury" element={<Treasury />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />
