@@ -50,7 +50,7 @@ const SubscribedTo = () => {
             <Tbody>
               {(subscribersInfo as subscriberInfo[]).map((info, index) => (
                 <Tr key={index}>
-                  <Td>{info.addr}</Td>
+                  <Td noOfLines={1}>{info.addr}</Td>
                   <Td>{info.username}</Td>
                 </Tr>
               ))}

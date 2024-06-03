@@ -23,7 +23,7 @@ const SubscriptionComponent = () => {
           transition={"all .5s ease-in-out"}
           p={"1rem"}
         >
-          <Flex gap={"1rem"} flexDirection={"row"} alignItems={"end"}>
+          <Flex gap={"1rem"} flexDirection={["column", "column", "row", "row"]}>
             <Approve />
             <Subscribe />
             <SetSubAmt />

@@ -63,7 +63,7 @@ const CreatorsList = () => {
                     />
                   </Td>
                   <Td>{details.username}</Td>
-                  <Td>{details.walletAddress}</Td>
+                  <Td noOfLines={1}>{details.walletAddress}</Td>
                   <Td>{details.subscriptionAmount.toString()}</Td>
                 </Tr>
               ))}

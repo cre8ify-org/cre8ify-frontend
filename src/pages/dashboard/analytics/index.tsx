@@ -14,15 +14,15 @@ const Analytics = () => {
     <DashboardLayout>
       <Head />
       <Overview />
-      <Grid templateColumns="repeat(2, 1fr)" gap={6} mb={"5rem"}>
+      <Grid
+        templateColumns={["1fr", "1fr", "repeat(2, 1fr)", "repeat(2, 1fr)"]}
+        gap={6}
+        mb={"5rem"}
+      >
         <FreeLikeChart />
         <ExclusiveLikeChart />
-      </Grid>
-      <Grid templateColumns="repeat(2, 1fr)" gap={6} mb={"5rem"}>
         <FreeDislikeChart />
         <ExclusiveDislikeChart />
-      </Grid>
-      <Grid templateColumns="repeat(2, 1fr)" gap={6} mb={"5rem"}>
         <FreeContentChart />
         <ExclusiveContentChart />
       </Grid>
