@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { getAuthContract } from "../constants/contract";
 import { readOnlyProvider } from "../constants/provider";
