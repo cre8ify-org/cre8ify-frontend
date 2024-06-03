@@ -1,16 +1,7 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Text,
-  Modal,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { menu } from "../../constants/data.ts";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../../App.css";
 import ConnectButton from "../../components/ConnectButton.tsx";
 import { RegisterCreator } from "../../components/RegisterCreator.tsx";
@@ -33,12 +24,6 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
       navigate("/");
     }
   }, [isConnected]);
-  const OverlayOne = () => (
-    <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-  );
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [overlay, setOverlay] = useState(<OverlayOne />);
 
   return (
     <Flex h="100vh">
@@ -100,29 +85,7 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
             ))}
           </Flex>
 
-          {userDetails?.username ? (
-            <ProfileDetails />
-          ) : (
-            <Button
-              bgGradient="linear(to-r, #e94c91, #5555fb)"
-              borderRadius={"100rem"}
-              border={"none"}
-              color={"#fff"}
-              transition={"all .5s ease-in-out"}
-              w={"150px"}
-              _hover={{
-                bgGradient: "linear(to-r, #e94c91, #5555fb)",
-                border: "none",
-              }}
-              _focus={{ outline: "none" }}
-              onClick={() => {
-                setOverlay(<OverlayOne />);
-                onOpen();
-              }}
-            >
-              <Text>Register</Text>
-            </Button>
-          )}
+          {userDetails?.username ? <ProfileDetails /> : <RegisterCreator />}
           {/* {error && <Text>Error: {error}</Text>} */}
         </Flex>
       </Box>
@@ -147,11 +110,6 @@ const DashboardLayout = (props: DashboardLayoutProps) => {
       >
         {props.children}
       </Box>
-
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
-        {overlay}
-        <RegisterCreator />
-      </Modal>
     </Flex>
   );
 };
