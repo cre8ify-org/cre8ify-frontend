@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getContentContract } from "../constants/contract";
 import { readOnlyProvider } from "../constants/provider";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 interface ContentItem {
   title: string;
@@ -27,7 +28,6 @@ interface State {
 }
 
 const useMyFreeContent = (userAddress: any): State => {
-  // const [lastId, setLastId] = useState(0);
   const [content, setContent] = useState<State>({
     loading: true,
     data: undefined,
@@ -36,12 +36,13 @@ const useMyFreeContent = (userAddress: any): State => {
 
   console.log(content);
 
+  const { address } = useWeb3ModalAccount();
+
   useEffect(() => {
-    const fetchContent = async () => {
+    const myFreeContent = async () => {
       try {
         const contract = getContentContract(readOnlyProvider);
-        const contentItems = await contract.fetchMyFreeContent();
-        console.log(contentItems); // Assuming this returns an array of ContentItem
+        const contentItems = await contract.fetchMyFreeContent(userAddress);
         setContent({
           loading: false,
           data: contentItems.map((item: any) => ({
@@ -67,13 +68,14 @@ const useMyFreeContent = (userAddress: any): State => {
         setContent({
           loading: false,
           data: undefined,
-          error: err.message,
+          error: "Something went wrong",
         });
+        console.log(err.message);
       }
     };
 
-    fetchContent();
-  }, [userAddress]);
+    myFreeContent();
+  }, [userAddress, address]);
 
   return content;
 };
