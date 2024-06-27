@@ -1,7 +1,8 @@
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 
-export const Lisk_SEPOLIA_ID = 4202;
+export const Base_SEPOLIA_ID = 84532;
 
+// export const Lisk_SEPOLIA_ID = 4202;
 // export const OPTIMISM_SEPOLIA_ID = 11155420;
 // export const OPTIMISM_ID = 10;
 
@@ -21,11 +22,19 @@ export const Lisk_SEPOLIA_ID = 4202;
 //   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
 // };
 
-const Lisk_sepolia = {
-  chainId: Lisk_SEPOLIA_ID,
-  name: "Lisk Sepolia Testnet",
+// const Lisk_sepolia = {
+//   chainId: Base_SEPOLIA_ID,
+//   name: "Lisk Sepolia Testnet",
+//   currency: "ETH",
+//   explorerUrl: "https://blockscout.lisk.com/",
+//   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
+// };
+
+const Base_sepolia = {
+  chainId: Base_SEPOLIA_ID,
+  name: "Base Sepolia Testnet",
   currency: "ETH",
-  explorerUrl: "https://blockscout.lisk.com/",
+  explorerUrl: "https://sepolia.basescan.org/",
   rpcUrl: import.meta.env.VITE_sepolia_rpc_url,
 };
 
@@ -39,7 +48,7 @@ const metadata = {
 export const configureWeb3Modal = () =>
   createWeb3Modal({
     ethersConfig: defaultConfig({ metadata }),
-    chains: [Lisk_sepolia],
+    chains: [Base_sepolia],
     projectId: import.meta.env.VITE_projectId,
     enableAnalytics: false, // Optional - defaults
     themeVariables: {
