@@ -24,13 +24,10 @@ const Feed = () => {
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             _hover={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
-
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             border={"none"}
             _focus={{ outline: "none" }}
@@ -42,13 +39,10 @@ const Feed = () => {
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             _hover={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
-
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             border={"none"}
             _focus={{ outline: "none" }}
@@ -60,13 +54,10 @@ const Feed = () => {
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             _hover={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
-
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             border={"none"}
             _focus={{ outline: "none" }}
@@ -78,13 +69,10 @@ const Feed = () => {
             _selected={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             _hover={{
               bgGradient: "linear(to-r, #e94c91, #5555fb)",
-
               bgClip: "text",
-              boxShadow: "0px 0px 0px 1px #9f51c6",
             }}
             border={"none"}
             _focus={{ outline: "none" }}

@@ -15,6 +15,7 @@ const AllUser = () => {
   const handleUserClick = (creator: string) => {
     fetchContent(creator);
   };
+
   console.log("Content", content);
 
   return (

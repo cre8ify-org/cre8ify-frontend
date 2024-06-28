@@ -43,7 +43,7 @@ const FreeContentMap: React.FC<{ userAddress: any }> = ({ userAddress }) => {
   const deleteContent = useDelete();
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>{error}</div>;
 
   const handleFullContent = (e: any) => {
     setId(e);
