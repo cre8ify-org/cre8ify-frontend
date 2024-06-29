@@ -32,7 +32,7 @@ const ContentMap = () => {
   );
 
   const [contentId, setContentId] = useState(Number(""));
-  console.log(contentId);
+  // console.log(contentId);
 
   const like = useLike();
   const disLike = useDisLike();

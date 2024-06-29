@@ -42,7 +42,7 @@ const useApprove = (amount: number | undefined) => {
 
       toast.success("Approval successful!");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("An error occurred while approving.");
     }
   }, [amount, chainId, walletProvider]);

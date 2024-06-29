@@ -16,7 +16,7 @@ const AllUser = () => {
     fetchContent(creator);
   };
 
-  console.log("Content", content);
+  // console.log("Content", content);
 
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"2rem"}>

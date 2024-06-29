@@ -56,9 +56,9 @@ const useCreateExclContent = (
         username,
         creatorImage
       );
-      console.log("transaction: ", transaction);
+      // console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
-      console.log("receipt: ", receipt);
+      // console.log("receipt: ", receipt);
 
       if (!receipt.status) {
         toast.error("Content Creation failed!");
@@ -67,7 +67,7 @@ const useCreateExclContent = (
 
       toast.success("Exclusive Content Created!");
     } catch (error: unknown) {
-      console.log(error);
+      // console.log(error);
     }
   }, [
     chainId,

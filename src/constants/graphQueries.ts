@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const queryContentUrl =
-  "https://api.studio.thegraph.com/query/72160/cct/v1.2.0";
+  "https://api.studio.thegraph.com/query/72160/ccp-base/0.0.1";
 
 export const GET_ALL_FREE_CONTENT = gql`
   query GetContentBeforeNowByCreator(

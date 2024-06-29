@@ -34,7 +34,7 @@ const useSubscribe = (creatorAddr: string, amount: number | undefined) => {
         toast.error("Subscription failed!");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("An error occurred while subscribing.");
     }
   }, [amount, chainId, creatorAddr, walletProvider]);

@@ -26,9 +26,9 @@ const useEditProfile = (newImage: string) => {
         toast.error("Please fill in details");
       } else {
         const transaction = await contract.editProfile(newImage);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
 
         if (!receipt.status) {
           toast.error("Update failed!");
@@ -38,7 +38,7 @@ const useEditProfile = (newImage: string) => {
         toast.success("Updated!");
       }
     } catch (error: unknown) {
-      console.log(error);
+      // console.log(error);
     }
   }, [chainId, walletProvider, newImage]);
 };

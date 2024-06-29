@@ -34,7 +34,7 @@ const useMyFreeContent = (userAddress: any): State => {
     error: undefined,
   });
 
-  console.log(content);
+  // console.log(content);
 
   const { address } = useWeb3ModalAccount();
 
@@ -70,7 +70,7 @@ const useMyFreeContent = (userAddress: any): State => {
           data: undefined,
           error: "Something went wrong",
         });
-        console.log(err.message);
+        // console.log(err.message);
       }
     };
 

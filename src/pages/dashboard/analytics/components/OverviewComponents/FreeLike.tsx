@@ -13,7 +13,7 @@ function FreeLike() {
   const [freeLikedCount, setFreeLikedCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("freeLikedCount", freeLikedCount);
+  // console.log("freeLikedCount", freeLikedCount);
 
   useEffect(() => {
     const contentClient = new ApolloClient({
