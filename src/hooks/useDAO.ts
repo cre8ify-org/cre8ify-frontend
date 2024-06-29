@@ -25,36 +25,36 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.joinDAO(stakeAmount);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
       } catch (error: unknown) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [chainId, walletProvider]
   );
 
- const leaveDAO = useCallback(async () => {
-   if (chainId === undefined)
-     return toast.error("Please connect your wallet first.");
-   if (!isSupportedChain(chainId)) return toast.error("Wrong network");
+  const leaveDAO = useCallback(async () => {
+    if (chainId === undefined)
+      return toast.error("Please connect your wallet first.");
+    if (!isSupportedChain(chainId)) return toast.error("Wrong network");
 
-   const readWriteProvider = getProvider(walletProvider);
-   const signer = await readWriteProvider.getSigner();
-   const contract = getContentDAOContract(signer);
+    const readWriteProvider = getProvider(walletProvider);
+    const signer = await readWriteProvider.getSigner();
+    const contract = getContentDAOContract(signer);
 
-   try {
-     const transaction = await contract.leaveDAO();
-     console.log("transaction: ", transaction);
+    try {
+      const transaction = await contract.leaveDAO();
+      //  console.log("transaction: ", transaction);
 
-     const receipt = await transaction.wait();
-     console.log("receipt: ", receipt);
-   } catch (error: unknown) {
-     console.log(error);
-   }
- }, [chainId, walletProvider]);
+      const receipt = await transaction.wait();
+      //  console.log("receipt: ", receipt);
+    } catch (error: unknown) {
+      //  console.log(error);
+    }
+  }, [chainId, walletProvider]);
 
   const createProposal = useCallback(
     async (name: string, description: string, duration: number) => {
@@ -72,62 +72,62 @@ const useContentDAO = () => {
           description,
           duration
         );
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
       } catch (error: unknown) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [chainId, walletProvider]
   );
 
-   const voteForProposal = useCallback(
-     async (proposalIndex: number) => {
-       if (chainId === undefined)
-         return toast.error("Please connect your wallet first");
-       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
+  const voteForProposal = useCallback(
+    async (proposalIndex: number) => {
+      if (chainId === undefined)
+        return toast.error("Please connect your wallet first");
+      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
 
-       const readWriteProvider = getProvider(walletProvider);
-       const signer = await readWriteProvider.getSigner();
-       const contract = getContentDAOContract(signer);
+      const readWriteProvider = getProvider(walletProvider);
+      const signer = await readWriteProvider.getSigner();
+      const contract = getContentDAOContract(signer);
 
-       try {
-         const transaction = await contract.voteForProposal(proposalIndex);
-         console.log("transaction: ", transaction);
+      try {
+        const transaction = await contract.voteForProposal(proposalIndex);
+        //  console.log("transaction: ", transaction);
 
-         const receipt = await transaction.wait();
-         console.log("receipt: ", receipt);
-       } catch (error: unknown) {
-         console.log(error);
-       }
-     },
-     [chainId, walletProvider]
-   );
+        const receipt = await transaction.wait();
+        //  console.log("receipt: ", receipt);
+      } catch (error: unknown) {
+        //  console.log(error);
+      }
+    },
+    [chainId, walletProvider]
+  );
 
-   const voteAgainstProposal = useCallback(
-     async (proposalIndex: number) => {
-       if (chainId === undefined)
-         return toast.error("Please connect your wallet first");
-       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
+  const voteAgainstProposal = useCallback(
+    async (proposalIndex: number) => {
+      if (chainId === undefined)
+        return toast.error("Please connect your wallet first");
+      if (!isSupportedChain(chainId)) return toast.error("Wrong network");
 
-       const readWriteProvider = getProvider(walletProvider);
-       const signer = await readWriteProvider.getSigner();
-       const contract = getContentDAOContract(signer);
+      const readWriteProvider = getProvider(walletProvider);
+      const signer = await readWriteProvider.getSigner();
+      const contract = getContentDAOContract(signer);
 
-       try {
-         const transaction = await contract.voteAgainstProposal(proposalIndex);
-         console.log("transaction: ", transaction);
+      try {
+        const transaction = await contract.voteAgainstProposal(proposalIndex);
+        //  console.log("transaction: ", transaction);
 
-         const receipt = await transaction.wait();
-         console.log("receipt: ", receipt);
-       } catch (error: unknown) {
-         console.log(error);
-       }
-     },
-     [chainId, walletProvider]
-   );
+        const receipt = await transaction.wait();
+        //  console.log("receipt: ", receipt);
+      } catch (error: unknown) {
+        //  console.log(error);
+      }
+    },
+    [chainId, walletProvider]
+  );
 
   const executeProposal = useCallback(
     async (proposalIndex: number) => {
@@ -141,18 +141,18 @@ const useContentDAO = () => {
 
       try {
         const transaction = await contract.executeProposal(proposalIndex);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
 
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
       } catch (error: unknown) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [chainId, walletProvider]
   );
 
-const getProposals = useCallback(async () => {
+  const getProposals = useCallback(async () => {
     if (chainId === undefined) {
       toast.error("Please connect your wallet first");
       return [];
@@ -177,7 +177,7 @@ const getProposals = useCallback(async () => {
 
       return proposals;
     } catch (error: unknown) {
-      console.log(error);
+      // console.log(error);
       return [];
     }
   }, [chainId, walletProvider]);

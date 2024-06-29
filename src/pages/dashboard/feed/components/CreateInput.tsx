@@ -31,7 +31,7 @@ const CreateInput = () => {
   const { data: userDetails } = useGetUserDetails();
   const [exclusive, setExclusive] = useState(false);
   const regUser = useCheckRegUser();
-  console.log(regUser);
+  // console.log(regUser);
 
   const OverlayOne = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
@@ -93,7 +93,7 @@ const CreateInput = () => {
       setIpfsHash(resData.IpfsHash);
       console.log(resData.IpfsHash);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       alert("Trouble uploading file");
     }
   };

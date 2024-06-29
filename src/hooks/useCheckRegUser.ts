@@ -24,9 +24,9 @@ const useCheckRegUser = () => {
         const contract = getAuthContract(readOnlyProvider);
         const response = await contract.checkRegisteredUsers(address);
 
-        console.log(response);
+        // console.log(response);
       } catch (err: any) {
-        console.log(err.message);
+        // console.log(err.message);
       }
     };
 

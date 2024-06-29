@@ -26,9 +26,9 @@ const useRegister = (name: string, image: string) => {
         toast.error("Please fill in details");
       } else {
         const transaction = await contract.registerUser(name, image);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
 
         if (!receipt.status) {
           toast.error("Registration failed!");
@@ -38,7 +38,7 @@ const useRegister = (name: string, image: string) => {
         toast.success("User Registered");
       }
     } catch (error: unknown) {
-      console.log(error);
+      // console.log(error);
     }
   }, [chainId, walletProvider, name, image]);
 };

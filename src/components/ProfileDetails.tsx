@@ -13,6 +13,8 @@ import useGetUserDetails from "../hooks/useGetUserDetails";
 
 const ProfileDetails = () => {
   const { data: userDetails, loading, error } = useGetUserDetails();
+  // console.log("userDetails", userDetails);
+
   const OverlayTwo = () => (
     <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
   );

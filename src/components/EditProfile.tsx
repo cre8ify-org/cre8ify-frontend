@@ -19,7 +19,7 @@ import useEditProfile from "../hooks/useEditProfile";
 
 export const EditProfile = (props: any) => {
   const [hash, setHash] = useState<string>("");
-  console.log(hash);
+  // console.log(hash);
 
   const handleEditProfile = useEditProfile(
     `${import.meta.env.VITE_GATEWAY_URL}/ipfs/${hash}`
@@ -60,9 +60,9 @@ export const EditProfile = (props: any) => {
       const resData = await res.json();
 
       setHash(resData.IpfsHash);
-      console.log(resData.IpfsHash);
+      // console.log(resData.IpfsHash);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       alert("Trouble uploading file");
     }
   };

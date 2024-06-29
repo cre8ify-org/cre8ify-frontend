@@ -14,7 +14,7 @@ const useDelete = () => {
 
   return useCallback(
     async (id: number) => {
-      console.log(id);
+      // console.log(id);
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -25,9 +25,9 @@ const useDelete = () => {
 
       try {
         const transaction = await contract.deleteFreeContent(id);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
 
         if (!receipt.status) {
           toast.error("Deletion failed!");
@@ -36,7 +36,7 @@ const useDelete = () => {
 
         toast.success("Deleted!");
       } catch (error: any) {
-        console.log(error);
+        // console.log(error);
         if ((error.message = "You are not the creator")) {
           toast.error("You're not the creator");
         }

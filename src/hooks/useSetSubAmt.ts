@@ -27,18 +27,18 @@ const useSetSubAmt = (amount: number | undefined) => {
       // const amountInWei = ethers.formatEther(amount);
 
       const transaction = await contract.setMonthlySubscriptionAmount(amount);
-      console.log("transaction: ", transaction);
+      // console.log("transaction: ", transaction);
       const receipt = await transaction.wait();
 
       if (receipt.status) {
         return toast.success("Set subscription amount successful!");
       }
 
-      console.log("receipt: ", receipt);
+      // console.log("receipt: ", receipt);
 
       toast.error("Set subscription amount failed!");
     } catch (error: unknown) {
-      console.log(error);
+      // console.log(error);
     }
   }, [amount, chainId, walletProvider]);
 };

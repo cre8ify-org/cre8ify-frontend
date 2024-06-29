@@ -14,7 +14,7 @@ const useLike = () => {
 
   return useCallback(
     async (id: number) => {
-      console.log(id);
+      // console.log(id);
       if (chainId === undefined)
         return toast.error("Please connect your wallet first");
       if (!isSupportedChain(chainId)) return toast.error("Wrong network");
@@ -25,9 +25,9 @@ const useLike = () => {
 
       try {
         const transaction = await contract.likeFreeContent(id);
-        console.log("transaction: ", transaction);
+        // console.log("transaction: ", transaction);
         const receipt = await transaction.wait();
-        console.log("receipt: ", receipt);
+        // console.log("receipt: ", receipt);
 
         if (!receipt.status) {
           toast.error("Liking failed!");
@@ -36,7 +36,7 @@ const useLike = () => {
 
         toast.success("Liked!");
       } catch (error: unknown) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [chainId, walletProvider]
