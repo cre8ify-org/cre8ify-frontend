@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Kanit", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,6 +14,29 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.c_p {
+  padding: 0.3rem 0.7rem;
+}
+
+.activeClassName {
+  transition: all 0.5s ease-in-out;
+  color: #979797 !important;
+}
+
+.active {
+  background-color: #13111a;
+  box-shadow: 0px 0px 0px 1px #9f51c6;
+  border-radius: 0.5rem;
+  color: white !important;
+}
+
+.activeClassName:hover {
+  color: white !important;
+  background-color: #13111a;
+  box-shadow: 0px 0px 0px 1px #9f51c6;
+  border-radius: 0.5rem;
 }
 
 a {
